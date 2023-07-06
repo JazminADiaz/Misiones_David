@@ -111,6 +111,7 @@ class TuttiStLoopFunction: public CoreLoopFunctions {
     UInt32 m_unStopEdge;
     UInt32 m_unStopBox;
     Real m_fObjectiveFunction;
+    int time_saved;
 
     struct RobotStateStruct {
         CVector2 cLastPosition;
