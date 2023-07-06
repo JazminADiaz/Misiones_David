@@ -18,6 +18,7 @@
 #include "../../src/CoreLoopFunctions.h"
 
 using namespace argos;
+std::fstream MyFile;
 
 class TuttiStLoopFunction: public CoreLoopFunctions {
   public:
@@ -44,6 +45,7 @@ class TuttiStLoopFunction: public CoreLoopFunctions {
     void UpdateRobotPositions();
 
     void ScoreControl();
+    void EventLog();
     Real GetStopScore();  
     Real GetMoveScore();
 

@@ -37,6 +37,7 @@ void TuttiStLoopFunction::Destroy() {
 
     m_tRobotStates.clear();
     RemoveArena();
+    EventLog();
 }
 
 /****************************************/
@@ -69,7 +70,15 @@ void TuttiStLoopFunction::Init(TConfigurationNode& t_tree) {
 
 /****************************************/
 /****************************************/
+void TuttiStLoopFunction::EventLog() {
+    std::fstream CreateFile("/home/jazmin/Documents/Ubuntu_personal/TESIS/intento2023/data.csv");
+    CreateFile<<"id,activity,time"<<std::endl;
+    MyFile.open("/home/jazmin/Documents/Ubuntu_personal/TESIS/intento2023/data.csv", std::ios::app);
+    MyFile<<"1"<<","<<"nose"<<","<<"2"<<std::endl;
 
+
+    MyFile.close();
+}
 void TuttiStLoopFunction::Reset() {
     CoreLoopFunctions::Reset();
 
@@ -93,7 +102,8 @@ void TuttiStLoopFunction::PostStep() {
     m_unClock = GetSpace().GetSimulationClock();
 
     ScoreControl();
-    ArenaControl();
+    ArenaControl(); 
+    EventLog();
 }
 
 /****************************************/
