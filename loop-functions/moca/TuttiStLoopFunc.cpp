@@ -1,3 +1,5 @@
+//std::string time_saved= std::to_string(GetSpace().GetSimulationClock());
+
 /**
   * @file <loop-functions/IcraLoopFunc.cpp>
   *
@@ -17,6 +19,7 @@ TuttiStLoopFunction::TuttiStLoopFunction() {
     m_unStopEdge = 2;
     m_unStopBox = 2;
     m_fObjectiveFunction = 0;
+    
 }
 
 /****************************************/
@@ -76,15 +79,17 @@ void TuttiStLoopFunction::EventLog() {
     CreateFile<<"id,activity,time"<<std::endl;
     MyFile.open("/home/jazmin/Documents/Ubuntu_personal/TESIS/intento2023/data.csv", std::ios::app);
     time_saved= char(m_unClock);
-    
-    MyFile<<c<<","<<"nose"<<","<<time_saved<<std::endl;
-    c=c+1;
-    if (c==19){
-        c=0;
+    c=0;
+    TRobotStateMap::iterator it;
+    for (it = m_tRobotStates.begin(); it != m_tRobotStates.end(); ++it) {
+        MyFile<<c<<","<<"nose"<<","<<time_saved<<std::endl;
+        c=c+1;
+
     }
 
     MyFile.close();
 }
+
 void TuttiStLoopFunction::Reset() {
     CoreLoopFunctions::Reset();
 
@@ -111,6 +116,7 @@ void TuttiStLoopFunction::PostStep() {
     ScoreControl();
     ArenaControl(); 
     EventLog();
+
 }
 
 /****************************************/
@@ -171,7 +177,6 @@ void TuttiStLoopFunction::ScoreControl(){
 Real TuttiStLoopFunction::GetStopScore() {
 
     UpdateRobotPositions();
-
     Real unScore = 0;
     TRobotStateMap::iterator it;
     for (it = m_tRobotStates.begin(); it != m_tRobotStates.end(); ++it) {
