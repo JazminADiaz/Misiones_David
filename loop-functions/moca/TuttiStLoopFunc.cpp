@@ -76,8 +76,9 @@ void TuttiStLoopFunction::EventLog() {
     CreateFile<<"id,activity,time"<<std::endl;
     MyFile.open("/home/jazmin/Documents/Ubuntu_personal/TESIS/intento2023/data.csv", std::ios::app);
     time_saved= char(m_unClock);
-    c=c+1;
+    
     MyFile<<c<<","<<"nose"<<","<<time_saved<<std::endl;
+    c=c+1;
     if (c==19){
         c=0;
     }
