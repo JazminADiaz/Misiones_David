@@ -78,13 +78,14 @@ void TuttiStLoopFunction::EventLog() {
     std::fstream CreateFile("/home/jazmin/Documents/Ubuntu_personal/TESIS/intento2023/data.csv");
     CreateFile<<"id,activity,time"<<std::endl;
     MyFile.open("/home/jazmin/Documents/Ubuntu_personal/TESIS/intento2023/data.csv", std::ios::app);
-    time_saved= char(m_unClock);
+    time_S = std::to_string(GetSpace().GetSimulationClock());
+
     c=0;
     TRobotStateMap::iterator it;
     for (it = m_tRobotStates.begin(); it != m_tRobotStates.end(); ++it) {
-        MyFile<<c<<","<<"nose"<<","<<time_saved<<std::endl;
+        MyFile<<c<<","<<"nose"<<","<<time_S<<std::endl;
         c=c+1;
-
+        std::cout<<time_S<<std::endl;
     }
 
     MyFile.close();

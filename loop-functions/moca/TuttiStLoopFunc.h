@@ -112,6 +112,7 @@ class TuttiStLoopFunction: public CoreLoopFunctions {
     UInt32 m_unStopBox;
     Real m_fObjectiveFunction;
     int time_saved;
+    std::string time_S;
     int c=0;
 
     struct RobotStateStruct {
