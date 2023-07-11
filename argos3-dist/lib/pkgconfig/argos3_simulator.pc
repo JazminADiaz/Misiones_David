@@ -1,0 +1,10 @@
+prefix=/home/jazmin/tuttifrutti/argos3-dist
+exec_prefix=${prefix}
+includedir=${prefix}/include
+libdir=${exec_prefix}/lib/argos3
+
+Name: argos3_simulator
+Description: ARGoS (multi-physics multi-robot simulator)
+Version: 3.0.0-beta48
+Cflags: -I${includedir} -Wno-unknown-pragmas 
+Libs: -Wl,--no-as-needed -L${libdir} -largos3core_simulator

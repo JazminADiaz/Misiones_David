@@ -1,0 +1,25 @@
+var a01992 =
+[
+    [ "TList", "a01992.html#adfe0e4d5e50fbfbf1b0cefbe225685c4", null ],
+    [ "TSet", "a01992.html#a91acdcdfc2aaaf689b5d86e08d43796f", null ],
+    [ "CLEDEntity", "a01992.html#a9b95ea79df0d625136f608892f6e46e1", null ],
+    [ "CLEDEntity", "a01992.html#a7b4fad6aaae950363bcbfe3b4263b3f6", null ],
+    [ "~CLEDEntity", "a01992.html#ad8be63c89ff8ee81914b7aca8474dbe4", null ],
+    [ "AddToMedium", "a01992.html#a687b5dbf0185ce3f43e043a5ebc95ace", null ],
+    [ "Destroy", "a01992.html#aa413cdb5574d0bbb19964caa7833d597", null ],
+    [ "ENABLE_VTABLE", "a01992.html#ac4e59e276d4ec27e45bf37d349733f85", null ],
+    [ "GetColor", "a01992.html#ac51f951fe8f1cee8807f68a441273a2d", null ],
+    [ "GetInitColor", "a01992.html#ad2757325b7544b027314cfc84a5c9140", null ],
+    [ "GetMedium", "a01992.html#ab4cd7e74f0d48c2a407c207c804449f7", null ],
+    [ "GetTypeDescription", "a01992.html#a78788cdd50c6330975dffd8f1a15d10c", null ],
+    [ "HasMedium", "a01992.html#a3ab744746de026a712a8138124aa0c2e", null ],
+    [ "Init", "a01992.html#ad79815cbe4b624bffe42af14033db5b9", null ],
+    [ "RemoveFromMedium", "a01992.html#a317a47a99d6e963a5d6ec000ed6b5153", null ],
+    [ "Reset", "a01992.html#a571a4ea1bc430f8dd8037efb5c5a2698", null ],
+    [ "SetColor", "a01992.html#a6044f5053fe216da25b33decb97eb6ca", null ],
+    [ "SetEnabled", "a01992.html#a9588f1ebf986cd3c5497568f83519bf2", null ],
+    [ "SetInitColor", "a01992.html#a351963046ca2c2c05532fe1c0508e692", null ],
+    [ "m_cColor", "a01992.html#a74ebc0eb41bc415d6c0a1e8abb83c2e2", null ],
+    [ "m_cInitColor", "a01992.html#a67fa08fa12d5f4cb28287bf7336a71ba", null ],
+    [ "m_pcMedium", "a01992.html#a5d946c56b5d407e171f1b6b397fca109", null ]
+];

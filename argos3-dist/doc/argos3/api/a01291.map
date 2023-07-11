@@ -1,0 +1,7 @@
+<map id="argos::CSpace" name="argos::CSpace">
+<area shape="rect" id="node1" title=" " alt="" coords="244,78,359,105"/>
+<area shape="rect" id="node3" href="$a01312.html" title=" " alt="" coords="407,5,599,47"/>
+<area shape="rect" id="node4" href="$a01324.html" title=" " alt="" coords="407,71,599,112"/>
+<area shape="rect" id="node5" href="$a01332.html" title=" " alt="" coords="411,137,595,163"/>
+<area shape="rect" id="node2" href="$a01348.html" title="This class is the base of all XML&#45;configurable ARGoS interface." alt="" coords="5,71,196,112"/>
+</map>

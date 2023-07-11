@@ -1,0 +1,7 @@
+<map id="argos::CMiniQuadrotorEntity" name="argos::CMiniQuadrotorEntity">
+<area shape="rect" id="node1" title=" " alt="" coords="100,244,307,271"/>
+<area shape="rect" id="node2" href="$a01116.html" title="Basic class for an entity that contains other entities." alt="" coords="106,169,301,196"/>
+<area shape="rect" id="node3" href="$a01132.html" title="The basic entity type." alt="" coords="147,95,260,121"/>
+<area shape="rect" id="node4" href="$a01348.html" title="This class is the base of all XML&#45;configurable ARGoS interface." alt="" coords="5,5,196,47"/>
+<area shape="rect" id="node5" href="$a01520.html" title=" " alt="" coords="221,5,394,47"/>
+</map>

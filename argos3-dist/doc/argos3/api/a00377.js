@@ -1,0 +1,6 @@
+var a00377 =
+[
+    [ "UPDATE", "a00377.html#acc87d83df62d9f95fb7916e095ded9b4", null ],
+    [ "REGISTER_ENTITY", "a00377.html#ae754d331814af65e1f33d988971744c0", null ],
+    [ "REGISTER_STANDARD_SPACE_OPERATIONS_ON_COMPOSABLE", "a00377.html#a31bb4bfadc15af5494950c5791079236", null ]
+];

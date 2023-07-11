@@ -1,0 +1,14 @@
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/CMakeFiles/edit_cache.dir
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/CMakeFiles/package_source.dir
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/CMakeFiles/rebuild_cache.dir
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/CMakeFiles/package.dir
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src/CMakeFiles/edit_cache.dir
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src/CMakeFiles/rebuild_cache.dir
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src/CMakeFiles/package.dir
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src/CMakeFiles/visualize_fsm.dir
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src/CMakeFiles/automode_main.dir
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src/CMakeFiles/package_source.dir
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src/CMakeFiles/automode.dir
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src/CMakeFiles/visualize_fsm_autogen.dir
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src/CMakeFiles/automode_main_autogen.dir
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src/CMakeFiles/automode_autogen.dir

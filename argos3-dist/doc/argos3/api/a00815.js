@@ -1,0 +1,4 @@
+var a00815 =
+[
+    [ "REGISTER_STANDARD_SPACE_OPERATIONS_ON_ENTITY", "a00815.html#a76905bef2e5a750eff4e7b4e6c20746b", null ]
+];

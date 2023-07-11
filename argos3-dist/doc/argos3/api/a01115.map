@@ -1,0 +1,14 @@
+<map id="argos::CComposableEntity" name="argos::CComposableEntity">
+<area shape="rect" id="node1" title="Basic class for an entity that contains other entities." alt="" coords="405,183,600,209"/>
+<area shape="rect" id="node5" href="$a01972.html" title=" " alt="" coords="682,5,821,32"/>
+<area shape="rect" id="node6" href="$a01976.html" title=" " alt="" coords="668,56,835,83"/>
+<area shape="rect" id="node7" href="$a01552.html" title=" " alt="" coords="675,107,827,133"/>
+<area shape="rect" id="node8" href="$a01588.html" title=" " alt="" coords="672,157,831,184"/>
+<area shape="rect" id="node9" href="$a01704.html" title=" " alt="" coords="670,208,833,235"/>
+<area shape="rect" id="node10" href="$a02004.html" title="A container of CLEDEntity." alt="" coords="652,259,851,285"/>
+<area shape="rect" id="node11" href="$a01928.html" title=" " alt="" coords="648,309,855,336"/>
+<area shape="rect" id="node12" href="$a01968.html" title=" " alt="" coords="680,360,823,387"/>
+<area shape="rect" id="node2" href="$a01132.html" title="The basic entity type." alt="" coords="244,183,357,209"/>
+<area shape="rect" id="node3" href="$a01348.html" title="This class is the base of all XML&#45;configurable ARGoS interface." alt="" coords="5,142,196,183"/>
+<area shape="rect" id="node4" href="$a01520.html" title=" " alt="" coords="14,207,187,249"/>
+</map>

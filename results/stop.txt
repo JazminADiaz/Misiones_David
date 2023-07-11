@@ -1,0 +1,22 @@
+| Num of exp | seed | controller | robots | simulation
+| ---- | ---- | ---- | ---- | ----
+| 0 | 103 | evocolor | 9398 | 3980
+| 1 | 104 | evocolor | 9118 | 6282
+| 2 | 101 | automode | 3207 | 168
+| 3 | 108 | evocolor | 9931 | 5263
+| 4 | 102 | evocolor | 9718 | 177
+| 5 | 106 | automode | 3343 | 227
+| 6 | 107 | automode | 3050 | 187
+| 7 | 108 | automode | 4394 | 218
+| 8 | 104 | automode | 3209 | 186
+| 9 | 105 | automode | 3543 | 165
+| 10 | 105 | evocolor | 8774 | 3343
+| 11 | 100 | automode | 7281 | 3100
+| 12 | 102 | automode | 4160 | 3653
+| 13 | 103 | automode | 3288 | 224
+| 14 | 109 | automode | 9054 | 182
+| 15 | 106 | evocolor | 8742 | 4423
+| 16 | 101 | evocolor | 9758 | 2957
+| 17 | 100 | evocolor | 7510 | 5440
+| 18 | 109 | evocolor | 8292 | 4190
+| 19 | 107 | evocolor | 10717 | 5136

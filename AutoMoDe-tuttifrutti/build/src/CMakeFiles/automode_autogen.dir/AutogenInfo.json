@@ -1,0 +1,262 @@
+{
+	"BUILD_DIR" : "/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src/automode_autogen",
+	"CMAKE_BINARY_DIR" : "/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src",
+	"CMAKE_EXECUTABLE" : "/usr/bin/cmake",
+	"CMAKE_SOURCE_DIR" : "/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti",
+	"HEADERS" : 
+	[
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/core/AutoMoDeController.h",
+			"Mu",
+			"TAC5DWH4SE/moc_AutoMoDeController.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/core/AutoMoDeFiniteStateMachine.h",
+			"Mu",
+			"TAC5DWH4SE/moc_AutoMoDeFiniteStateMachine.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/core/AutoMoDeFsmBuilder.h",
+			"Mu",
+			"TAC5DWH4SE/moc_AutoMoDeFsmBuilder.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/core/AutoMoDeFsmHistory.h",
+			"Mu",
+			"TAC5DWH4SE/moc_AutoMoDeFsmHistory.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviour.h",
+			"Mu",
+			"OKIHRWMZEG/moc_AutoMoDeBehaviour.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourAntiPhototaxis.h",
+			"Mu",
+			"OKIHRWMZEG/moc_AutoMoDeBehaviourAntiPhototaxis.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourAttraction.h",
+			"Mu",
+			"OKIHRWMZEG/moc_AutoMoDeBehaviourAttraction.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourExploration.h",
+			"Mu",
+			"OKIHRWMZEG/moc_AutoMoDeBehaviourExploration.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourGoAwayColor.h",
+			"Mu",
+			"OKIHRWMZEG/moc_AutoMoDeBehaviourGoAwayColor.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourGoToColor.h",
+			"Mu",
+			"OKIHRWMZEG/moc_AutoMoDeBehaviourGoToColor.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourPhototaxis.h",
+			"Mu",
+			"OKIHRWMZEG/moc_AutoMoDeBehaviourPhototaxis.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourRepulsion.h",
+			"Mu",
+			"OKIHRWMZEG/moc_AutoMoDeBehaviourRepulsion.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourStop.h",
+			"Mu",
+			"OKIHRWMZEG/moc_AutoMoDeBehaviourStop.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeCondition.h",
+			"Mu",
+			"OKIHRWMZEG/moc_AutoMoDeCondition.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeConditionBlackFloor.h",
+			"Mu",
+			"OKIHRWMZEG/moc_AutoMoDeConditionBlackFloor.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeConditionFixedProbability.h",
+			"Mu",
+			"OKIHRWMZEG/moc_AutoMoDeConditionFixedProbability.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeConditionGrayFloor.h",
+			"Mu",
+			"OKIHRWMZEG/moc_AutoMoDeConditionGrayFloor.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeConditionInvertedNeighborsCount.h",
+			"Mu",
+			"OKIHRWMZEG/moc_AutoMoDeConditionInvertedNeighborsCount.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeConditionNeighborsCount.h",
+			"Mu",
+			"OKIHRWMZEG/moc_AutoMoDeConditionNeighborsCount.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeConditionProbColor.h",
+			"Mu",
+			"OKIHRWMZEG/moc_AutoMoDeConditionProbColor.cpp"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeConditionWhiteFloor.h",
+			"Mu",
+			"OKIHRWMZEG/moc_AutoMoDeConditionWhiteFloor.cpp"
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src/automode_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src/automode_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"ARGOS_simulator_BUILD",
+		"QT_CORE_LIB",
+		"QT_GUI_LIB",
+		"QT_WIDGETS_LIB",
+		"automode_EXPORTS"
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src",
+		"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src",
+		"/home/jazmin/tuttifrutti/argos3-dist/include",
+		"/usr/include/x86_64-linux-gnu/qt5",
+		"/usr/include/x86_64-linux-gnu/qt5/QtWidgets",
+		"/usr/include/x86_64-linux-gnu/qt5/QtGui",
+		"/usr/include/x86_64-linux-gnu/qt5/QtCore",
+		"/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++",
+		"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti",
+		"/usr/include/c++/9",
+		"/usr/include/x86_64-linux-gnu/c++/9",
+		"/usr/include/c++/9/backward",
+		"/usr/lib/gcc/x86_64-linux-gnu/9/include",
+		"/usr/local/include",
+		"/usr/include/x86_64-linux-gnu",
+		"/usr/include"
+	],
+	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE" ],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : true,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/usr/bin/c++",
+		"-dM",
+		"-E",
+		"-c",
+		"/usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src/automode_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 4,
+	"PARSE_CACHE_FILE" : "/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src/CMakeFiles/automode_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/usr/lib/qt5/bin/moc",
+	"QT_UIC_EXECUTABLE" : "",
+	"QT_VERSION_MAJOR" : 5,
+	"SETTINGS_FILE" : "/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/build/src/CMakeFiles/automode_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/core/AutoMoDeController.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/core/AutoMoDeFiniteStateMachine.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/core/AutoMoDeFsmBuilder.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/core/AutoMoDeFsmHistory.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviour.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourAntiPhototaxis.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourAttraction.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourExploration.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourGoAwayColor.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourGoToColor.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourPhototaxis.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourRepulsion.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourStop.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeCondition.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeConditionBlackFloor.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeConditionFixedProbability.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeConditionGrayFloor.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeConditionInvertedNeighborsCount.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeConditionNeighborsCount.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeConditionProbColor.cpp",
+			"Mu"
+		],
+		[
+			"/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeConditionWhiteFloor.cpp",
+			"Mu"
+		]
+	],
+	"VERBOSITY" : 0
+}

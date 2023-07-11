@@ -1,0 +1,26 @@
+<map id="argos::CCI_Actuator" name="argos::CCI_Actuator">
+<area shape="rect" id="node1" title="The basic interface for all actuators." alt="" coords="244,347,395,374"/>
+<area shape="rect" id="node3" href="$a01784.html" title=" " alt="" coords="443,5,665,47"/>
+<area shape="rect" id="node5" href="$a01628.html" title=" " alt="" coords="453,71,655,112"/>
+<area shape="rect" id="node7" href="$a01648.html" title=" " alt="" coords="457,136,651,177"/>
+<area shape="rect" id="node9" href="$a01676.html" title=" " alt="" coords="463,201,645,243"/>
+<area shape="rect" id="node11" href="$a01796.html" title=" " alt="" coords="455,267,653,294"/>
+<area shape="rect" id="node13" href="$a01804.html" title=" " alt="" coords="463,318,645,345"/>
+<area shape="rect" id="node15" href="$a01912.html" title=" " alt="" coords="460,369,648,411"/>
+<area shape="rect" id="node17" href="$a01920.html" title=" " alt="" coords="460,435,648,476"/>
+<area shape="rect" id="node18" href="$a01812.html" title=" " alt="" coords="459,500,649,541"/>
+<area shape="rect" id="node19" href="$a01828.html" title=" " alt="" coords="446,565,662,607"/>
+<area shape="rect" id="node21" href="$a01832.html" title=" " alt="" coords="452,631,656,672"/>
+<area shape="rect" id="node23" href="$a01836.html" title=" " alt="" coords="449,696,659,737"/>
+<area shape="rect" id="node2" href="$a01348.html" title="This class is the base of all XML&#45;configurable ARGoS interface." alt="" coords="5,340,196,381"/>
+<area shape="rect" id="node4" href="$a01864.html" title=" " alt="" coords="731,5,934,47"/>
+<area shape="rect" id="node6" href="$a01692.html" title=" " alt="" coords="715,71,950,112"/>
+<area shape="rect" id="node8" href="$a01708.html" title=" " alt="" coords="722,136,943,177"/>
+<area shape="rect" id="node10" href="$a01724.html" title=" " alt="" coords="727,201,938,243"/>
+<area shape="rect" id="node12" href="$a01872.html" title=" " alt="" coords="719,267,946,294"/>
+<area shape="rect" id="node14" href="$a01880.html" title=" " alt="" coords="727,318,938,345"/>
+<area shape="rect" id="node16" href="$a01932.html" title=" " alt="" coords="731,369,934,411"/>
+<area shape="rect" id="node20" href="$a01896.html" title=" " alt="" coords="735,565,931,607"/>
+<area shape="rect" id="node22" href="$a01900.html" title=" " alt="" coords="717,631,949,672"/>
+<area shape="rect" id="node24" href="$a01904.html" title=" " alt="" coords="713,696,952,737"/>
+</map>
