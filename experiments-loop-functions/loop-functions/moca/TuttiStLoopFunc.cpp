@@ -67,7 +67,7 @@ void TuttiStLoopFunction::Init(TConfigurationNode& t_tree) {
     }
 
     InitRobotStates();
-    m_pcArena->SetArenaColor(CColor::BLACK);
+    m_pcArena->SetArenaColor(CColor::RED);
 
 }
 
