@@ -227,60 +227,63 @@ Real TuttiTmLoopFunction::GetMoveScore() {
 
 argos::CColor TuttiTmLoopFunction::GetFloorColor(const argos::CVector2& c_position_on_plane) {
     //tam1
-    if (-0.055< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= 0.055 
-    and 1.17< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 1.28
+    if (-0.05< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= 0.05 
+    and 0.68< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75
     ){
         return CColor::WHITE;
     }
 //tam2
-    if (1.17< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 1.28
+    if (-0.25< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= -0.15 
 
-    and -0.355< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= -0.245
+    and 0.68< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75
     ){
         return CColor::WHITE;
     }
+    
     //else if (c_position_on_plane.GetX() >= 0.60){
     //    return CColor::BLACK;
     //}
-    //tam2
-    if (1.17< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 1.28
+//tam2
+    if (-0.45< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= -0.35 
 
-    and -0.645< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= -0.545
-    ){
-        return CColor::WHITE;
-    }
-//tam3
-    if (1.17< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 1.28
-
-    and -0.945< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= -0.845
+    and 0.7< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75
     ){
         return CColor::WHITE;
     }
 //tam4
-    if (1.17< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 1.28
+    if (-0.65< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= -0.55 
 
-    and -0.945< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= -0.845
+    and 0.7< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75
+    ){
+        return CColor::WHITE;
+    }
+//tam5
+    if (0.15< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= 0.25 
+
+    and 0.68< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75
     ){
         return CColor::WHITE;
     }
 
-//tam5
-    if (1.17< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 1.28
+//tam6
+    if (0.35< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= 0.45 
 
-    and -1.245< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= -1.145
+    and 0.68< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75
     ){
         return CColor::WHITE;
     }
 
     
 
-//tam6
-    if (1.17< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 1.28
+//tam7
+    //if (0.55< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= 0.65 
 
-    and 0.255< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= 0.355
-    ){
-        return CColor::WHITE;
-    }
+    //and 0.68< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75)
+    //{        return CColor::WHITE;    }
+
+if (0.45< c_position_on_plane.GetX()){
+
+            return CColor::BLACK;}
 
     return CColor::GRAY50;
 }
