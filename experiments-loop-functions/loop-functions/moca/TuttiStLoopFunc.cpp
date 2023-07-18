@@ -180,8 +180,9 @@ Real TuttiStLoopFunction::GetStopScore() {
     TRobotStateMap::iterator it;
     for (it = m_tRobotStates.begin(); it != m_tRobotStates.end(); ++it) {
         Real d = (it->second.cPosition - it->second.cLastPosition).Length();
-        if (d > 0.0005)
+        if (d > 0.0005){
             unScore+=1;
+            std::cout<<"stop"<<unScore<<std::endl;}
     }
 
     return unScore;
@@ -198,8 +199,10 @@ Real TuttiStLoopFunction::GetMoveScore() {
     TRobotStateMap::iterator it;
     for (it = m_tRobotStates.begin(); it != m_tRobotStates.end(); ++it) {
         Real d = (it->second.cPosition - it->second.cLastPosition).Length();
-        if (d <= 0.0005)
+        if (d <= 0.0005){
             unScore+=1;
+            std::cout<<"move"<<unScore<<std::endl;}
+
     }
 
     return unScore;

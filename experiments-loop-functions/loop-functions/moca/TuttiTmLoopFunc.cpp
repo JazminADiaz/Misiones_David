@@ -19,6 +19,7 @@ TuttiTmLoopFunction::TuttiTmLoopFunction() {
     m_unStopEdge = 2;
     m_unStopBox = 2;
     m_fObjectiveFunction = 0;
+    tam = 0;
     
 }
 
@@ -113,6 +114,7 @@ void TuttiTmLoopFunction::Reset() {
     m_unStopTime = 0;
     m_fObjectiveFunction = 0;
     c=0;
+    tam=0;
 
     m_tRobotStates.clear();
 
@@ -127,6 +129,7 @@ void TuttiTmLoopFunction::PostStep() {
     m_unClock = GetSpace().GetSimulationClock();
     
     ScoreControl();
+    TamControl();
     //ArenaControl(); 
     
 
@@ -178,10 +181,7 @@ void TuttiTmLoopFunction::ScoreControl(){
         m_unStopBox = GetRandomTime(1, 4);
     }
 
-    if (m_unClock <= m_unStopTime)
-        m_fObjectiveFunction += GetMoveScore();
-    else
-        m_fObjectiveFunction += GetStopScore();
+
 }
 
 /****************************************/
@@ -196,9 +196,8 @@ Real TuttiTmLoopFunction::GetStopScore() {
         Real d = (it->second.cPosition - it->second.cLastPosition).Length();
         if (d > 0.0005)
             unScore+=1;
-    }
-
     return unScore;
+}
 }
 
 
@@ -222,14 +221,49 @@ Real TuttiTmLoopFunction::GetMoveScore() {
     return unScore;
 }
 
+Real TuttiTmLoopFunction::TamControl() {
+    UInt32 tam1=UpdateRobotPositions();
+    
+
+    
+    InitRobotStates();
+    //m_pcArena->SetArenaColor(CColor::BLACK);
+
+    //if (m_unClock == m_unStopTime) {
+        CSpace::TMapPerType& tBlocksMap = GetSpace().GetEntitiesByType("box");
+        UInt32 unBlocksID = 0;
+        for (CSpace::TMapPerType::iterator it = tBlocksMap.begin(); it != tBlocksMap.end(); ++it) {
+            CBoxEntity* pcBlock = any_cast<CBoxEntity*>(it->second);
+            //std::cout << unBlocksID << std::endl;
+            //pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::MAGENTA);
+            std::cout<<"tam:"<<tam1<<"bloque"<<unBlocksID<<std::endl;
+            
+            if ((unBlocksID == 6 or unBlocksID == 9) and tam1==2) {
+                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);
+            }
+            if ((unBlocksID == 12 or unBlocksID == 15) and tam1==4) {
+                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);
+            }
+
+            unBlocksID += 1;    
+        }
+    
+    return tam;
+
+
+}
+
+
 /****************************************/
 /****************************************/
 
 argos::CColor TuttiTmLoopFunction::GetFloorColor(const argos::CVector2& c_position_on_plane) {
+    
     //tam1
     if (-0.05< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= 0.05 
     and 0.68< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75
     ){
+        
         return CColor::WHITE;
     }
 //tam2
@@ -246,14 +280,14 @@ argos::CColor TuttiTmLoopFunction::GetFloorColor(const argos::CVector2& c_positi
 //tam2
     if (-0.45< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= -0.35 
 
-    and 0.7< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75
+    and 0.68< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75
     ){
         return CColor::WHITE;
     }
 //tam4
     if (-0.65< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= -0.55 
 
-    and 0.7< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75
+    and 0.68< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75
     ){
         return CColor::WHITE;
     }
@@ -291,18 +325,34 @@ if (0.45< c_position_on_plane.GetX()){
 /****************************************/
 /****************************************/
 
-void TuttiTmLoopFunction::UpdateRobotPositions() {
+Real TuttiTmLoopFunction::UpdateRobotPositions() {
     CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
+    int tam=0;
     CVector2 cEpuckPosition(0,0);
     for (CSpace::TMapPerType::iterator it = tEpuckMap.begin(); it != tEpuckMap.end(); ++it) {
         CEPuckEntity* pcEpuck = any_cast<CEPuckEntity*>(it->second);
         cEpuckPosition.Set(pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetX(),
                            pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetY());
+        //std::cout<<"antesX:"<<(m_tRobotStates[pcEpuck].cLastPosition.GetX())<<" despuesX: "<< m_tRobotStates[pcEpuck].cPosition.GetX()<<std::endl;
+        //std::cout<<"antesY:"<<(m_tRobotStates[pcEpuck].cLastPosition.GetY())<<" despuesY: "<< m_tRobotStates[pcEpuck].cPosition.GetY()<<std::endl;
+
 
         m_tRobotStates[pcEpuck].cLastPosition = m_tRobotStates[pcEpuck].cPosition;
+
         m_tRobotStates[pcEpuck].cPosition = cEpuckPosition;
+        
+
+        if (abs((m_tRobotStates[pcEpuck].cPosition.GetX())- m_tRobotStates[pcEpuck].cLastPosition.GetX())<=0.000005 and
+        abs((m_tRobotStates[pcEpuck].cPosition.GetY())- m_tRobotStates[pcEpuck].cLastPosition.GetY())<=0.000005){
+            tam+=1;
+        }
+
+
     }
+    return tam;
 }
+
+
 
 /****************************************/
 /****************************************/
@@ -311,6 +361,7 @@ void TuttiTmLoopFunction::InitRobotStates() {
 
     CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
     CVector2 cEpuckPosition(0,0);
+    int x;
     for (CSpace::TMapPerType::iterator it = tEpuckMap.begin(); it != tEpuckMap.end(); ++it) {
         CEPuckEntity* pcEpuck = any_cast<CEPuckEntity*>(it->second);
         cEpuckPosition.Set(pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetX(),
@@ -319,6 +370,7 @@ void TuttiTmLoopFunction::InitRobotStates() {
         m_tRobotStates[pcEpuck].cLastPosition = cEpuckPosition;
         m_tRobotStates[pcEpuck].cPosition = cEpuckPosition;
         m_tRobotStates[pcEpuck].unItem = 0;
+        
     }
 }
 

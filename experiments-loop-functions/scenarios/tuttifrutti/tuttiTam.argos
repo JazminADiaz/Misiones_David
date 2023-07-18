@@ -182,78 +182,26 @@
   <box id="wall_i4" size="0.01,1.6,0.08" movable="false">
     <body position="0,-0.805,0" orientation="90,0,0"/>
   </box>
-
-  <!-- * Tams * -->
-    <!-- * Tam1 -->
+      <!-- * Tam 1 --> 
   <box id="tam_01_1" size="0.01,0.1,0.08" movable="false">
-    <body position="0.75,0,0" orientation="0,0,0"/>
+    <body position="0.75,0.4,0" orientation="0,0,0"/>
     <leds medium="leds">
-        <led id="led_1" offset="-0.02,0,0.05" anchor="origin" color="green" intensity="100.0"/>
-        <led id="led_1_1" offset="-0.02,-0.025,0.05" anchor="origin" color="green" intensity="100.0"/>
-
+        <led id="led_6" offset="-0.02,0,0.05" anchor="origin" color="blue" intensity="100.0"/>
+        <!--  
+         <led id="led_6_1" offset="-0.02,0.2,0.05" anchor="origin" color="green" intensity="100.0"/>--> 
     </leds>
   </box>
 
   <box id="tam_01_2" size="0.01,0.05,0.08" movable="false">
-  <body position="0.725,0.05,0" orientation="90,0,0"/>
+  <body position="0.725,0.45,0" orientation="90,0,0"/>
   </box>
 
   <box id="tam_01_3" size="0.01,0.05,0.08" movable="false">
-  <body position="0.725,-0.05,0" orientation="90,0,0"/>
+  <body position="0.725,0.35,0" orientation="90,0,0"/>
   </box>
-
-    <!-- * Tam 2 -->
+  
+      <!-- * Tam 2 -->
   <box id="tam_02_1" size="0.01,0.1,0.08" movable="false">
-    <body position="0.75,-0.2,0" orientation="0,0,0"/>
-    <leds medium="leds">
-        <led id="led_2" offset="-0.02,0,0.05" anchor="origin" color="green" intensity="100.0"/>
-    </leds>
-  </box>
-
-  <box id="tam_02_2" size="0.01,0.05,0.08" movable="false">
-  <body position="0.725,-0.25,0" orientation="90,0,0"/>
-  </box>
-
-  <box id="tam_02_3" size="0.01,0.05,0.08" movable="false">
-  <body position="0.725,-0.15,0" orientation="90,0,0"/>
-  </box>
-
-    <!-- * Tam 3 -->
-  <box id="tam_03_1" size="0.01,0.1,0.08" movable="false">
-    <body position="0.75,-0.4,0" orientation="0,0,0"/>
-    <leds medium="leds">
-        <led id="led_3" offset="-0.02,0,0.05" anchor="origin" color="green" intensity="100.0"/>
-    </leds>
-  </box>
-
-  <box id="tam_03_2" size="0.01,0.05,0.08" movable="false">
-  <body position="0.725,-0.45,0" orientation="90,0,0"/>
-  </box>
-
-  <box id="tam_03_3" size="0.01,0.05,0.08" movable="false">
-  <body position="0.725,-0.35,0" orientation="90,0,0"/>
-  </box>
-
-    <!-- * Tam 4-->
-  <box id="tam_04_1" size="0.01,0.1,0.08" movable="false">
-    <body position="0.75,-0.6,0" orientation="0,0,0"/>
-    <leds medium="leds">
-        <led id="led_4" offset="-0.02,0,0.05" anchor="origin" color="green" intensity="100.0"/>
-    </leds>
-  </box>
-
-  <box id="tam_04_2" size="0.01,0.05,0.08" movable="false">
-  <body position="0.725,-0.65,0" orientation="90,0,0"/>
-  </box>
-
-  <box id="tam_04_3" size="0.01,0.05,0.08" movable="false">
-  <body position="0.725,-0.55,0" orientation="90,0,0"/>
-  </box> 
-
-      <!-- * Tam 5 
-    <led id="led_5_3" offset="-0.15,0,0.08" anchor="origin" color="blue" intensity="100.0"/>
--->
-  <box id="tam_05_1" size="0.01,0.1,0.08" movable="false">
     <body position="0.75,0.2,0" orientation="0,0,0"/>
     <leds medium="leds">
         <led id="led_5" offset="-0.02,0,0.05" anchor="origin" color="blue" intensity="100.0"/>
@@ -261,31 +209,82 @@
     </leds>
   </box>
 
-  <box id="tam_0_5" size="0.01,0.05,0.08" movable="false">
+  <box id="tam_02_2" size="0.01,0.05,0.08" movable="false">
   <body position="0.725,0.25,0" orientation="90,0,0"/>
   </box>
 
-  <box id="tam_05_3" size="0.01,0.05,0.08" movable="false">
+  <box id="tam_02_3" size="0.01,0.05,0.08" movable="false">
   <body position="0.725,0.15,0" orientation="90,0,0"/>
   </box>
-
-
-      <!-- * Tam 6 --> 
-  <box id="tam_06_1" size="0.01,0.1,0.08" movable="false">
-    <body position="0.75,0.4,0" orientation="0,0,0"/>
+  <!-- * Tams * -->
+    <!-- * Tam3 -->
+  <box id="tam_03_1" size="0.01,0.1,0.08" movable="false">
+    <body position="0.75,0,0" orientation="0,0,0"/>
     <leds medium="leds">
-        <led id="led_6" offset="-0.02,0,0.05" anchor="origin" color="blue" intensity="100.0"/>
-         <!-- <led id="led_6_1" offset="-0.02,0.2,0.05" anchor="origin" color="blue" intensity="100.0"/>-->
+        <led id="led_3" offset="-0.02,0,0.05" anchor="origin" color="green" intensity="100.0"/>
+
+    </leds>
+  </box>
+
+  <box id="tam_03_2" size="0.01,0.05,0.08" movable="false">
+  <body position="0.725,0.05,0" orientation="90,0,0"/>
+  </box>
+
+  <box id="tam_03_3" size="0.01,0.05,0.08" movable="false">
+  <body position="0.725,-0.05,0" orientation="90,0,0"/>
+  </box>
+
+    <!-- * Tam 4 -->
+  <box id="tam_04_1" size="0.01,0.1,0.08" movable="false">
+    <body position="0.75,-0.2,0" orientation="0,0,0"/>
+    <leds medium="leds">
+        <led id="led_4" offset="-0.02,0,0.05" anchor="origin" color="green" intensity="100.0"/>
+    </leds>
+  </box>
+
+  <box id="tam_04_2" size="0.01,0.05,0.08" movable="false">
+  <body position="0.725,-0.25,0" orientation="90,0,0"/>
+  </box>
+
+  <box id="tam_04_3" size="0.01,0.05,0.08" movable="false">
+  <body position="0.725,-0.15,0" orientation="90,0,0"/>
+  </box>
+
+    <!-- * Tam 5 -->
+  <box id="tam_05_1" size="0.01,0.1,0.08" movable="false">
+    <body position="0.75,-0.4,0" orientation="0,0,0"/>
+    <leds medium="leds">
+        <led id="led_5" offset="-0.02,0,0.05" anchor="origin" color="green" intensity="100.0"/>
+    </leds>
+  </box>
+
+  <box id="tam_05_2" size="0.01,0.05,0.08" movable="false">
+  <body position="0.725,-0.45,0" orientation="90,0,0"/>
+  </box>
+
+  <box id="tam_05_3" size="0.01,0.05,0.08" movable="false">
+  <body position="0.725,-0.35,0" orientation="90,0,0"/>
+  </box>
+
+    <!-- * Tam 6-->
+  <box id="tam_06_1" size="0.01,0.1,0.08" movable="false">
+    <body position="0.75,-0.6,0" orientation="0,0,0"/>
+    <leds medium="leds">
+        <led id="led_6" offset="-0.02,0,0.05" anchor="origin" color="green" intensity="100.0"/>
     </leds>
   </box>
 
   <box id="tam_06_2" size="0.01,0.05,0.08" movable="false">
-  <body position="0.725,0.45,0" orientation="90,0,0"/>
+  <body position="0.725,-0.65,0" orientation="90,0,0"/>
   </box>
 
   <box id="tam_06_3" size="0.01,0.05,0.08" movable="false">
-  <body position="0.725,0.35,0" orientation="90,0,0"/>
-  </box>
+  <body position="0.725,-0.55,0" orientation="90,0,0"/>
+  </box> 
+
+
+
+
 
 
 
