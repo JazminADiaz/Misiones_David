@@ -20,6 +20,8 @@ TuttiTmLoopFunction::TuttiTmLoopFunction() {
     m_unStopBox = 2;
     m_fObjectiveFunction = 0;
     tam = 0;
+
+
     
 }
 
@@ -68,21 +70,32 @@ void TuttiTmLoopFunction::Init(TConfigurationNode& t_tree) {
     }
 
     InitRobotStates();
-    //m_pcArena->SetArenaColor(CColor::BLACK);
 
-    //if (m_unClock == m_unStopTime) {
-        CSpace::TMapPerType& tBlocksMap = GetSpace().GetEntitiesByType("box");
-        UInt32 unBlocksID = 0;
-        for (CSpace::TMapPerType::iterator it = tBlocksMap.begin(); it != tBlocksMap.end(); ++it) {
-            CBoxEntity* pcBlock = any_cast<CBoxEntity*>(it->second);
-            //std::cout << unBlocksID << std::endl;
-            //pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::MAGENTA);
-            //if (unBlocksID == 0) {
-              //  pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::MAGENTA);
-            //}
-            unBlocksID += 1;
-        }
-    //}
+    CSpace::TMapPerType& tBlocksMap = GetSpace().GetEntitiesByType("box");
+    CVector2 cBoxPosition(0,0);
+
+
+    UInt32 unBlocksID = 0;
+    for (CSpace::TMapPerType::iterator it = tBlocksMap.begin(); it != tBlocksMap.end(); ++it) {
+        CBoxEntity* pcBlock = any_cast<CBoxEntity*>(it->second);
+        cBoxPosition.Set(pcBlock->GetEmbodiedEntity().GetOriginAnchor().Position.GetX(),
+                        pcBlock->GetEmbodiedEntity().GetOriginAnchor().Position.GetY());
+
+            if (unBlocksID ==0){Tam1.SetX(cBoxPosition.GetX());}
+            if (unBlocksID ==1){Tam1.SetY(cBoxPosition.GetY());}
+            if (unBlocksID ==3){Tam2.SetX(cBoxPosition.GetX());}
+            if (unBlocksID ==4){Tam2.SetY(cBoxPosition.GetY());}
+            if (unBlocksID ==6){Tam3.SetX(cBoxPosition.GetX());}
+            if (unBlocksID ==7){Tam3.SetY(cBoxPosition.GetY());}
+            if (unBlocksID ==9){Tam4.SetX(cBoxPosition.GetX());}
+            if (unBlocksID ==10){Tam4.SetY(cBoxPosition.GetY());}
+            if (unBlocksID ==12){Tam5.SetX(cBoxPosition.GetX());}
+            if (unBlocksID ==13){Tam5.SetY(cBoxPosition.GetY());}
+            if (unBlocksID ==15){Tam6.SetX(cBoxPosition.GetX());}
+            if (unBlocksID ==16){Tam6.SetY(cBoxPosition.GetY());}
+
+        unBlocksID += 1; 
+    }
 
 }
 
@@ -129,7 +142,7 @@ void TuttiTmLoopFunction::PostStep() {
     m_unClock = GetSpace().GetSimulationClock();
     
     ScoreControl();
-    TamControl();
+    GetTamControl();
     //ArenaControl(); 
     
 
@@ -221,12 +234,12 @@ Real TuttiTmLoopFunction::GetMoveScore() {
     return unScore;
 }
 
-Real TuttiTmLoopFunction::TamControl() {
-    UInt32 tam1=UpdateRobotPositions();
+Real TuttiTmLoopFunction::GetTamControl() {
+    UInt32 tam1=1;
     
 
     
-    InitRobotStates();
+
     //m_pcArena->SetArenaColor(CColor::BLACK);
 
     //if (m_unClock == m_unStopTime) {
@@ -257,67 +270,40 @@ Real TuttiTmLoopFunction::TamControl() {
 /****************************************/
 /****************************************/
 
+
 argos::CColor TuttiTmLoopFunction::GetFloorColor(const argos::CVector2& c_position_on_plane) {
     
-    //tam1
-    if (-0.05< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= 0.05 
-    and 0.68< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75
-    ){
-        
-        return CColor::WHITE;
-    }
-//tam2
-    if (-0.25< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= -0.15 
+        Real y_l=0.1, x_l=0.07;
 
-    and 0.68< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75
-    ){
-        return CColor::WHITE;
-    }
-    
-    //else if (c_position_on_plane.GetX() >= 0.60){
-    //    return CColor::BLACK;
-    //}
+//tam1 
+    if (Tam1.GetY()-y_l< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= Tam1.GetY()
+    and (Tam1.GetX())-x_l< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= Tam1.GetX()
+    ){          return CColor::WHITE;    }
 //tam2
-    if (-0.45< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= -0.35 
+    if (Tam2.GetY()-y_l< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= Tam2.GetY()
+    and (Tam2.GetX()-x_l)< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= Tam2.GetX()
+    ){  return CColor::WHITE;    }
 
-    and 0.68< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75
-    ){
-        return CColor::WHITE;
-    }
+//tam3
+    if (Tam3.GetY()-y_l< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= Tam3.GetY()
+    and (Tam3.GetX()-x_l)< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= Tam3.GetX()
+    ){   return CColor::WHITE;    }
 //tam4
-    if (-0.65< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= -0.55 
-
-    and 0.68< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75
-    ){
-        return CColor::WHITE;
-    }
+    if (Tam4.GetY()< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= Tam4.GetY()+y_l
+    and (Tam4.GetX())-x_l< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= Tam4.GetX()
+    ){ return CColor::WHITE;    }
 //tam5
-    if (0.15< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= 0.25 
+    if (Tam5.GetY()< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= Tam5.GetY()+y_l
+    and (Tam5.GetX()-x_l)< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= Tam5.GetX()
+    ){  return CColor::WHITE;}
 
-    and 0.68< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75
-    ){
-        return CColor::WHITE;
-    }
 
 //tam6
-    if (0.35< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= 0.45 
-
-    and 0.68< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75
-    ){
-        return CColor::WHITE;
-    }
-
-    
-
-//tam7
-    //if (0.55< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= 0.65 
-
-    //and 0.68< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= 0.75)
-    //{        return CColor::WHITE;    }
-
-if (0.45< c_position_on_plane.GetX()){
-
-            return CColor::BLACK;}
+    if (Tam6.GetY()< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= Tam6.GetY()+y_l
+    and (Tam6.GetX()-x_l)< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= Tam6.GetX()
+    ){  return CColor::WHITE;}
+//else
+    if (0.45< c_position_on_plane.GetX()){return CColor::BLACK;}
 
     return CColor::GRAY50;
 }
