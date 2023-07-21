@@ -42,13 +42,20 @@ class TuttiTmLoopFunction: public CoreLoopFunctions {
     void ArenaControl();
 
     void InitRobotStates();
-    Real UpdateRobotPositions();
 
     void ScoreControl();
     void EventLog();
     Real GetStopScore();  
     Real GetMoveScore();
-    Real TamControl();
+    void ActiveTamCount();
+    void InitBoxStates();
+    Real GetTamControl();
+
+    /*cambio void a Real solo para probar*/
+    Real UpdateRobotPositions();
+
+
+
   private:
 
     /*
@@ -112,6 +119,9 @@ class TuttiTmLoopFunction: public CoreLoopFunctions {
     UInt32 m_unStopBox;
     UInt32 tam;
     Real m_fObjectiveFunction;
+    CVector2 Tam1, Tam2, Tam3, Tam4, Tam5, Tam6;
+    UInt32  tam1=0, tam2=0, tam3=0, tam4=0, tam5=0, tam6=0;
+
     int time_saved;
     std::string time_S;
     int c=0;
