@@ -110,11 +110,14 @@ void TuttiTmLoopFunction::EventLog() {
     CreateFile<<"id,activity,time"<<std::endl;
     MyFile.open("/home/jazmin/Documents/Ubuntu_personal/TESIS/intento2023/data.csv", std::ios::app);
     time_S = std::to_string(GetSpace().GetSimulationClock());
-
+    
     c=0;
+
+    InitBoxStates();
+
     TRobotStateMap::iterator it;
     for (it = m_tRobotStates.begin(); it != m_tRobotStates.end(); ++it) {
-        MyFile<<c<<","<<"nose"<<","<<time_S<<std::endl;
+        //MyFile<<c<<","<<"nose"<<","<<time_S<<std::endl;
         c=c+1;
     }
 
@@ -146,7 +149,6 @@ void TuttiTmLoopFunction::PostStep() {
     EventLog();
     m_unClock = GetSpace().GetSimulationClock();
 
-    InitBoxStates();
     //ScoreControl();
     //GetTamControl();
     //ActiveTamCount();
@@ -249,9 +251,8 @@ Real TuttiTmLoopFunction::GetMoveScore() {
 Real TuttiTmLoopFunction::GetTamControl() {
 CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
 CVector2 cEpuckPosition(0,0);
-Real y_l=0.15,x_l=0.12, rob=0, lim=0.000005;
-
-std::string action, robot;
+Real y_l=0.1,x_l=0.08, rob=0, lim=0.000005;
+//los action guardan el robot interact
 for (CSpace::TMapPerType::iterator it = tEpuckMap.begin(); it != tEpuckMap.end(); ++it) {
         CEPuckEntity* pcEpuck = any_cast<CEPuckEntity*>(it->second);
         cEpuckPosition.Set(pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetX(),
@@ -262,97 +263,185 @@ for (CSpace::TMapPerType::iterator it = tEpuckMap.begin(); it != tEpuckMap.end()
         m_tRobotStates[pcEpuck].cPosition = cEpuckPosition;
 
         robot=std::to_string(rob);
+        robot.erase ( robot.find_last_not_of('0') + 1, std::string::npos );
+        robot.erase ( robot.find_last_not_of(',') + 1, std::string::npos );
 //tam1 
     if (Tam1.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam1.GetY()
     and (Tam1.GetX())-x_l< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam1.GetX() and tam1==0
-    ){ 
-        action=";T1_enter";
-            //std::cout<<"antesX:"<<(m_tRobotStates[pcEpuck].cLastPosition.GetX())<<" despuesX: "<< m_tRobotStates[pcEpuck].cPosition.GetX()<<std::endl;
-        std::cout<<"T1,enter"<<std::endl;
-        action=robot+action;
+    ){  
+        robotT1=rob;
+        if(actionT1!="T1_enter"){
+            std::cout<<robot<<"T1_enter"<<std::endl;
+            MyFile<<robot<<","<<"T1_enter"<<","<<time_S<<std::endl;
+
+            }
+        actionT1="T1_enter";
+
+
         if (abs((m_tRobotStates[pcEpuck].cPosition.GetX())- m_tRobotStates[pcEpuck].cLastPosition.GetX())<=lim and
          abs((m_tRobotStates[pcEpuck].cPosition.GetY())- m_tRobotStates[pcEpuck].cLastPosition.GetY())<=lim and tam1==0){
-            action=";T1_stop";
-            std::cout<<"T1,stop"<<std::endl;
+            actionT1="T1_stop";
+            std::cout<<robotT1<<actionT1<<std::endl;
+            MyFile<<robot<<","<<actionT1<<","<<time_S<<std::endl;
 
-            action=robot+action;
-            tam1=1;
+        tam1=1;
         }
+    }
+
+    if (rob==robotT1 and actionT1== "T1_enter" and Tam1.GetX()-x_l> cEpuckPosition.GetX()){
+                actionT1="T1_out";
+                std::cout<<robotT1<<actionT1<<std::endl;
+                MyFile<<robot<<","<<actionT1<<","<<time_S<<std::endl;
+
     }
     
 //tam2
-    if (Tam2.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam2.GetY()
+  if (Tam2.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam2.GetY()
     and (Tam2.GetX()-x_l)< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam2.GetX() and tam2==0
-    ){  action=";T2_enter";
-        std::cout<<"T2,enter"<<std::endl;
+){      robotT2=rob;
+        if(actionT2!="T2_enter"){
+            std::cout<<robot<<"T2_enter"<<std::endl;
+            MyFile<<robot<<","<<"T2_enter"<<","<<time_S<<std::endl;
+}
+        actionT2="T2_enter";
 
-        action=robot+action;
         if (abs((m_tRobotStates[pcEpuck].cPosition.GetX())- m_tRobotStates[pcEpuck].cLastPosition.GetX())<=lim and
          abs((m_tRobotStates[pcEpuck].cPosition.GetY())- m_tRobotStates[pcEpuck].cLastPosition.GetY())<=lim and tam2==0){
-            action=";T2_stop";
-            std::cout<<"T2,stop"<<std::endl;
+            actionT2="T2_stop";
+            std::cout<<robotT2<<"T2_stop"<<std::endl;
+            MyFile<<robot<<","<<actionT2<<","<<time_S<<std::endl;
 
-            action=robot+action;
             tam2=1;
         }
-             }
+
+}
+    if (rob==robotT2 and actionT2== "T2_enter" and (Tam2.GetX()-x_l)>= cEpuckPosition.GetX()){
+        actionT2="T2_out";          
+        std::cout<<robotT2<<"T2_out"<<std::endl;
+        MyFile<<robot<<","<<actionT2<<","<<time_S<<std::endl;
+
+
+    }
 
 //tam3
-    if (Tam3.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam3.GetY()
+  if (Tam3.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam3.GetY()
     and (Tam3.GetX()-x_l)< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam3.GetX() and tam3==0
-    ){  action=";T3_enter";
-        action=robot+action;
+){      
+    robotT3=rob;
+        if(actionT3!="T3_enter"){
+            std::cout<<robot<<"T3_enter"<<std::endl;
+        MyFile<<robot<<","<<"T3_enter"<<","<<time_S<<std::endl;
+
+            }
+        actionT3="T3_enter";
+
+
         if (abs((m_tRobotStates[pcEpuck].cPosition.GetX())- m_tRobotStates[pcEpuck].cLastPosition.GetX())<=lim and
          abs((m_tRobotStates[pcEpuck].cPosition.GetY())- m_tRobotStates[pcEpuck].cLastPosition.GetY())<=lim and tam3==0){
-            action=";T3_stop";
-            action=robot+action;
+            actionT3="T3_stop";
+            std::cout<<robotT3<<"T3_stop"<<std::endl;
+            MyFile<<robot<<","<<actionT3<<","<<time_S<<std::endl;
+
             tam3=1;
-        }   
-             }
+        }
+
+}
+    if (rob==robotT3 and actionT3== "T3_enter" and (Tam3.GetX()-(x_l))>= cEpuckPosition.GetX()){
+        actionT3="T3_out";          
+        std::cout<<robotT3<<"T3_out"<<std::endl;
+        MyFile<<robot<<","<<actionT3<<","<<time_S<<std::endl;
+
+
+    }
+
 //tam4
     if (Tam4.GetY()< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam4.GetY()+y_l
     and (Tam4.GetX())-x_l< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam4.GetX() and tam4==0
-    ){  action=";T4_enter";
-        action=robot+action;
+){      robotT4=rob;
+        if(actionT4!="T4_enter"){
+            std::cout<<robot<<"T4_enter"<<std::endl;
+            MyFile<<robot<<","<<"T4_enter"<<","<<time_S<<std::endl;
+}
+        actionT4="T4_enter";
+
         if (abs((m_tRobotStates[pcEpuck].cPosition.GetX())- m_tRobotStates[pcEpuck].cLastPosition.GetX())<=lim and
          abs((m_tRobotStates[pcEpuck].cPosition.GetY())- m_tRobotStates[pcEpuck].cLastPosition.GetY())<=lim and tam4==0){
-            action=";T4_stop";
-            action=robot+action;
-            tam4=1; 
+            actionT4="T4_stop";
+            std::cout<<robotT4<<"T4_stop"<<std::endl;
+            MyFile<<robot<<","<<actionT4<<","<<time_S<<std::endl;
+
+            tam4=1;
         }
-            }
+
+}
+    if (rob==robotT4 and actionT4== "T4_enter" and (Tam4.GetX()-(x_l))>= cEpuckPosition.GetX()){
+        actionT4="T4_out";          
+        std::cout<<robotT4<<"T4_out"<<std::endl;
+        MyFile<<robot<<","<<actionT4<<","<<time_S<<std::endl;
+    }
+    
 //tam5
     if (Tam5.GetY()< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam5.GetY()+y_l
     and (Tam5.GetX()-x_l)< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam5.GetX() and tam5==0
-    ){  
-        action=";T5_enter";
-        action=robot+action;
+){      robotT5=rob;
+        if(actionT5!="T5_enter"){
+            std::cout<<robot<<"T5_enter"<<std::endl;
+            MyFile<<robot<<","<<"T5_enter"<<","<<time_S<<std::endl;
+            }
+        actionT5="T5_enter";
         if (abs((m_tRobotStates[pcEpuck].cPosition.GetX())- m_tRobotStates[pcEpuck].cLastPosition.GetX())<=lim and
          abs((m_tRobotStates[pcEpuck].cPosition.GetY())- m_tRobotStates[pcEpuck].cLastPosition.GetY())<=lim and tam5==0){
-            action=";T5_stop";
-            action=robot+action;
+            actionT5="T5_stop";
+            std::cout<<robotT5<<"T5_stop"<<std::endl;
+            MyFile<<robot<<","<<actionT5<<","<<time_S<<std::endl;
+
             tam5=1;
         }
-           }
+
+}
+    if (rob==robotT5 and actionT5== "T5_enter" and (Tam5.GetX()-(x_l))>= cEpuckPosition.GetX()){
+        actionT5="T5_out";          
+        std::cout<<robotT5<<"T5_out"<<std::endl;
+        MyFile<<robot<<","<<actionT5<<","<<time_S<<std::endl;
+
+
+    }
+ 
 //tam6
     if (Tam6.GetY()< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam6.GetY()+y_l
     and (Tam6.GetX()-x_l)< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam6.GetX() and tam6==0
-    ){  action=";T6_enter";
-        action=robot+action;
+){      robotT6=rob;
+        if(actionT6!="T6_enter"){
+            std::cout<<robot<<"T6_enter"<<std::endl;
+            MyFile<<robot<<","<<"T6_enter"<<","<<time_S<<std::endl;
+}
+        actionT6="T6_enter";
+
+            
         if (abs((m_tRobotStates[pcEpuck].cPosition.GetX())- m_tRobotStates[pcEpuck].cLastPosition.GetX())<=lim and
          abs((m_tRobotStates[pcEpuck].cPosition.GetY())- m_tRobotStates[pcEpuck].cLastPosition.GetY())<=lim and tam6==0){
-            action=";T6_stop";
-            action=robot+action;
+            actionT6="T6_stop";
+            std::cout<<robotT6<<"T6_stop"<<std::endl;
+            MyFile<<robot<<","<<actionT6<<","<<time_S<<std::endl;
+
             tam6=1;
         }
-          }
-        //std::cout<<"Epuck: "<<rob<<", atam2: "<<tam2<<std::endl;
 
+}
+    if (rob==robotT6 and actionT6== "T6_enter" and (Tam6.GetX()-(x_l))>= cEpuckPosition.GetX()){
+        actionT6="T6_out";          
+        std::cout<<robotT6<<"T6_out"<<std::endl;
+        MyFile<<robot<<","<<actionT6<<","<<time_S<<std::endl;
+
+
+    }
+  
         rob+=1;
 
 
     }
 //                std::cout<<"atam1:"<<tam1<<"atam2:"<<tam2<<std::endl;
+
     return tam2;
     }
 
@@ -454,7 +543,7 @@ void TuttiTmLoopFunction::InitRobotStates() {
 
 void TuttiTmLoopFunction::InitBoxStates() {
         GetTamControl();
-
+    
     CSpace::TMapPerType& tBlocksMap = GetSpace().GetEntitiesByType("box");
     CVector2 cBoxPosition(0,0);
     UInt32 unBlocksID1 = 0;
@@ -492,7 +581,7 @@ void TuttiTmLoopFunction::InitBoxStates() {
                 pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::MAGENTA);
             }
         unBlocksID1+=1;
-        std::cout<<"bloque1:"<<unBlocksID1<<std::endl;
+       // std::cout<<"bloque1:"<<unBlocksID1<<std::endl;
     }
 }
 
