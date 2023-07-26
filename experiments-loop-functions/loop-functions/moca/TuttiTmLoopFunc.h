@@ -119,10 +119,10 @@ class TuttiTmLoopFunction: public CoreLoopFunctions {
     UInt32 m_unStopBox;
     UInt32 tam;
     Real m_fObjectiveFunction;
-    CVector2 Tam1, Tam2, Tam3, Tam4, Tam5, Tam6;
-    UInt32  tam1=0, tam2=0, tam3=0, tam4=0, tam5=0, tam6=0;
-    std::string actionT1, actionT2, actionT3, actionT4, actionT5, actionT6, robot;
-    Real robotT1, robotT2, robotT3, robotT4, robotT5, robotT6;
+    CVector2 Tam1, Tam2, Tam3, Tam4, Tam5, Tam6, Tam7, Tam8;
+    UInt32  tam1=0, tam2=0, tam3=0, tam4=0, tam5=0, tam6=0, tam7=0, tam8=0;
+    std::string actionT1, actionT2, actionT3, actionT4, actionT5, actionT6, actionT7, actionT8, robot;
+    Real robotT1, robotT2, robotT3, robotT4, robotT5, robotT6, robotT7, robotT8;
 
     int time_saved;
     std::string time_S;

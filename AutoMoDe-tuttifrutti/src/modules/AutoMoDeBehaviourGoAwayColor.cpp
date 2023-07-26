@@ -56,7 +56,7 @@ namespace argos {
 		CVector2 sResultVector(0,CRadians::ZERO);
 
         for (it = sReadings.BlobList.begin(); it != sReadings.BlobList.end(); it++) {
-            if ((*it)->Color == m_cColorReceiverParameter  && (*it)->Distance >= 6.0) {
+            if ((*it)->Color == m_cColorReceiverParameter  && (*it)->Distance >= 22) {
                 sColVectorSum += CVector2(1 / (((*it)->Distance) + 1), (*it)->Angle);
             }
 		}
@@ -64,9 +64,9 @@ namespace argos {
         sProxVectorSum = CVector2(m_pcRobotDAO->GetProximityReading().Value, m_pcRobotDAO->GetProximityReading().Angle);
 
         if (sColVectorSum.Length() != 0)
-            sResultVector = -CVector2(m_unRepulsionParameter, sColVectorSum.Angle().SignedNormalize()) - 5*sProxVectorSum;
+            sResultVector = -CVector2(1.0, sColVectorSum.Angle().SignedNormalize()) - m_unRepulsionParameter*sProxVectorSum;
         else
-            sResultVector = CVector2(m_unRepulsionParameter, sColVectorSum.Angle().SignedNormalize()) - 5*sProxVectorSum;
+            sResultVector = CVector2(1.0, sColVectorSum.Angle().SignedNormalize()) - m_unRepulsionParameter*sProxVectorSum;
 
 		m_pcRobotDAO->SetWheelsVelocity(ComputeWheelsVelocityFromVector(sResultVector));
         m_pcRobotDAO->SetLEDsColor(m_cColorEmiterParameter);
