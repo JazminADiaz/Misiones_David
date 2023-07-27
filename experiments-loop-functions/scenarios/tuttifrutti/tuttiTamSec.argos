@@ -184,9 +184,9 @@
 <box id="tam_02_1" movable="false" size="0.01,0.1,0.12">
 <body orientation="0,0,0" position="0.79,0.25,0"></body>
 <leds medium="leds">
-<led anchor="origin" color="blue" id="led_2" intensity="100.0" offset="-0.01,0,0.09"></led>
-<led anchor="origin" color="blue" id="led_2_2" intensity="100.0" offset="-0.01,0.04,0.09"></led>
-<led anchor="origin" color="blue" id="led_2_3" intensity="100.0" offset="-0.01,-0.04,0.09"></led>
+<led anchor="origin" color="green" id="led_2" intensity="100.0" offset="-0.01,0,0.09"></led>
+<led anchor="origin" color="green" id="led_2_2" intensity="100.0" offset="-0.01,0.04,0.09"></led>
+<led anchor="origin" color="green" id="led_2_3" intensity="100.0" offset="-0.01,-0.04,0.09"></led>
 </leds>
 </box>
 <box id="tam_02_2" movable="false" size="0.01,0.11,0.12">

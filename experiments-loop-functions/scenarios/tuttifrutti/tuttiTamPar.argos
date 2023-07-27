@@ -56,7 +56,7 @@
 <distribute>
 <position max="0.4,0.4,0" method="uniform" min="-1,-1,0"></position>
 <orientation mean="0,0,0" method="gaussian" std_dev="360,0,0"></orientation>
-<entity max_trials="100" quantity="6">
+<entity max_trials="100" quantity="8">
 <e-puck id="epuck">
 <controller config="tuttifrutti"></controller>
 </e-puck>
@@ -200,9 +200,9 @@
 <box id="tam_03_1" movable="false" size="0.01,0.1,0.12">
 <body orientation="0,0,0" position="0.79,-0.25,0"></body>
 <leds medium="leds">
-<led anchor="origin" color="green" id="led_3" intensity="100.0" offset="-0.01,0,0.1"></led>
-<led anchor="origin" color="green" id="led_3_2" intensity="100.0" offset="-0.01,0.04,0.1"></led>
-<led anchor="origin" color="green" id="led_3_3" intensity="100.0" offset="-0.01,-0.04,0.1"></led>
+<led anchor="origin" color="blue" id="led_3" intensity="100.0" offset="-0.01,0,0.1"></led>
+<led anchor="origin" color="blue" id="led_3_2" intensity="100.0" offset="-0.01,0.04,0.1"></led>
+<led anchor="origin" color="blue" id="led_3_3" intensity="100.0" offset="-0.01,-0.04,0.1"></led>
 </leds>
 </box>
 <box id="tam_03_2" movable="false" size="0.01,0.11,0.12">
@@ -215,9 +215,9 @@
 <box id="tam_04_1" movable="false" size="0.01,0.1,0.12">
 <body orientation="0,0,0" position="0.79,-0.75,0"></body>
 <leds medium="leds">
-<led anchor="origin" color="green" id="led_4" intensity="100.0" offset="-0.01,0,0.08"></led>
-<led anchor="origin" color="green" id="led_4_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
-<led anchor="origin" color="green" id="led_4_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
+<led anchor="origin" color="blue" id="led_4" intensity="100.0" offset="-0.01,0,0.08"></led>
+<led anchor="origin" color="blue" id="led_4_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+<led anchor="origin" color="blue" id="led_4_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
 </leds>
 </box>
 <box id="tam_04_2" movable="false" size="0.01,0.11,0.12">
@@ -230,9 +230,9 @@
 <box id="tam_05_1" movable="false" size="0.01,0.1,0.12">
 <body orientation="0,0,0" position="-0.79,0.75,0"></body>
 <leds medium="leds">
-<led anchor="origin" color="green" id="led_5" intensity="100.0" offset="0.01,0,0.08"></led>
-<led anchor="origin" color="green" id="led_5_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
-<led anchor="origin" color="green" id="led_5_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
+<led anchor="origin" color="blue" id="led_5" intensity="100.0" offset="0.01,0,0.08"></led>
+<led anchor="origin" color="blue" id="led_5_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
+<led anchor="origin" color="blue" id="led_5_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
 </leds>
 </box>
 <box id="tam_05_2" movable="false" size="0.01,0.11,0.12">
@@ -245,9 +245,9 @@
 <box id="tam_06_1" movable="false" size="0.01,0.1,0.12">
 <body orientation="0,0,0" position="-0.79,0.25,0"></body>
 <leds medium="leds">
-<led anchor="origin" color="green" id="led_6" intensity="100.0" offset="0.01,0,0.08"></led>
-<led anchor="origin" color="green" id="led_6_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
-<led anchor="origin" color="green" id="led_6_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
+<led anchor="origin" color="blue" id="led_6" intensity="100.0" offset="0.01,0,0.08"></led>
+<led anchor="origin" color="blue" id="led_6_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
+<led anchor="origin" color="blue" id="led_6_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
 </leds>
 </box>
 <box id="tam_06_2" movable="false" size="0.01,0.11,0.12">
@@ -261,9 +261,9 @@
 <box id="tam_07_1" movable="false" size="0.01,0.1,0.12">
 <body orientation="0,0,0" position="-0.79,-0.25,0"></body>
 <leds medium="leds">
-<led anchor="origin" color="green" id="led_7" intensity="100.0" offset="0.01,0,0.08"></led>
-<led anchor="origin" color="green" id="led_7_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
-<led anchor="origin" color="green" id="led_7_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
+<led anchor="origin" color="blue" id="led_7" intensity="100.0" offset="0.01,0,0.08"></led>
+<led anchor="origin" color="blue" id="led_7_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
+<led anchor="origin" color="blue" id="led_7_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
 </leds>
 </box>
 <box id="tam_07_2" movable="false" size="0.01,0.11,0.12">
@@ -276,9 +276,9 @@
 <box id="tam_08_1" movable="false" size="0.01,0.1,0.12">
 <body orientation="0,0,0" position="-0.79,-0.75,0"></body>
 <leds medium="leds">
-<led anchor="origin" color="green" id="led_8" intensity="100.0" offset="0.01,0,0.08"></led>
-<led anchor="origin" color="green" id="led_8_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
-<led anchor="origin" color="green" id="led_8_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
+<led anchor="origin" color="blue" id="led_8" intensity="100.0" offset="0.01,0,0.08"></led>
+<led anchor="origin" color="blue" id="led_8_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
+<led anchor="origin" color="blue" id="led_8_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
 </leds>
 </box>
 <box id="tam_08_2" movable="false" size="0.01,0.11,0.12">

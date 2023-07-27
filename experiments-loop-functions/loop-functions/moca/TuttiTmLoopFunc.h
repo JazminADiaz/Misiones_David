@@ -16,9 +16,10 @@
 #include <argos3/plugins/simulator/entities/box_entity.h>
 #include <argos3/plugins/robots/arena/simulator/arena_entity.h>
 #include "../../src/CoreLoopFunctions.h"
-
+#include <ctime>
 using namespace argos;
 std::fstream MyFile;
+
 
 class TuttiTmLoopFunction: public CoreLoopFunctions {
   public:
@@ -125,7 +126,7 @@ class TuttiTmLoopFunction: public CoreLoopFunctions {
     Real robotT1, robotT2, robotT3, robotT4, robotT5, robotT6, robotT7, robotT8;
 
     int time_saved;
-    std::string time_S;
+    std::string time_S, file_name;
     int c=0;
 
     struct RobotStateStruct {
