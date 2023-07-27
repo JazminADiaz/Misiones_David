@@ -458,7 +458,7 @@ Real y_l=0.1,x_l=0.12, rob=0, lim=0.000005;
 
 argos::CColor TuttiTmLoopFunction::GetFloorColor(const argos::CVector2& c_position_on_plane) {
     
-        Real y_l=0.1, x_l=0.06;
+        Real y_l=0.1, x_l=0.07;
 
 //tam1 
     if (Tam1.GetY()-y_l< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= Tam1.GetY()
