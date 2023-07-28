@@ -37,7 +37,7 @@ def import_csv(file_path):
     inductive(event_log)
     heuristic(event_log)
 
-def time_format(file_path, cont):
+def time_format(file_path, cont, folder):
         log = pd.read_csv(file_path, sep=';')
         time_log=[]
         case_id=[]
@@ -67,8 +67,8 @@ def time_format(file_path, cont):
         log['time'] = time_log
         log['time'] = pd.to_datetime(log['time'], format='%Y-%m-%d %H:%M:%S')
         log['case_id']=case_id
-        log.to_csv('/home/jazmin/tuttifrutti/log/ideales_no_repetidos_1/time/data'+str(cont)+'.csv', sep=';', index=False)
-        return '/home/jazmin/tuttifrutti/log/ideales_no_repetidos_1/time/data'+str(cont)+'.csv'
+        log.to_csv(folder+'/time/data'+str(cont)+'.csv', sep=';', index=False)
+        return folder+'/time/data'+str(cont)+'.csv'
 
 def logs_folder(folder):
     # Get data file names
@@ -79,15 +79,15 @@ def logs_folder(folder):
     for filename in filenames:
         cont+=1
         if cont<30:
-            filename=time_format(filename, cont)
+            filename=time_format(filename, cont, folder)
             dfs.append(pd.read_csv(filename))
 
     # Concatenate all data into one DataFrame
     big_frame = pd.concat(dfs, ignore_index=True)
     print(big_frame)
-    big_frame.to_csv('/home/jazmin/tuttifrutti/log/ideales_no_repetidos_1/final_log/trial.csv', sep=';', index=False)
+    big_frame.to_csv(folder+'/final_log/trial.csv', sep=';', index=False)
     
-    import_csv("/home/jazmin/tuttifrutti/log/ideales_no_repetidos_1/final_log/trial.csv")
+    import_csv(folder+"/final_log/trial.csv")
 
 
 
@@ -96,4 +96,5 @@ def logs_folder(folder):
 
 
 if __name__ == "__main__":
-    logs_folder("/home/jazmin/Documents/Ubuntu_personal/TESIS/intento2023/ideales_no_repetidos_1")
+    mision="secuencial_paralela"
+    logs_folder("/home/jazmin/tuttifrutti/log/"+mision)

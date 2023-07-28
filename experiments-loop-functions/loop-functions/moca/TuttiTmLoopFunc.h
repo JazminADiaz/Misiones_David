@@ -127,7 +127,7 @@ class TuttiTmLoopFunction: public CoreLoopFunctions {
     UInt32 timer1=0, timer2=0, timer3=0,timer4=0,timer5=0,timer6=0,timer7=0,timer8=0, timer9=0, timer10=0, timer11=0, timer12=0, timer13=0;
 
     int time_saved;
-    std::string time_S, file_name;
+    std::string time_S, file_name, mision;
     int c=0;
 
     struct RobotStateStruct {

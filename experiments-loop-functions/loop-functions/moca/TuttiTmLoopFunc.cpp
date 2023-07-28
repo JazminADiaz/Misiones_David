@@ -109,9 +109,12 @@ void TuttiTmLoopFunction::Init(TConfigurationNode& t_tree) {
 /****************************************/
 /****************************************/
 void TuttiTmLoopFunction::EventLog() {
-    std::fstream CreateFile("/home/jazmin/tuttifrutti/log/ideales_no_repetidos_1/"+file_name+"data.csv");
+    mision="secuencial_paralela/";
+    //mision="paralela/"
+    //mision="secuencial/"
+    std::fstream CreateFile("/home/jazmin/tuttifrutti/log/"+mision+file_name+"data.csv");
     CreateFile<<"case_id;activity;time"<<std::endl;
-    MyFile.open("/home/jazmin/tuttifrutti/log/ideales_no_repetidos_1/"+file_name+"data.csv", std::ios::app);
+    MyFile.open("/home/jazmin/tuttifrutti/log/"+mision+file_name+"data.csv", std::ios::app);
     time_S = std::to_string(GetSpace().GetSimulationClock());
     InitBoxStates();
     MyFile.close();
