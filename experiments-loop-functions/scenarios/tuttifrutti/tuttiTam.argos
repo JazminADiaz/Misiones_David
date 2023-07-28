@@ -4,11 +4,9 @@
 <!-- * Framework * -->
 <!-- ************* -->
 <framework>
-<experiment length="400" random_seed="30" ticks_per_second="10"></experiment>
-<!--si 76  59 30 -->
-<!--no 28 -->
-
-
+<experiment length="400" random_seed="20" ticks_per_second="10"></experiment>
+<!--si 77 30 55 20-->
+<!--no 65 25 -->
 </framework>
 <!-- ****************** -->
 <!-- * Loop functions * -->
@@ -164,7 +162,6 @@
 
 
  -->
-
 <!-- * Tam 1 -->
 <box id="tam_01_1" movable="false" size="0.01,0.1,0.12">
 <body orientation="0,0,0" position="0.79,0.75,0"></body>
