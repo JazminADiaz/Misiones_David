@@ -4,9 +4,9 @@
 <!-- * Framework * -->
 <!-- ************* -->
 <framework>
-<experiment length="400" random_seed="77" ticks_per_second="10"></experiment>
-<!--si 77 30 55 20 66 89 99 (no detecta timer5=100) 18 20 -->
-<!--no 65 25 16 33-->
+<experiment length="400" random_seed="69" ticks_per_second="10"></experiment>
+<!--si 77 30 55 20 89 99 18 9 11 18 23 27 42 45 47 49 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70-->
+<!--no 65 25 16 33 15 40 // 52-->
 </framework>
 <!-- ****************** -->
 <!-- * Loop functions * -->
@@ -308,5 +308,5 @@
 <placement idx="0" lens_focal_length="30" look_at="0,0,0" position="0,0,2.7"></placement>
 </camera>
 </qt-opengl>
-</visualization>-->
+</visualization> -->
 </argos-configuration>

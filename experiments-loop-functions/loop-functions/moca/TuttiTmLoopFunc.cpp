@@ -109,9 +109,9 @@ void TuttiTmLoopFunction::Init(TConfigurationNode& t_tree) {
 /****************************************/
 /****************************************/
 void TuttiTmLoopFunction::EventLog() {
-    std::fstream CreateFile("/home/jazmin/Documents/Ubuntu_personal/TESIS/intento2023/ideales_no_repetidos_1/"+file_name+"data.csv");
+    std::fstream CreateFile("/home/jazmin/tuttifrutti/log/ideales_no_repetidos_1/"+file_name+"data.csv");
     CreateFile<<"case_id;activity;time"<<std::endl;
-    MyFile.open("/home/jazmin/Documents/Ubuntu_personal/TESIS/intento2023/ideales_no_repetidos_1/"+file_name+"data.csv", std::ios::app);
+    MyFile.open("/home/jazmin/tuttifrutti/log/ideales_no_repetidos_1/"+file_name+"data.csv", std::ios::app);
     time_S = std::to_string(GetSpace().GetSimulationClock());
     InitBoxStates();
     MyFile.close();
@@ -283,7 +283,7 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
                 tam2=1;
                 }
             timer2+=1;
-            if(timer1==50 and tam2==1){
+            if(timer2==50 and tam2==1){
                     timer2=0;
                     actionT2="T2_task2";
                     MyFile<<robot<<";"<<actionT2<<";"<<time_S<<std::endl;
