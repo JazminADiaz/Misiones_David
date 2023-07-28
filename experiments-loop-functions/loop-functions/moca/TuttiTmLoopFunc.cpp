@@ -109,9 +109,9 @@ void TuttiTmLoopFunction::Init(TConfigurationNode& t_tree) {
 /****************************************/
 /****************************************/
 void TuttiTmLoopFunction::EventLog() {
-    std::fstream CreateFile("/home/jazmin/Documents/Ubuntu_personal/TESIS/intento2023/Ideales/"+file_name+"data.csv");
+    std::fstream CreateFile("/home/jazmin/Documents/Ubuntu_personal/TESIS/intento2023/ideales_no_repetidos_1/"+file_name+"data.csv");
     CreateFile<<"case_id;activity;time"<<std::endl;
-    MyFile.open("/home/jazmin/Documents/Ubuntu_personal/TESIS/intento2023/Ideales/"+file_name+"data.csv", std::ios::app);
+    MyFile.open("/home/jazmin/Documents/Ubuntu_personal/TESIS/intento2023/ideales_no_repetidos_1/"+file_name+"data.csv", std::ios::app);
     time_S = std::to_string(GetSpace().GetSimulationClock());
     InitBoxStates();
     MyFile.close();
@@ -243,6 +243,8 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
         robot=std::to_string(rob);
         robot.erase ( robot.find_last_not_of('0') + 1, std::string::npos );
         robot.erase ( robot.find_last_not_of(',') + 1, std::string::npos );
+        robot.erase ( robot.find_last_not_of('.') + 1, std::string::npos );
+
         //tam1 
         if (Tam1.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam1.GetY()
         and (Tam1.GetX())-x_l< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam1.GetX())
@@ -257,8 +259,7 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
             timer1+=1;
             if(timer1==50 and tam1==1){
                     timer1=0;
-                    if (actionT2=="T2_task1"){actionT1="T1_task2";}
-                    else{actionT1="T1_task1";}
+                    actionT1="T1_task1";
                     MyFile<<robot<<";"<<actionT1<<";"<<time_S<<std::endl;
                     std::cout<<robot<<actionT1<<std::endl;
                     tam1=2;
@@ -284,8 +285,7 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
             timer2+=1;
             if(timer1==50 and tam2==1){
                     timer2=0;
-                    if (actionT1=="T1_task1"){actionT2="T2_task2";}
-                    else{actionT2="T2_task1";}
+                    actionT2="T2_task2";
                     MyFile<<robot<<";"<<actionT2<<";"<<time_S<<std::endl;
                     std::cout<<robot<<actionT2<<std::endl;
                     tam2=2;
@@ -299,17 +299,15 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
         if (tam1==2 and tam2==2){
                 tam1=3;
                 tam2=3;
-                timer2=0;
+                timer12=0;
         }
         if ((actionT1=="T1_task2" or actionT2=="T2_task2") and tam1==3 and tam2==3){
-                timer2+=1;
+                timer12+=1;
 
-                if(timer2==100 and tam1==3 and tam2==3){
-                    std::cout<<"check_entro70"<<timer3<<std::endl;
-
-                    timer2=0;
-                    actionT1="T1_T2_task3";
-                    actionT2="T1_T2_task3";
+                if(timer12==100 and tam1==3 and tam2==3){
+                    timer12=0;
+                    actionT1="T1_task3";
+                    actionT2="T2_task3";
                     MyFile<<robotT1<<";"<<actionT1<<";"<<time_S<<std::endl;
                     MyFile<<robotT2<<";"<<actionT2<<";"<<time_S<<std::endl;
                     std::cout<<robotT1<<actionT1<<std::endl;
@@ -335,8 +333,7 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
             timer3+=1;
             if(timer3==50 and tam3==1){
                     timer3=0;
-                    if (actionT4=="T4_task1"){actionT3="T3_task2";}
-                    else{actionT3="T3_task1";}
+                    actionT3="T3_task1";
                     MyFile<<robot<<";"<<actionT3<<";"<<time_S<<std::endl;
                     std::cout<<robot<<actionT3<<std::endl;
                     tam3=2;
@@ -362,8 +359,7 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
             timer4+=1;
             if(timer4==50 and tam4==1){
                     timer4=0;
-                    if (actionT3=="T3_task1"){actionT4="T4_task2";}
-                    else{actionT4="T4_task1";}
+                    actionT4="T4_task2";
                     MyFile<<robot<<";"<<actionT4<<";"<<time_S<<std::endl;
                     std::cout<<robot<<actionT4<<std::endl;
                     tam4=2;
@@ -378,21 +374,21 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
         if (tam3==2 and tam4==2){
                 tam3=3;
                 tam4=3;
-                timer3=0;
+                timer9=0;
         }
         if ((actionT3=="T3_task2" or actionT4=="T4_task2") and tam3==3 and tam4==3){
-                timer3+=1;
+                timer9+=1;
 
-                if(timer3==100 and tam3==3 and tam4==3){
-                    timer3=0;
-                    actionT3="T3_T4_task3";
-                    actionT4="T3_T4_task3";
+                if(timer9==100 and tam3==3 and tam4==3){
+                    timer9=0;
+                    actionT3="T3_task3";
+                    actionT4="T4_task3";
                     MyFile<<robotT3<<";"<<actionT3<<";"<<time_S<<std::endl;
                     MyFile<<robotT4<<";"<<actionT4<<";"<<time_S<<std::endl;
                     std::cout<<robotT3<<actionT3<<std::endl;
                     std::cout<<robotT4<<actionT4<<std::endl;
                     tam3=4;
-                    tam4=4 ;
+                    tam4=4;
                 }
                 
         }
@@ -411,8 +407,7 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
             timer5+=1;
             if(timer5==50 and tam5==1){
                     timer5=0;
-                    if (actionT6=="T6_task1"){actionT5="T5_task2";}
-                    else{actionT5="T5_task1";}
+                    actionT5="T5_task1";
                     MyFile<<robot<<";"<<actionT5<<";"<<time_S<<std::endl;
                     std::cout<<robot<<actionT5<<std::endl;
                     tam5=2;
@@ -438,8 +433,7 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
             timer6+=1;
             if(timer6==50 and tam6==1){
                     timer6=0;
-                    if (actionT5=="T5_task1"){actionT6="T6_task2";}
-                    else{actionT6="T6_task1";}
+                    actionT6="T6_task2";
                     MyFile<<robot<<";"<<actionT6<<";"<<time_S<<std::endl;
                     std::cout<<robot<<actionT6<<std::endl;
                     tam6=2;
@@ -455,15 +449,15 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
         if (tam5==2 and tam6==2){
                 tam5=3;
                 tam6=3;
-                timer5=0;
+                timer10=0;
         }
         if ((actionT5=="T5_task2" or actionT6=="T6_task2") and tam5==3 and tam6==3){
-                timer5+=1;
+                timer10+=1;
 
-                if(timer5==100 and tam5==3 and tam6==3){
-                    timer5=0;
-                    actionT5="T5_T6_task3";
-                    actionT6="T5_T6_task3";
+                if(timer10==100 and tam5==3 and tam6==3){
+                    timer10=0;
+                    actionT5="T5_task3";
+                    actionT6="T6_task3";
                     MyFile<<robotT5<<";"<<actionT5<<";"<<time_S<<std::endl;
                     MyFile<<robotT6<<";"<<actionT6<<";"<<time_S<<std::endl;
                     std::cout<<robotT5<<actionT5<<std::endl;
@@ -489,8 +483,7 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
             timer7+=1;
             if(timer7==50 and tam7==1){
                     timer7=0;
-                    if (actionT8=="T8_task1"){actionT7="T7_task2";}
-                    else{actionT7="T7_task1";}
+                    actionT7="T7_task1";
                     MyFile<<robot<<";"<<actionT7<<";"<<time_S<<std::endl;
                     std::cout<<robot<<actionT7<<std::endl;
                     tam7=2;
@@ -517,8 +510,7 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
             timer8+=1;
             if(timer8==50 and tam8==1){
                     timer8=0;
-                    if (actionT7=="T7_task1"){actionT8="T8_task2";}
-                    else{actionT8="T8_task1";}
+                    actionT8="T8_task2";
                     MyFile<<robot<<";"<<actionT8<<";"<<time_S<<std::endl;
                     std::cout<<robot<<actionT8<<std::endl;
                     tam8=2;
@@ -534,32 +526,42 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
         if (tam7==2 and tam8==2){
                 tam7=3;
                 tam8=3;
-                timer7=0;
+                timer11=0;
         }
         if ((actionT7=="T7_task2" or actionT8=="T8_task2") and tam7==3 and tam8==3){
-                timer7+=1;
+                timer11+=1;
 
-                if(timer7==100 and tam7==3 and tam8==3){
-                    timer7=0;
-                    actionT7="T7_T8_task3";
-                    actionT8="T7_T8_task3";
+                if(timer11==100 and tam7==3 and tam8==3){
+                    
+                    actionT7="T7_task3";
+                    actionT8="T8_task3";
                     MyFile<<robotT7<<";"<<actionT7<<";"<<time_S<<std::endl;
                     MyFile<<robotT8<<";"<<actionT8<<";"<<time_S<<std::endl;
                     std::cout<<robotT7<<actionT7<<std::endl;
-                    std::cout<<robotT8<<actionT8<<std::endl;
-                    tam7=4;
-                    tam8=4 ;
-                    actionT7="T7_T8_task4";
-                    actionT8="T7_T8_task4";
-
-                    MyFile<<robotT7<<";"<<actionT7<<";"<<time_S<<std::endl;
-                    MyFile<<robotT8<<";"<<actionT8<<";"<<time_S<<std::endl;
-                    std::cout<<robotT7<<actionT7<<std::endl;
-                    std::cout<<robotT8<<actionT8<<std::endl;
-
+                    std::cout<<robotT8<<actionT8<<std::endl; 
+                    timer11=0;
                 }
-                
         }
+
+        if (actionT7=="T7_task3" and tam7==3 and tam8==3){
+                    timer13+=1;
+                    if (timer13==10){
+                        tam7=4;
+                        tam8=4;
+                        actionT7="T7_task4";
+                        actionT8="T8_task4";
+
+                        MyFile<<robotT7<<";"<<actionT7<<";"<<time_S<<std::endl;
+                        MyFile<<robotT8<<";"<<actionT8<<";"<<time_S<<std::endl;
+                        std::cout<<robotT7<<actionT7<<std::endl;
+                        std::cout<<robotT8<<actionT8<<std::endl;
+                        timer13=0;
+
+                    }
+
+
+        }  
+
     
         rob+=1;
     }
