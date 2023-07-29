@@ -50,7 +50,13 @@ class TuttiTmLoopFunction: public CoreLoopFunctions {
     Real GetMoveScore();
     void ActiveTamCount();
     void InitBoxStates();
+    void InitBoxStates_Sec();
+    void InitBoxStates_Par();
+
     Real GetTamControl();
+    Real GetTamControl_Sec();
+    Real GetTamControl_Par();
+
 
     /*cambio void a Real solo para probar*/
     Real UpdateRobotPositions();

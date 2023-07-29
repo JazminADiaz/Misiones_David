@@ -35,7 +35,7 @@ def import_csv(file_path):
     print(log_start)
     #alpha(event_log)
     inductive(event_log)
-    heuristic(event_log)
+    #heuristic(event_log)
 
 def time_format(file_path, cont, folder):
         log = pd.read_csv(file_path, sep=';')
@@ -53,13 +53,44 @@ def time_format(file_path, cont, folder):
             if mi>=10:
                 if cont<10:
                     time_log.append('2023-01-0'+str(cont)+' 0'+str(hi)+':'+str(mi)+':'+str(int(round(s))))
-                else:
+                if 10<=cont<=30:
                     time_log.append('2023-01-'+str(cont)+' 0'+str(hi)+':'+str(mi)+':'+str(int(round(s))))
+                if 30<cont<=58:
+                    time_log.append('2023-02-'+str(cont-30)+' 0'+str(hi)+':'+str(mi)+':'+str(int(round(s))))
+                if 58<cont<=88:
+                    time_log.append('2023-03-'+str(cont-57)+' 0'+str(hi)+':'+str(mi)+':'+str(int(round(s))))
+                if 88<cont<=119:
+                    time_log.append('2023-04-'+str(cont-88)+' 0'+str(hi)+':'+str(mi)+':'+str(int(round(s))))
+                if 120<cont<=150:
+                    time_log.append('2023-05-'+str(cont-119)+' 0'+str(hi)+':'+str(mi)+':'+str(int(round(s))))
+
+
+
+
+
+
+
             else:
                 if cont<10:
                     time_log.append('2023-01-0'+str(cont)+' 0'+str(hi)+':0'+str(mi)+':'+str(int(round(s))))
-                else:
+                if 10<=cont<=31:
                     time_log.append('2023-01-'+str(cont)+' 0'+str(hi)+':0'+str(mi)+':'+str(int(round(s))))
+                if 31<cont<=58:
+                    time_log.append('2023-02-'+str(cont-30)+' 0'+str(hi)+':0'+str(mi)+':'+str(int(round(s))))
+                if 58<cont<=88:
+                    time_log.append('2023-03-'+str(cont-57)+' 0'+str(hi)+':0'+str(mi)+':'+str(int(round(s))))
+                if 88<cont<=119:
+                    time_log.append('2023-04-'+str(cont-88)+' 0'+str(hi)+':0'+str(mi)+':'+str(int(round(s))))
+                if 120<cont<=150:
+                    time_log.append('2023-05-'+str(cont-119)+' 0'+str(hi)+':0'+str(mi)+':'+str(int(round(s))))
+
+
+
+
+
+
+
+   
             case='mision'+str(cont)
             case_id.append(case)
 
@@ -78,9 +109,9 @@ def logs_folder(folder):
     cont=0
     for filename in filenames:
         cont+=1
-        if cont<30:
-            filename=time_format(filename, cont, folder)
-            dfs.append(pd.read_csv(filename))
+    
+        filename=time_format(filename, cont, folder)
+        dfs.append(pd.read_csv(filename))
 
     # Concatenate all data into one DataFrame
     big_frame = pd.concat(dfs, ignore_index=True)
