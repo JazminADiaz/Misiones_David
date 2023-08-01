@@ -1,0 +1,15 @@
+case_id;activity;time
+5;TH_enter;43
+7;TC_enter;56
+2;TD_enter;87
+5;TH_task2;92
+7;TC_task1;105
+0;TG_enter;125
+2;TD_task2;136
+7;TC_task3;148
+2;TD_task3;148
+0;TG_task1;174
+0;TG_task3;186
+5;TH_task3;186
+0;TG_task4;187
+5;TH_task4;187

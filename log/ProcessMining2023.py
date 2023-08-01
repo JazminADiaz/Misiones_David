@@ -2,14 +2,52 @@ import pandas as pd
 import pm4py
 from datetime import date
 import glob
+from pm4py.algo.evaluation.generalization import algorithm as generalization_evaluator
+from pm4py.algo.evaluation.simplicity import algorithm as simplicity_evaluator
+
 today = date.today()
+def model_evaluation(log,net, im, fm):
+    log_t = pd.read_csv(log, sep=';')
+    log_t = pm4py.format_dataframe(log_t, case_id='case_id', activity_key='activity', timestamp_key='time', timest_format='%Y-%m-%d %H:%M:%S')    
+    fitness_t = pm4py.fitness_token_based_replay(log_t, net, im, fm)
+    fitness_a = pm4py.fitness_alignments(log_t, net, im, fm)
+    #ETConformance method
+    prec_t = pm4py.precision_token_based_replay(log_t, net, im, fm)
+    #Align-ETConformance method
+    prec_a = pm4py.precision_alignments(log_t, net, im, fm)
+    #generalization
+    gen = generalization_evaluator.apply(log_t, net, im, fm)
+    #simplicity
+    simp = simplicity_evaluator.apply(net)
+
+
+    print("token replace fitness:")
+    print(fitness_t)
+    print("aligments fitness:")
+    print(fitness_a)
+    print("ETConformance")
+    print(prec_t)
+    print("Align-ETConformance")
+    print(prec_a)
+    print("Simplicity")
+    print(simp)
+    print("Generalization")
+    print(gen)
+
+
+
+
+
+
+
 
 def alpha(event_log):
     net, initial_marking, final_marking = pm4py.discover_petri_net_alpha(event_log)
     pm4py.view_petri_net(net, initial_marking, final_marking)
-def inductive(event_log):
+def inductive(event_log, trial_log):
     net, initial_marking, final_marking = pm4py.discover_petri_net_inductive(event_log)
     pm4py.view_petri_net(net, initial_marking, final_marking)
+    model_evaluation(trial_log,net, initial_marking, final_marking)
 
 def heuristic(event_log):
     map = pm4py.discover_heuristics_net(event_log)
@@ -18,7 +56,7 @@ def heuristic(event_log):
 
     #pm4py.view_petri_net(net, im, fm)
 
-def import_csv(file_path):
+def import_csv(file_path,trial_log):
     fin = open(file_path, "rt")
     data = fin.read()
     data = data.replace('"', '')
@@ -34,7 +72,7 @@ def import_csv(file_path):
 
     print(log_start)
     #alpha(event_log)
-    inductive(event_log)
+    inductive(event_log, trial_log)
     #heuristic(event_log)
 
 def time_format(file_path, cont, folder):
@@ -63,13 +101,6 @@ def time_format(file_path, cont, folder):
                     time_log.append('2023-04-'+str(cont-88)+' 0'+str(hi)+':'+str(mi)+':'+str(int(round(s))))
                 if 120<cont<=150:
                     time_log.append('2023-05-'+str(cont-119)+' 0'+str(hi)+':'+str(mi)+':'+str(int(round(s))))
-
-
-
-
-
-
-
             else:
                 if cont<10:
                     time_log.append('2023-01-0'+str(cont)+' 0'+str(hi)+':0'+str(mi)+':'+str(int(round(s))))
@@ -83,14 +114,6 @@ def time_format(file_path, cont, folder):
                     time_log.append('2023-04-'+str(cont-88)+' 0'+str(hi)+':0'+str(mi)+':'+str(int(round(s))))
                 if 120<cont<=150:
                     time_log.append('2023-05-'+str(cont-119)+' 0'+str(hi)+':0'+str(mi)+':'+str(int(round(s))))
-
-
-
-
-
-
-
-   
             case='mision'+str(cont)
             case_id.append(case)
 
@@ -118,7 +141,7 @@ def logs_folder(folder):
     print(big_frame)
     big_frame.to_csv(folder+'/final_log/trial.csv', sep=';', index=False)
     
-    import_csv(folder+"/final_log/trial.csv")
+    import_csv(folder+"/final_log/trial.csv", folder+"/trial_folder/trial_log_t.csv")
 
 
 
@@ -127,5 +150,5 @@ def logs_folder(folder):
 
 
 if __name__ == "__main__":
-    mision="secuencial_paralela"
+    mision="secuencial"
     logs_folder("/home/jazmin/tuttifrutti/log/"+mision)
