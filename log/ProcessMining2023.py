@@ -4,48 +4,69 @@ from datetime import date
 import glob
 from pm4py.algo.evaluation.generalization import algorithm as generalization_evaluator
 from pm4py.algo.evaluation.simplicity import algorithm as simplicity_evaluator
+import numpy as np
 
 today = date.today()
-fitness=[]
-precision=[]
-generalization=[]
-simplicity=[]
+fitness1=[]
+precision1=[]
+
+generalization1=[]
+simplicity1=[]
 
 mision="secuencial_paralela"
 mision_folder="/home/jazmin/tuttifrutti/log/"+mision
-trials_folder=mision_folder+"/trial_folder/trial_log_t.csv"
+trials_folder=mision_folder+"/trial_folder"
 trial="/home/jazmin/tuttifrutti/log/secuencial_paralela/trial_folder/1690908573data.csv"
 
 def model_evaluation(net, im, fm):
     choice=2
-    log_t = time_format(trial,1,choice)
-    log_t = pm4py.format_dataframe(log_t, case_id='case_id', activity_key='activity', timestamp_key='time', timest_format='%Y-%m-%d %H:%M:%S')    
-    fitness_t = pm4py.fitness_token_based_replay(log_t, net, im, fm)
-    #fitness_a = pm4py.fitness_alignments(log_t, net, im, fm)
-    #ETConformance method
-    prec_t = pm4py.precision_token_based_replay(log_t, net, im, fm)
-    #Align-ETConformance method
-    #prec_a = pm4py.precision_alignments(log_t, net, im, fm)
-    #generalization
-    gen = generalization_evaluator.apply(log_t, net, im, fm)
-    #simplicity
-    simp = simplicity_evaluator.apply(net)
+    filenames_2 = glob.glob(trials_folder + "/*.csv")
+    fitness=[]
+    precision=[]
+    generalization=[]
+    simplicity=[]
 
-    fitness.append(fitness_t)
-    precision.append(prec_t)
-    generalization.append(gen)
-    simplicity.append(simp)
-    print(len(fitness))
-    #
+    for filename_2 in filenames_2:
+        log_t = time_format(filename_2,1,choice)
+        log_t = pm4py.format_dataframe(log_t, case_id='case_id', activity_key='activity', timestamp_key='time', timest_format='%Y-%m-%d %H:%M:%S')    
+        fitness_t = pm4py.fitness_token_based_replay(log_t, net, im, fm)
+        #fitness_a = pm4py.fitness_alignments(log_t, net, im, fm)
+        #ETConformance method
+        prec_t = pm4py.precision_token_based_replay(log_t, net, im, fm)
+        #Align-ETConformance method
+        #prec_a = pm4py.precision_alignments(log_t, net, im, fm)
+        #generalization
+        gen = generalization_evaluator.apply(log_t, net, im, fm)
+        #simplicity
+        simp = simplicity_evaluator.apply(net)
 
-    if len(fitness)==107:
+        fitness.append(fitness_t["log_fitness"])
+        precision.append(prec_t)
+        generalization.append(gen)
+        simplicity.append(simp)
+        #print(len(fitness))
+        #
+        '''
+        if len(fitness)==107:
+            pm4py.view_petri_net(net, im, fm)
+            print(fitness)
+        '''
+
+
+    fitness1.append(fitness)
+    precision1.append(precision)
+    generalization1.append(generalization)
+    simplicity1.append(simplicity)
+    print(len(fitness1))
+    if len(fitness1)==97:
         pm4py.view_petri_net(net, im, fm)
-        print(fitness)
+        print(fitness1[1])
 
+        #print(fitness)
 
- 
 
 def alpha(event_log):
+
     net, initial_marking, final_marking = pm4py.discover_petri_net_alpha(event_log)
     pm4py.view_petri_net(net, initial_marking, final_marking)
 
@@ -144,7 +165,6 @@ def logs_folder():
     for filename in filenames:
         cont+=1
         logs.append(cont)
-        
         filename=time_format(filename, cont,choice)
         dfs.append(pd.read_csv(filename))
 
