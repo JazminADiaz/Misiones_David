@@ -6,48 +6,53 @@ from pm4py.algo.evaluation.generalization import algorithm as generalization_eva
 from pm4py.algo.evaluation.simplicity import algorithm as simplicity_evaluator
 
 today = date.today()
-def model_evaluation(log,net, im, fm):
-    log_t = pd.read_csv(log, sep=';')
+fitness=[]
+precision=[]
+generalization=[]
+simplicity=[]
+
+mision="secuencial_paralela"
+mision_folder="/home/jazmin/tuttifrutti/log/"+mision
+trials_folder=mision_folder+"/trial_folder/trial_log_t.csv"
+trial="/home/jazmin/tuttifrutti/log/secuencial_paralela/trial_folder/1690908573data.csv"
+
+def model_evaluation(net, im, fm):
+    choice=2
+    log_t = time_format(trial,1,choice)
     log_t = pm4py.format_dataframe(log_t, case_id='case_id', activity_key='activity', timestamp_key='time', timest_format='%Y-%m-%d %H:%M:%S')    
     fitness_t = pm4py.fitness_token_based_replay(log_t, net, im, fm)
-    fitness_a = pm4py.fitness_alignments(log_t, net, im, fm)
+    #fitness_a = pm4py.fitness_alignments(log_t, net, im, fm)
     #ETConformance method
     prec_t = pm4py.precision_token_based_replay(log_t, net, im, fm)
     #Align-ETConformance method
-    prec_a = pm4py.precision_alignments(log_t, net, im, fm)
+    #prec_a = pm4py.precision_alignments(log_t, net, im, fm)
     #generalization
     gen = generalization_evaluator.apply(log_t, net, im, fm)
     #simplicity
     simp = simplicity_evaluator.apply(net)
 
+    fitness.append(fitness_t)
+    precision.append(prec_t)
+    generalization.append(gen)
+    simplicity.append(simp)
+    print(len(fitness))
+    #
 
-    print("token replace fitness:")
-    print(fitness_t)
-    print("aligments fitness:")
-    print(fitness_a)
-    print("ETConformance")
-    print(prec_t)
-    print("Align-ETConformance")
-    print(prec_a)
-    print("Simplicity")
-    print(simp)
-    print("Generalization")
-    print(gen)
+    if len(fitness)==107:
+        pm4py.view_petri_net(net, im, fm)
+        print(fitness)
 
 
-
-
-
-
-
+ 
 
 def alpha(event_log):
     net, initial_marking, final_marking = pm4py.discover_petri_net_alpha(event_log)
     pm4py.view_petri_net(net, initial_marking, final_marking)
-def inductive(event_log, trial_log):
+
+def inductive(event_log):
     net, initial_marking, final_marking = pm4py.discover_petri_net_inductive(event_log)
-    pm4py.view_petri_net(net, initial_marking, final_marking)
-    model_evaluation(trial_log,net, initial_marking, final_marking)
+    #pm4py.view_petri_net(net, initial_marking, final_marking)
+    model_evaluation(net, initial_marking, final_marking)
 
 def heuristic(event_log):
     map = pm4py.discover_heuristics_net(event_log)
@@ -56,7 +61,7 @@ def heuristic(event_log):
 
     #pm4py.view_petri_net(net, im, fm)
 
-def import_csv(file_path,trial_log):
+def import_csv(file_path):
     fin = open(file_path, "rt")
     data = fin.read()
     data = data.replace('"', '')
@@ -72,10 +77,10 @@ def import_csv(file_path,trial_log):
 
     print(log_start)
     #alpha(event_log)
-    inductive(event_log, trial_log)
+    inductive(event_log)
     #heuristic(event_log)
 
-def time_format(file_path, cont, folder):
+def time_format(file_path, cont,choice):
         log = pd.read_csv(file_path, sep=';')
         time_log=[]
         case_id=[]
@@ -121,34 +126,36 @@ def time_format(file_path, cont, folder):
         log['time'] = time_log
         log['time'] = pd.to_datetime(log['time'], format='%Y-%m-%d %H:%M:%S')
         log['case_id']=case_id
-        log.to_csv(folder+'/time/data'+str(cont)+'.csv', sep=';', index=False)
-        return folder+'/time/data'+str(cont)+'.csv'
+        if choice==1:
+            log.to_csv(mision_folder+'/time/data'+str(cont)+'.csv', sep=';', index=False)
+            return mision_folder+'/time/data'+str(cont)+'.csv'
+        if choice==2:
+            return log
 
-def logs_folder(folder):
+
+def logs_folder():
     # Get data file names
-    filenames = glob.glob(folder + "/*.csv")
+    filenames = glob.glob(mision_folder + "/*.csv")
 
     dfs = []
+    logs=[]
     cont=0
+    choice=1
     for filename in filenames:
         cont+=1
-    
-        filename=time_format(filename, cont, folder)
+        logs.append(cont)
+        
+        filename=time_format(filename, cont,choice)
         dfs.append(pd.read_csv(filename))
 
-    # Concatenate all data into one DataFrame
-    big_frame = pd.concat(dfs, ignore_index=True)
-    print(big_frame)
-    big_frame.to_csv(folder+'/final_log/trial.csv', sep=';', index=False)
-    
-    import_csv(folder+"/final_log/trial.csv", folder+"/trial_folder/trial_log_t.csv")
-
-
-
-    
-
+        # Concatenate all data into one DataFrame
+        big_frame = pd.concat(dfs, ignore_index=True)
+        #print(big_frame)
+        big_frame.to_csv(mision_folder+'/final_log/final_log.csv', sep=';', index=False)
+        
+        import_csv(mision_folder+"/final_log/final_log.csv")
 
 
 if __name__ == "__main__":
-    mision="secuencial"
-    logs_folder("/home/jazmin/tuttifrutti/log/"+mision)
+
+    logs_folder()

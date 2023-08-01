@@ -1,0 +1,27 @@
+case_id;activity;time
+mision44;TA_enter;2023-02-14 00:03:00
+mision44;TA_task1;2023-02-14 00:03:49
+mision44;TB_enter;2023-02-14 00:04:17
+mision44;TB_task2;2023-02-14 00:05:06
+mision44;TA_task3;2023-02-14 00:05:22
+mision44;TB_task3;2023-02-14 00:05:22
+mision44;TD_enter;2023-02-14 00:06:45
+mision44;TD_task2;2023-02-14 00:07:34
+mision44;TC_enter;2023-02-14 00:08:54
+mision44;TC_task1;2023-02-14 00:09:43
+mision44;TC_task3;2023-02-14 00:10:00
+mision44;TD_task3;2023-02-14 00:10:00
+mision44;TF_enter;2023-02-14 00:12:46
+mision44;TF_task2;2023-02-14 00:13:35
+mision44;TE_enter;2023-02-14 00:13:35
+mision44;TE_task1;2023-02-14 00:14:24
+mision44;TE_task3;2023-02-14 00:14:41
+mision44;TF_task3;2023-02-14 00:14:41
+mision44;TG_enter;2023-02-14 00:17:17
+mision44;TG_task1;2023-02-14 00:18:06
+mision44;TH_enter;2023-02-14 00:19:24
+mision44;TH_task2;2023-02-14 00:20:13
+mision44;TG_task3;2023-02-14 00:20:29
+mision44;TH_task3;2023-02-14 00:20:29
+mision44;TG_task4;2023-02-14 00:20:31
+mision44;TH_task4;2023-02-14 00:20:31
