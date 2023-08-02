@@ -1,0 +1,16 @@
+case_id;activity;time
+;TC_enter;15
+;TC_task3;299
+;TA_enter;1044
+;TA_task1;1093
+;TD_enter;1257
+;TD_task4;1306
+;TE_enter;1591
+;TE_task5;1640
+;TF_enter;1799
+;TF_task6;1848
+;TG_enter;1897
+;TG_task7;1946
+;TH_enter;2156
+;TH_task8;2205
+;T1-TH_task9;2221

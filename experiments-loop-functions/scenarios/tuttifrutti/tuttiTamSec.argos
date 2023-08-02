@@ -4,11 +4,9 @@
 <!-- * Framework * -->
 <!-- ************* -->
 <framework>
-<experiment length="400" random_seed="30" ticks_per_second="10"></experiment>
+<experiment length="400" random_seed="150" ticks_per_second="10"></experiment>
 <!--si 76  59 30 -->
 <!--no 28 -->
-
-
 </framework>
 <!-- ****************** -->
 <!-- * Loop functions * -->
@@ -164,7 +162,6 @@
 
 
  -->
-
 <!-- * Tam 1 -->
 <box id="tam_01_1" movable="false" size="0.01,0.1,0.12">
 <body orientation="0,0,0" position="0.79,0.75,0"></body>
@@ -304,12 +301,12 @@
 </media>
 <!-- ***************** -->
 <!-- * Visualization * -->
-<!-- ***************** -->
+<!-- ***************** 
 <visualization>
 <qt-opengl>
 <camera>
 <placement idx="0" lens_focal_length="30" look_at="0,0,0" position="0,0,2.7"></placement>
 </camera>
 </qt-opengl>
-</visualization>
+</visualization>-->
 </argos-configuration>

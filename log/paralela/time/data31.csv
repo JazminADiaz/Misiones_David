@@ -1,18 +1,10 @@
 case_id;activity;time
-mision31;T4_enter;2023-01-31 00:00:49
-mision31;T7_enter;2023-01-31 00:00:59
-mision31;T4_task4;2023-01-31 00:01:38
-mision31;T8_enter;2023-01-31 00:01:47
-mision31;T7_task7;2023-01-31 00:01:48
-mision31;T6_enter;2023-01-31 00:01:50
-mision31;T3_enter;2023-01-31 00:01:52
-mision31;T8_task8;2023-01-31 00:02:36
-mision31;T6_task6;2023-01-31 00:02:39
-mision31;T3_task3;2023-01-31 00:02:41
-mision31;T2_enter;2023-01-31 00:03:19
-mision31;T2_task2;2023-01-31 00:04:08
-mision31;T1_enter;2023-01-31 00:05:18
-mision31;T1_task1;2023-01-31 00:06:07
-mision31;T5_enter;2023-01-31 00:09:26
-mision31;T5_task5;2023-02-01 00:10:15
-mision31;T1-T8_task9;2023-02-01 00:10:27
+mision31;TC_enter;2023-01-31 00:00:51
+mision31;TH_enter;2023-01-31 00:01:01
+mision31;TF_enter;2023-01-31 00:02:07
+mision31;TG_enter;2023-01-31 00:02:10
+mision31;TD_enter;2023-01-31 00:03:28
+mision31;TB_enter;2023-01-31 00:05:34
+mision31;TA_enter;2023-02-01 00:10:44
+mision31;TE_enter;2023-02-01 00:41:17
+mision31;T1-TH_task9;2023-02-01 00:41:29

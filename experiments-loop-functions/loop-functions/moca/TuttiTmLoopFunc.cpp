@@ -110,8 +110,8 @@ void TuttiTmLoopFunction::Init(TConfigurationNode& t_tree) {
 /****************************************/
 void TuttiTmLoopFunction::EventLog() {
     mision="secuencial_paralela/trial_folder/";
-    //mision="paralela/";
-    //mision="secuencial/";
+    //mision="paralela/trial_folder/";
+    //mision="secuencial/trial_folder/";
     std::fstream CreateFile("/home/jazmin/tuttifrutti/log/"+mision+file_name+"data.csv");
     CreateFile<<"case_id;activity;time"<<std::endl;
     MyFile.open("/home/jazmin/tuttifrutti/log/"+mision+file_name+"data.csv", std::ios::app);
@@ -132,9 +132,12 @@ void TuttiTmLoopFunction::Reset() {
     m_fObjectiveFunction = 0;
     m_tRobotStates.clear();
     InitRobotStates();
-    //InitBoxStates();
+
+
+
+    InitBoxStates();
     //InitBoxStates_Sec();
-    InitBoxStates_Par();
+    //InitBoxStates_Par();
 
 }
 
@@ -815,14 +818,6 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
                 MyFile<<";"<<"TA_enter"<<";"<<time_S<<std::endl;
                 tam1=1;
             }
-            //timer1+=1;
-            if(timer1==50 and tam1==1){
-                    timer1=0;
-                    actionT1="TA_task1";
-                    MyFile<<";"<<actionT1<<";"<<time_S<<std::endl;
-                    std::cout<<robot<<actionT1<<std::endl;
-                    tam1=2;
-            }
         }
         
         //tam2
@@ -837,15 +832,7 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
                 tam2=1;
                 }
             //timer2+=1;
-            if(timer2==50 and tam2==1){
-                    timer2=0;
-                    actionT2="TB_task2";
-                    MyFile<<";"<<actionT2<<";"<<time_S<<std::endl;
-                    std::cout<<robot<<actionT2<<std::endl;
-                    tam2=2;
-                    std::cout<<tam2<<std::endl;
 
-            }
         }
 
 
@@ -861,13 +848,7 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
                 tam3=1;
                 }
             //timer3+=1;
-            if(timer3==50 and tam3==1){
-                    timer3=0;
-                    actionT3="TC_task3";
-                    MyFile<<";"<<actionT3<<";"<<time_S<<std::endl;
-                    std::cout<<robot<<actionT3<<std::endl;
-                    tam3=2;
-            }
+
         }
     //tam4
         if (Tam4.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam4.GetY()
@@ -881,13 +862,6 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
                 tam4=1;
                 }
             //timer4+=1;
-            if(timer4==50 and tam4==1){
-                    timer4=0;
-                    actionT4="TD_task4";
-                    MyFile<<";"<<actionT4<<";"<<time_S<<std::endl;
-                    std::cout<<robot<<actionT4<<std::endl;
-                    tam4=2;
-            }
         }
 
 
@@ -902,14 +876,7 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
                 MyFile<<";"<<"TE_enter"<<";"<<time_S<<std::endl;
                 tam5=1;
                 }
-            //timer5+=1;
-            if(timer5==50 and tam5==1){
-                    timer5=0;
-                    actionT5="TE_task5";
-                    MyFile<<";"<<actionT5<<";"<<time_S<<std::endl;
-                    std::cout<<robot<<actionT5<<std::endl;
-                    tam5=2;
-            }
+
         }
         //tam6
         if (Tam6.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam6.GetY()
@@ -923,13 +890,7 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
                 tam6=1;
                 }
             //timer6+=1;
-            if(timer6==50 and tam6==1){
-                    timer6=0;
-                    actionT6="TF_task6";
-                    MyFile<<";"<<actionT6<<";"<<time_S<<std::endl;
-                    std::cout<<robot<<actionT6<<std::endl;
-                    tam6=2;
-            }
+
         }
         //tam7
         if (Tam7.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam7.GetY()
@@ -943,13 +904,7 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
                 tam7=1;
                 }
             //timer7+=1;
-            if(timer7==50 and tam7==1){
-                    timer7=0;
-                    actionT7="TG_task7";
-                    MyFile<<";"<<actionT7<<";"<<time_S<<std::endl;
-                    std::cout<<robot<<actionT7<<std::endl;
-                    tam7=2;
-            }
+
         }
 
         //tam8
@@ -965,24 +920,18 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
                 tam8=1;
                 }
             //timer8+=1;
-            if(timer8==50 and tam8==1){
-                    timer8=0;
-                    actionT8="TH_task8";
-                    MyFile<<";"<<actionT8<<";"<<time_S<<std::endl;
-                    std::cout<<robot<<actionT8<<std::endl;
-                    tam8=2;
-            }
+
         }
         if (tam1==1 and tam2==1 and tam3==1 and tam4==1 and tam5==1 and tam6==1 and tam7==1 and tam8==1){
-            tam1=3;
+            tam1=2;
         }
-        if (tam1==3){
+        if (tam1==2){
             timer9+=1;
             if (timer9==100){
             MyFile<<";"<<"T1-TH_task9"<<";"<<time_S<<std::endl;
             std::cout<<robot<<"T1-TH_task9"<<std::endl;
 
-            tam1=4;
+            tam1=3;
             }}
 
 
@@ -1106,75 +1055,41 @@ void TuttiTmLoopFunction::InitBoxStates_Par() {
         CBoxEntity* pcBlock = any_cast<CBoxEntity*>(it->second);
             //std::cout<<"tam1:"<<tam1<<"tam2:"<<tam2<<std::endl;
             
-            if (unBlocksID1 ==0 and tam1==1 and tam5==0 and tam6==0) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::MAGENTA);
+            if (unBlocksID1 ==0 and tam1==1) {
+                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);
             }
-            if (unBlocksID1 ==3 and tam2==1 and tam5==0 and tam6==0) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::MAGENTA);
+            if (unBlocksID1 ==3 and tam2==1) {
+                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);
             }
-
-            if ((unBlocksID1 == 6) and tam1==1 and tam2==1 and tam3==0) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);
-            }
-
-            if ((unBlocksID1 == 9) and tam1==1 and tam2==1 and tam3==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);
-            }
-
 
             if (unBlocksID1 == 6 and tam3==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::MAGENTA);
+                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);
                 
             }
             if (unBlocksID1 == 9 and tam4==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::MAGENTA); 
+                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK); 
 
             }  
-            if ((unBlocksID1 == 12) and tam3==1 and tam4==1 and tam5==0) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);
-                
-            }
-            if ((unBlocksID1 == 15) and tam3==1 and tam4==1 and tam5==1 and tam6==0) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);
-                
-            }
+
             if (unBlocksID1 == 12 and tam5==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::MAGENTA);
+                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);
             }
             if (unBlocksID1 == 15 and tam6==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::MAGENTA);
+                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);
             }
-            if ((unBlocksID1 == 18) and tam5==1 and tam6==1 and tam7==0) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);
-            }
-            if ((unBlocksID1 == 21) and tam6==1 and tam7==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);
-            }
+
             if (unBlocksID1 == 18 and tam7==1) {
-            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::MAGENTA);}
+            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);}
 
             if (unBlocksID1 == 21 and tam8==1) {
-            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::MAGENTA);}
+            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);}
 
-
-            if ((unBlocksID1 == 0 ) and tam3==1 ) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);
-            }
-            if ((unBlocksID1 == 3 ) and tam4==1 ) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);
-            } 
-            if ((unBlocksID1 == 6 ) and tam5==1 ) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);
-            } 
-            if ((unBlocksID1 == 9 ) and tam6==1 ) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);
-            } 
-            if ((unBlocksID1 == 12 ) and tam7==1 ) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);
-            } 
-            if ((unBlocksID1 == 15 ) and tam8==1 ) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);
-            } 
+            if (tam1==2){
+                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::MAGENTA);}
+            
+            if (tam1==3){
+                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);}
+            
 
             
         unBlocksID1+=1;

@@ -13,10 +13,21 @@ precision1=[]
 generalization1=[]
 simplicity1=[]
 
-mision="secuencial_paralela"
+mision="paralela"
 mision_folder="/home/jazmin/tuttifrutti/log/"+mision
 trials_folder=mision_folder+"/trial_folder"
-trial="/home/jazmin/tuttifrutti/log/secuencial_paralela/trial_folder/1690908573data.csv"
+
+
+
+if mision=="secuencial_paralela":
+    check=26
+
+if mision=="secuencial":
+    check=17
+
+if mision=="paralela":
+    check=9
+
 
 def model_evaluation(net, im, fm):
     choice=2
@@ -58,7 +69,7 @@ def model_evaluation(net, im, fm):
     generalization1.append(generalization)
     simplicity1.append(simplicity)
     print(len(fitness1))
-    if len(fitness1)==97:
+    if len(fitness1)==3:
         pm4py.view_petri_net(net, im, fm)
         print(fitness1[1])
 
@@ -96,7 +107,7 @@ def import_csv(file_path):
     log_start = pm4py.get_start_activities(event_log)
 
 
-    print(log_start)
+    #print(log_start)
     #alpha(event_log)
     inductive(event_log)
     #heuristic(event_log)
@@ -123,10 +134,10 @@ def time_format(file_path, cont,choice):
                     time_log.append('2023-02-'+str(cont-30)+' 0'+str(hi)+':'+str(mi)+':'+str(int(round(s))))
                 if 58<cont<=88:
                     time_log.append('2023-03-'+str(cont-57)+' 0'+str(hi)+':'+str(mi)+':'+str(int(round(s))))
-                if 88<cont<=119:
+                if 88<cont<=118:
                     time_log.append('2023-04-'+str(cont-88)+' 0'+str(hi)+':'+str(mi)+':'+str(int(round(s))))
-                if 120<cont<=150:
-                    time_log.append('2023-05-'+str(cont-119)+' 0'+str(hi)+':'+str(mi)+':'+str(int(round(s))))
+                if 118<cont<=148:
+                    time_log.append('2023-05-'+str(cont-118)+' 0'+str(hi)+':'+str(mi)+':'+str(int(round(s))))
             else:
                 if cont<10:
                     time_log.append('2023-01-0'+str(cont)+' 0'+str(hi)+':0'+str(mi)+':'+str(int(round(s))))
@@ -136,10 +147,10 @@ def time_format(file_path, cont,choice):
                     time_log.append('2023-02-'+str(cont-30)+' 0'+str(hi)+':0'+str(mi)+':'+str(int(round(s))))
                 if 58<cont<=88:
                     time_log.append('2023-03-'+str(cont-57)+' 0'+str(hi)+':0'+str(mi)+':'+str(int(round(s))))
-                if 88<cont<=119:
+                if 88<cont<=118:
                     time_log.append('2023-04-'+str(cont-88)+' 0'+str(hi)+':0'+str(mi)+':'+str(int(round(s))))
-                if 120<cont<=150:
-                    time_log.append('2023-05-'+str(cont-119)+' 0'+str(hi)+':0'+str(mi)+':'+str(int(round(s))))
+                if 118<cont<=148:
+                    time_log.append('2023-05-'+str(cont-118)+' 0'+str(hi)+':0'+str(mi)+':'+str(int(round(s))))
             case='mision'+str(cont)
             case_id.append(case)
 
@@ -149,7 +160,7 @@ def time_format(file_path, cont,choice):
         log['case_id']=case_id
         if choice==1:
             log.to_csv(mision_folder+'/time/data'+str(cont)+'.csv', sep=';', index=False)
-            return mision_folder+'/time/data'+str(cont)+'.csv'
+            return mision_folder+'/time/data'+str(cont)+'.csv', len(log.time)
         if choice==2:
             return log
 
@@ -165,15 +176,17 @@ def logs_folder():
     for filename in filenames:
         cont+=1
         logs.append(cont)
-        filename=time_format(filename, cont,choice)
-        dfs.append(pd.read_csv(filename))
+        [filename, log]=time_format(filename, cont,choice)
+        if (log>=check):
+            dfs.append(pd.read_csv(filename))
+            if (len(dfs)<=10):
 
-        # Concatenate all data into one DataFrame
-        big_frame = pd.concat(dfs, ignore_index=True)
-        #print(big_frame)
-        big_frame.to_csv(mision_folder+'/final_log/final_log.csv', sep=';', index=False)
-        
-        import_csv(mision_folder+"/final_log/final_log.csv")
+                # Concatenate all data into one DataFrame
+                big_frame = pd.concat(dfs, ignore_index=True)
+                #print(big_frame)
+                big_frame.to_csv(mision_folder+'/final_log/final_log.csv', sep=';', index=False)
+                
+                import_csv(mision_folder+"/final_log/final_log.csv")
 
 
 if __name__ == "__main__":
