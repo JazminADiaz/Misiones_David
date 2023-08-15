@@ -1,11 +1,19 @@
+import matplotlib.pyplot as plot
 import pandas as pd
+import numpy as np
 import pm4py
 from datetime import date
 import glob
 from pm4py.algo.evaluation.generalization import algorithm as generalization_evaluator
 from pm4py.algo.evaluation.simplicity import algorithm as simplicity_evaluator
-import numpy as np
 
+# Imports
+
+
+
+
+model=0
+models=[]
 today = date.today()
 fitness1=[]
 precision1=[]
@@ -13,10 +21,9 @@ precision1=[]
 generalization1=[]
 simplicity1=[]
 
-mision="paralela"
+mision="secuencial_paralela"
 mision_folder="/home/jazmin/tuttifrutti/log/"+mision
 trials_folder=mision_folder+"/trial_folder"
-
 
 
 if mision=="secuencial_paralela":
@@ -28,6 +35,66 @@ if mision=="secuencial":
 if mision=="paralela":
     check=9
 
+def graphic(fitness1, precision1, generalization1, simplicity1, models):
+    d1 = {'Simplicidad': simplicity1}
+    d2 = {'Fitness': fitness1}
+    d3 = {'Generalización':generalization1}
+    d4 = {'Precisión': precision1}
+    #print(len(fitness1), len(precision1))
+    df1 = pd.DataFrame(data=d1)
+    df1['# de repeticiones para creación de modelo'] = pd.Series(models)
+    df1.boxplot(column=['Simplicidad'], by=['# de repeticiones para creación de modelo'])
+    if mision=="secuencial_paralela":
+        plot.suptitle('Mision Secuencial Paralela')
+    if mision=="paralela":
+        plot.suptitle('Mision Paralela')
+    if mision=="secuencial":
+        plot.suptitle('Mision Secuencial')
+    plot.savefig("/home/jazmin/tuttifrutti/log/"+mision+"/final_log/BoxPlot_"+mision+"_Simplicidad.png")
+    plot.show()
+
+    df2 = pd.DataFrame(data=d2)
+    df2['# de repeticiones para creación de modelo'] = pd.Series(models)
+    df2.boxplot(column=['Fitness'], by=['# de repeticiones para creación de modelo'])
+
+    if mision=="secuencial_paralela":
+        plot.suptitle('Mision Secuencial Paralela')
+    if mision=="paralela":
+        plot.suptitle('Mision Paralela')
+    if mision=="secuencial":
+        plot.suptitle('Mision Secuencial')
+    plot.savefig("/home/jazmin/tuttifrutti/log/"+mision+"/final_log/BoxPlot_"+mision+"_Fitness.png")
+    plot.show()
+
+    df3 = pd.DataFrame(data=d3)
+    df3['# de repeticiones para creación de modelo'] = pd.Series(models)
+    df3.boxplot(column=['Generalización'], by=['# de repeticiones para creación de modelo'])
+
+    if mision=="secuencial_paralela":
+        plot.suptitle('Mision Secuencial Paralela')
+    if mision=="paralela":
+        plot.suptitle('Mision Paralela')
+    if mision=="secuencial":
+        plot.suptitle('Mision Secuencial')
+    plot.savefig("/home/jazmin/tuttifrutti/log/"+mision+"/final_log/BoxPlot_"+mision+"_Generalización.png")
+    plot.show()
+
+    df4 = pd.DataFrame(data=d4)
+    df4['# de repeticiones para creación de modelo'] = pd.Series(models)
+    df4.boxplot(column=['Precisión'], by=['# de repeticiones para creación de modelo'])
+
+    if mision=="secuencial_paralela":
+        plot.suptitle('Mision Secuencial Paralela')
+    if mision=="paralela":
+        plot.suptitle('Mision Paralela')
+    if mision=="secuencial":
+        plot.suptitle('Mision Secuencial')
+    plot.savefig("/home/jazmin/tuttifrutti/log/"+mision+"/final_log/BoxPlot_"+mision+"_Precisión.png")
+    plot.show()
+
+
+
+
 
 def model_evaluation(net, im, fm):
     choice=2
@@ -36,6 +103,7 @@ def model_evaluation(net, im, fm):
     precision=[]
     generalization=[]
     simplicity=[]
+
 
     for filename_2 in filenames_2:
         log_t = time_format(filename_2,1,choice)
@@ -50,8 +118,8 @@ def model_evaluation(net, im, fm):
         gen = generalization_evaluator.apply(log_t, net, im, fm)
         #simplicity
         simp = simplicity_evaluator.apply(net)
-
-        fitness.append(fitness_t["log_fitness"])
+        
+        fitness.append(fitness_t["average_trace_fitness"])
         precision.append(prec_t)
         generalization.append(gen)
         simplicity.append(simp)
@@ -63,17 +131,21 @@ def model_evaluation(net, im, fm):
             print(fitness)
         '''
 
-
-    fitness1.append(fitness)
-    precision1.append(precision)
-    generalization1.append(generalization)
-    simplicity1.append(simplicity)
+    models.extend([model,model,model,model,model,model,model,model,model,model])
+    fitness1.extend(fitness)
+    precision1.extend(precision)
+    generalization1.extend(generalization)
+    simplicity1.extend(simplicity)
     print(len(fitness1))
-    if len(fitness1)==3:
+    if len(fitness1)==50:
         pm4py.view_petri_net(net, im, fm)
-        print(fitness1[1])
+        pm4py.save_vis_petri_net(net, im, fm,  "/home/jazmin/tuttifrutti/log/"+mision+"/final_log/PetriNet.png")
 
-        #print(fitness)
+        graphic(fitness1, precision1, generalization1, simplicity1, models)
+
+        print(precision1)
+        #print(models)
+        #print(len(models))
 
 
 def alpha(event_log):
@@ -170,23 +242,24 @@ def logs_folder():
     filenames = glob.glob(mision_folder + "/*.csv")
 
     dfs = []
-    logs=[]
     cont=0
     choice=1
     for filename in filenames:
         cont+=1
-        logs.append(cont)
         [filename, log]=time_format(filename, cont,choice)
         if (log>=check):
-            dfs.append(pd.read_csv(filename))
-            if (len(dfs)<=10):
+            global model
+            model+=1
+            if model<=50:
+                dfs.append(pd.read_csv(filename))
+                #if (len(dfs)<=10):
 
                 # Concatenate all data into one DataFrame
                 big_frame = pd.concat(dfs, ignore_index=True)
                 #print(big_frame)
                 big_frame.to_csv(mision_folder+'/final_log/final_log.csv', sep=';', index=False)
-                
-                import_csv(mision_folder+"/final_log/final_log.csv")
+                if model%10==0:
+                    import_csv(mision_folder+"/final_log/final_log.csv")
 
 
 if __name__ == "__main__":

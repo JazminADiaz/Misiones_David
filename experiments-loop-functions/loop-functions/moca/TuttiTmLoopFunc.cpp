@@ -109,9 +109,9 @@ void TuttiTmLoopFunction::Init(TConfigurationNode& t_tree) {
 /****************************************/
 /****************************************/
 void TuttiTmLoopFunction::EventLog() {
-    mision="secuencial_paralela/trial_folder/";
-    //mision="paralela/trial_folder/";
-    //mision="secuencial/trial_folder/";
+    mision="secuencial_paralela/";
+    //mision="paralela/";
+    //mision="secuencial/";
     std::fstream CreateFile("/home/jazmin/tuttifrutti/log/"+mision+file_name+"data.csv");
     CreateFile<<"case_id;activity;time"<<std::endl;
     MyFile.open("/home/jazmin/tuttifrutti/log/"+mision+file_name+"data.csv", std::ios::app);
@@ -277,11 +277,14 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
                     tam1=2;
             }
         }
-        if (rob==robotT1 and (actionT1=="TA_enter" or actionT1== "TA_task1" or actionT1== "TA_task2") and Tam1.GetX()-x_l> cEpuckPosition.GetX()){
+        /*
+                if (rob==robotT1 and (actionT1=="TA_enter" or actionT1== "TA_task1" or actionT1== "TA_task2") and Tam1.GetX()-x_l> cEpuckPosition.GetX()){
             actionT1="TA_out";
             std::cout<<robotT1<<actionT1<<std::endl;
             MyFile<<";"<<actionT1<<";"<<time_S<<std::endl;
         }
+        */
+
         
         //tam2
         if (Tam2.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam2.GetY()
@@ -305,11 +308,12 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
 
             }
         }
+/*
         if (rob==robotT2 and (actionT2=="TB_enter" or actionT2== "TB_task2" or actionT2== "TB_task1") and Tam2.GetX()-x_l> cEpuckPosition.GetX()){
             actionT2="TB_out";
             std::cout<<robotT2<<actionT2<<std::endl;
             MyFile<<";"<<actionT2<<";"<<time_S<<std::endl;
-        }
+        }*/
         if (tam1==2 and tam2==2){
                 tam1=3;
                 tam2=3;
@@ -353,11 +357,11 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
                     tam3=2;
             }
         }
-        if (rob==robotT3 and (actionT3=="TC_enter" or actionT3== "TC_task1" or actionT3=="TC_task2") and Tam3.GetX()-x_l> cEpuckPosition.GetX()){
+/*        if (rob==robotT3 and (actionT3=="TC_enter" or actionT3== "TC_task1" or actionT3=="TC_task2") and Tam3.GetX()-x_l> cEpuckPosition.GetX()){
             actionT3="TC_out";
             std::cout<<robotT3<<actionT3<<std::endl;
             MyFile<<";"<<actionT3<<";"<<time_S<<std::endl;
-        }
+        }*/
 
     //tam4
         if (Tam4.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam4.GetY()
@@ -379,11 +383,11 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
                     tam4=2;
             }
         }
-        if (rob==robotT4 and (actionT4=="TD_enter" or actionT4== "TD_task1" or actionT4=="TD_task2") and Tam4.GetX()-x_l> cEpuckPosition.GetX()){
+/*        if (rob==robotT4 and (actionT4=="TD_enter" or actionT4== "TD_task1" or actionT4=="TD_task2") and Tam4.GetX()-x_l> cEpuckPosition.GetX()){
             actionT4="TD_out";
             std::cout<<robotT4<<actionT4<<std::endl;
             MyFile<<";"<<actionT4<<";"<<time_S<<std::endl;
-        }
+        }*/
         //tam3 and tam4
         if (tam3==2 and tam4==2){
                 tam3=3;
@@ -427,12 +431,12 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
                     tam5=2;
             }
         }
-        if (rob==robotT5 and (actionT5=="TE_enter" or actionT5== "TE_task1" or actionT5=="TE_task2") and  (Tam5.GetX()-(x_l))>= cEpuckPosition.GetX()){
+/*        if (rob==robotT5 and (actionT5=="TE_enter" or actionT5== "TE_task1" or actionT5=="TE_task2") and  (Tam5.GetX()-(x_l))>= cEpuckPosition.GetX()){
             actionT5="TE_out";
             std::cout<<robotT5<<actionT5<<std::endl;
             MyFile<<";"<<actionT5<<";"<<time_S<<std::endl;
         }
-    
+    */
         //tam6
         if (Tam6.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam6.GetY()
         and (Tam6.GetX())< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam6.GetX() +x_l)
@@ -453,11 +457,11 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
                     tam6=2;
             }
         }
-        if (rob==robotT6 and (actionT6=="TF_enter" or actionT6== "TF_task1" or actionT6=="TF_task2") and (Tam6.GetX()-(x_l))>= cEpuckPosition.GetX()){
+/*        if (rob==robotT6 and (actionT6=="TF_enter" or actionT6== "TF_task1" or actionT6=="TF_task2") and (Tam6.GetX()-(x_l))>= cEpuckPosition.GetX()){
             actionT6="TF_out";
             std::cout<<robotT6<<actionT6<<std::endl;
             MyFile<<";"<<actionT6<<";"<<time_S<<std::endl;
-        }
+        }*/
         //tam5 and tam6
         
         if (tam5==2 and tam6==2){
@@ -504,11 +508,11 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
             }
         }
 
-        if (rob==robotT7 and (actionT7=="TG_enter" or actionT7== "TG_task1" or actionT7=="TG_task2") and  (Tam7.GetX()-(x_l))>= cEpuckPosition.GetX()){
+/*        if (rob==robotT7 and (actionT7=="TG_enter" or actionT7== "TG_task1" or actionT7=="TG_task2") and  (Tam7.GetX()-(x_l))>= cEpuckPosition.GetX()){
             actionT7="TG_out";
             std::cout<<robotT7<<actionT7<<std::endl;
             MyFile<<";"<<actionT7<<";"<<time_S<<std::endl;
-        }
+        }*/
         //tam8
 
         if (Tam8.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam8.GetY()
@@ -530,11 +534,11 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
                     tam8=2;
             }
         }
-        if (rob==robotT8 and (actionT8=="TH_enter" or actionT8== "TH_task1" or actionT8=="TH_task2") and (Tam8.GetX()-(x_l))>= cEpuckPosition.GetX()){
+/*        if (rob==robotT8 and (actionT8=="TH_enter" or actionT8== "TH_task1" or actionT8=="TH_task2") and (Tam8.GetX()-(x_l))>= cEpuckPosition.GetX()){
             actionT8="TH_out";
             std::cout<<robotT8<<actionT8<<std::endl;
             MyFile<<";"<<actionT8<<";"<<time_S<<std::endl;
-        }
+        }*/
         //tam7 and tam8
         
         if (tam7==2 and tam8==2){

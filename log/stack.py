@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 arr = []
 a=[1,2,3,4]
 b=[5,6,7,8]
@@ -41,3 +42,8 @@ plt.boxplot(data, positions=x, notch=True)
 plt.xticks(locs)
 plt.show()
 #print(np_arr)
+
+
+df = pd.DataFrame(np.random.randn(10, 3),
+                  columns=['Col1', 'Col2', 'Col3'])
+print(df)
