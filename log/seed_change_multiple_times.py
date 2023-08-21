@@ -7,7 +7,7 @@ import re
 import subprocess
 import random
 
-b=61
+b=60
 mision="tuttiTamT"
 for a in range(10):
     
