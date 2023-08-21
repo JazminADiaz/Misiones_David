@@ -296,6 +296,9 @@ tutti_st_loopfunc_LIB_DEPENDS:STATIC=general;argos3plugin_simulator_epuck;
 //Dependencies for the target
 tutti_tm_loopfunc_LIB_DEPENDS:STATIC=general;argos3plugin_simulator_epuck;
 
+//Dependencies for the target
+tutti_tmt_loopfunc_LIB_DEPENDS:STATIC=general;argos3plugin_simulator_epuck;
+
 
 ########################
 # INTERNAL cache entries

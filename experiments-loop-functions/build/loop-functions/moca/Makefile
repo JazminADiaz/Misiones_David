@@ -157,6 +157,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/rule:
+	cd /home/jazmin/tuttifrutti/experiments-loop-functions/build && $(MAKE) -f CMakeFiles/Makefile2 loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/rule
+.PHONY : loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/rule
+
+# Convenience name for target.
+tutti_tmt_loopfunc: loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/rule
+
+.PHONY : tutti_tmt_loopfunc
+
+# fast build rule for target.
+tutti_tmt_loopfunc/fast:
+	cd /home/jazmin/tuttifrutti/experiments-loop-functions/build && $(MAKE) -f loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/build.make loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/build
+.PHONY : tutti_tmt_loopfunc/fast
+
+# Convenience name for target.
 loop-functions/moca/CMakeFiles/tutti_tm_loopfunc.dir/rule:
 	cd /home/jazmin/tuttifrutti/experiments-loop-functions/build && $(MAKE) -f CMakeFiles/Makefile2 loop-functions/moca/CMakeFiles/tutti_tm_loopfunc.dir/rule
 .PHONY : loop-functions/moca/CMakeFiles/tutti_tm_loopfunc.dir/rule
@@ -215,6 +230,21 @@ tutti_st_loopfunc: loop-functions/moca/CMakeFiles/tutti_st_loopfunc.dir/rule
 tutti_st_loopfunc/fast:
 	cd /home/jazmin/tuttifrutti/experiments-loop-functions/build && $(MAKE) -f loop-functions/moca/CMakeFiles/tutti_st_loopfunc.dir/build.make loop-functions/moca/CMakeFiles/tutti_st_loopfunc.dir/build
 .PHONY : tutti_st_loopfunc/fast
+
+# Convenience name for target.
+loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc_autogen.dir/rule:
+	cd /home/jazmin/tuttifrutti/experiments-loop-functions/build && $(MAKE) -f CMakeFiles/Makefile2 loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc_autogen.dir/rule
+.PHONY : loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc_autogen.dir/rule
+
+# Convenience name for target.
+tutti_tmt_loopfunc_autogen: loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc_autogen.dir/rule
+
+.PHONY : tutti_tmt_loopfunc_autogen
+
+# fast build rule for target.
+tutti_tmt_loopfunc_autogen/fast:
+	cd /home/jazmin/tuttifrutti/experiments-loop-functions/build && $(MAKE) -f loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc_autogen.dir/build.make loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc_autogen.dir/build
+.PHONY : tutti_tmt_loopfunc_autogen/fast
 
 # Convenience name for target.
 loop-functions/moca/CMakeFiles/tutti_tm_loopfunc_autogen.dir/rule:
@@ -384,6 +414,33 @@ TuttiTmLoopFunc.cpp.s:
 	cd /home/jazmin/tuttifrutti/experiments-loop-functions/build && $(MAKE) -f loop-functions/moca/CMakeFiles/tutti_tm_loopfunc.dir/build.make loop-functions/moca/CMakeFiles/tutti_tm_loopfunc.dir/TuttiTmLoopFunc.cpp.s
 .PHONY : TuttiTmLoopFunc.cpp.s
 
+TuttiTmTLoopFunc.o: TuttiTmTLoopFunc.cpp.o
+
+.PHONY : TuttiTmTLoopFunc.o
+
+# target to build an object file
+TuttiTmTLoopFunc.cpp.o:
+	cd /home/jazmin/tuttifrutti/experiments-loop-functions/build && $(MAKE) -f loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/build.make loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/TuttiTmTLoopFunc.cpp.o
+.PHONY : TuttiTmTLoopFunc.cpp.o
+
+TuttiTmTLoopFunc.i: TuttiTmTLoopFunc.cpp.i
+
+.PHONY : TuttiTmTLoopFunc.i
+
+# target to preprocess a source file
+TuttiTmTLoopFunc.cpp.i:
+	cd /home/jazmin/tuttifrutti/experiments-loop-functions/build && $(MAKE) -f loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/build.make loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/TuttiTmTLoopFunc.cpp.i
+.PHONY : TuttiTmTLoopFunc.cpp.i
+
+TuttiTmTLoopFunc.s: TuttiTmTLoopFunc.cpp.s
+
+.PHONY : TuttiTmTLoopFunc.s
+
+# target to generate assembly for a file
+TuttiTmTLoopFunc.cpp.s:
+	cd /home/jazmin/tuttifrutti/experiments-loop-functions/build && $(MAKE) -f loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/build.make loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/TuttiTmTLoopFunc.cpp.s
+.PHONY : TuttiTmTLoopFunc.cpp.s
+
 tutti_ag_loopfunc_autogen/mocs_compilation.o: tutti_ag_loopfunc_autogen/mocs_compilation.cpp.o
 
 .PHONY : tutti_ag_loopfunc_autogen/mocs_compilation.o
@@ -492,6 +549,33 @@ tutti_tm_loopfunc_autogen/mocs_compilation.cpp.s:
 	cd /home/jazmin/tuttifrutti/experiments-loop-functions/build && $(MAKE) -f loop-functions/moca/CMakeFiles/tutti_tm_loopfunc.dir/build.make loop-functions/moca/CMakeFiles/tutti_tm_loopfunc.dir/tutti_tm_loopfunc_autogen/mocs_compilation.cpp.s
 .PHONY : tutti_tm_loopfunc_autogen/mocs_compilation.cpp.s
 
+tutti_tmt_loopfunc_autogen/mocs_compilation.o: tutti_tmt_loopfunc_autogen/mocs_compilation.cpp.o
+
+.PHONY : tutti_tmt_loopfunc_autogen/mocs_compilation.o
+
+# target to build an object file
+tutti_tmt_loopfunc_autogen/mocs_compilation.cpp.o:
+	cd /home/jazmin/tuttifrutti/experiments-loop-functions/build && $(MAKE) -f loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/build.make loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/tutti_tmt_loopfunc_autogen/mocs_compilation.cpp.o
+.PHONY : tutti_tmt_loopfunc_autogen/mocs_compilation.cpp.o
+
+tutti_tmt_loopfunc_autogen/mocs_compilation.i: tutti_tmt_loopfunc_autogen/mocs_compilation.cpp.i
+
+.PHONY : tutti_tmt_loopfunc_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+tutti_tmt_loopfunc_autogen/mocs_compilation.cpp.i:
+	cd /home/jazmin/tuttifrutti/experiments-loop-functions/build && $(MAKE) -f loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/build.make loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/tutti_tmt_loopfunc_autogen/mocs_compilation.cpp.i
+.PHONY : tutti_tmt_loopfunc_autogen/mocs_compilation.cpp.i
+
+tutti_tmt_loopfunc_autogen/mocs_compilation.s: tutti_tmt_loopfunc_autogen/mocs_compilation.cpp.s
+
+.PHONY : tutti_tmt_loopfunc_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+tutti_tmt_loopfunc_autogen/mocs_compilation.cpp.s:
+	cd /home/jazmin/tuttifrutti/experiments-loop-functions/build && $(MAKE) -f loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/build.make loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/tutti_tmt_loopfunc_autogen/mocs_compilation.cpp.s
+.PHONY : tutti_tmt_loopfunc_autogen/mocs_compilation.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -504,10 +588,12 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... tutti_tmt_loopfunc"
 	@echo "... tutti_tm_loopfunc"
 	@echo "... tutti_fr_loopfunc"
 	@echo "... tutti_ag_loopfunc"
 	@echo "... tutti_st_loopfunc"
+	@echo "... tutti_tmt_loopfunc_autogen"
 	@echo "... tutti_tm_loopfunc_autogen"
 	@echo "... tutti_fr_loopfunc_autogen"
 	@echo "... tutti_ag_loopfunc_autogen"
@@ -524,6 +610,9 @@ help:
 	@echo "... TuttiTmLoopFunc.o"
 	@echo "... TuttiTmLoopFunc.i"
 	@echo "... TuttiTmLoopFunc.s"
+	@echo "... TuttiTmTLoopFunc.o"
+	@echo "... TuttiTmTLoopFunc.i"
+	@echo "... TuttiTmTLoopFunc.s"
 	@echo "... tutti_ag_loopfunc_autogen/mocs_compilation.o"
 	@echo "... tutti_ag_loopfunc_autogen/mocs_compilation.i"
 	@echo "... tutti_ag_loopfunc_autogen/mocs_compilation.s"
@@ -536,6 +625,9 @@ help:
 	@echo "... tutti_tm_loopfunc_autogen/mocs_compilation.o"
 	@echo "... tutti_tm_loopfunc_autogen/mocs_compilation.i"
 	@echo "... tutti_tm_loopfunc_autogen/mocs_compilation.s"
+	@echo "... tutti_tmt_loopfunc_autogen/mocs_compilation.o"
+	@echo "... tutti_tmt_loopfunc_autogen/mocs_compilation.i"
+	@echo "... tutti_tmt_loopfunc_autogen/mocs_compilation.s"
 .PHONY : help
 
 

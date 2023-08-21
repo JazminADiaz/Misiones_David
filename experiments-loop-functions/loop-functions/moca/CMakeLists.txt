@@ -17,3 +17,7 @@ target_link_libraries(tutti_fr_loopfunc argos3plugin_${ARGOS_BUILD_FOR}_epuck)
 add_library(tutti_tm_loopfunc SHARED TuttiTmLoopFunc.h TuttiTmLoopFunc.cpp)
 target_link_libraries(tutti_tm_loopfunc argos3plugin_${ARGOS_BUILD_FOR}_epuck)
 
+add_library(tutti_tmt_loopfunc SHARED TuttiTmTLoopFunc.h TuttiTmTLoopFunc.cpp)
+target_link_libraries(tutti_tmt_loopfunc argos3plugin_${ARGOS_BUILD_FOR}_epuck)
+
+

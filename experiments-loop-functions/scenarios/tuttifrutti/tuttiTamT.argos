@@ -4,14 +4,14 @@
 <!-- * Framework * -->
 <!-- ************* -->
 <framework>
-<experiment length="400" random_seed="60" ticks_per_second="10"></experiment>
+<experiment length="400" random_seed="71" ticks_per_second="10"></experiment>
 <!--si 77 30 55 20 66 89 99 (no detecta timer5=100) 18 20 -->
 <!--no 65 25 16 33-->
 </framework>
 <!-- ****************** -->
 <!-- * Loop functions * -->
 <!-- ****************** -->
-<loop_functions label="tutti_tm_loop_function" library="/home/jazmin/tuttifrutti/experiments-loop-functions/build/loop-functions/moca/libtutti_tm_loopfunc.so">
+<loop_functions label="tutti_tmt_loop_function" library="/home/jazmin/tuttifrutti/experiments-loop-functions/build/loop-functions/moca/libtutti_tmt_loopfunc.so">
 <params build_arena="false" lenght_boxes="0.25" maximization="false" number_boxes_per_edge="3" number_edges="8" number_robots=""></params>
 </loop_functions>
 <!-- *************** -->

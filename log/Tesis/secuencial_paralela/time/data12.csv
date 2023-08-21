@@ -1,0 +1,27 @@
+case_id;activity;time;robot
+mision12;TB_enter;2023-08-21 10:17:22;0
+mision12;TA_enter;2023-08-21 10:17:23;2
+mision12;TB_task2;2023-08-21 10:17:26;0
+mision12;TA_task1;2023-08-21 10:17:28;2
+mision12;TA_task3;2023-08-21 10:17:30;5
+mision12;TB_task3;2023-08-21 10:17:30;5
+mision12;TD_enter;2023-08-21 10:17:50;5
+mision12;TC_enter;2023-08-21 10:17:55;3
+mision12;TD_task2;2023-08-21 10:17:55;5
+mision12;TC_task1;2023-08-21 10:18:00;3
+mision12;TC_task3;2023-08-21 10:18:01;0
+mision12;TD_task3;2023-08-21 10:18:01;0
+mision12;TF_enter;2023-08-21 10:18:20;2
+mision12;TF_task2;2023-08-21 10:18:25;2
+mision12;TE_enter;2023-08-21 10:19:09;0
+mision12;TE_task1;2023-08-21 10:19:14;0
+mision12;TE_task3;2023-08-21 10:19:16;3
+mision12;TF_task3;2023-08-21 10:19:16;3
+mision12;TH_enter;2023-08-21 10:19:26;4
+mision12;TG_enter;2023-08-21 10:19:30;3
+mision12;TH_task2;2023-08-21 10:19:31;4
+mision12;TG_task1;2023-08-21 10:19:35;3
+mision12;TG_task3;2023-08-21 10:19:36;0
+mision12;TH_task3;2023-08-21 10:19:36;0
+mision12;TG_task4;2023-08-21 10:19:36;3
+mision12;TH_task4;2023-08-21 10:19:36;3

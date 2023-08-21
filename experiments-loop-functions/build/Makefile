@@ -183,6 +183,19 @@ argos3_demiurge_loop_functions_autogen/fast:
 .PHONY : argos3_demiurge_loop_functions_autogen/fast
 
 #=============================================================================
+# Target rules for targets named tutti_tmt_loopfunc
+
+# Build rule for target.
+tutti_tmt_loopfunc: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tutti_tmt_loopfunc
+.PHONY : tutti_tmt_loopfunc
+
+# fast build rule for target.
+tutti_tmt_loopfunc/fast:
+	$(MAKE) -f loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/build.make loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc.dir/build
+.PHONY : tutti_tmt_loopfunc/fast
+
+#=============================================================================
 # Target rules for targets named tutti_tm_loopfunc
 
 # Build rule for target.
@@ -233,6 +246,19 @@ tutti_st_loopfunc: cmake_check_build_system
 tutti_st_loopfunc/fast:
 	$(MAKE) -f loop-functions/moca/CMakeFiles/tutti_st_loopfunc.dir/build.make loop-functions/moca/CMakeFiles/tutti_st_loopfunc.dir/build
 .PHONY : tutti_st_loopfunc/fast
+
+#=============================================================================
+# Target rules for targets named tutti_tmt_loopfunc_autogen
+
+# Build rule for target.
+tutti_tmt_loopfunc_autogen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tutti_tmt_loopfunc_autogen
+.PHONY : tutti_tmt_loopfunc_autogen
+
+# fast build rule for target.
+tutti_tmt_loopfunc_autogen/fast:
+	$(MAKE) -f loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc_autogen.dir/build.make loop-functions/moca/CMakeFiles/tutti_tmt_loopfunc_autogen.dir/build
+.PHONY : tutti_tmt_loopfunc_autogen/fast
 
 #=============================================================================
 # Target rules for targets named tutti_tm_loopfunc_autogen
@@ -300,10 +326,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... argos3_demiurge_loop_functions"
 	@echo "... argos3_demiurge_loop_functions_autogen"
+	@echo "... tutti_tmt_loopfunc"
 	@echo "... tutti_tm_loopfunc"
 	@echo "... tutti_fr_loopfunc"
 	@echo "... tutti_ag_loopfunc"
 	@echo "... tutti_st_loopfunc"
+	@echo "... tutti_tmt_loopfunc_autogen"
 	@echo "... tutti_tm_loopfunc_autogen"
 	@echo "... tutti_fr_loopfunc_autogen"
 	@echo "... tutti_ag_loopfunc_autogen"
