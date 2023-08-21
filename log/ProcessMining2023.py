@@ -43,7 +43,7 @@ def graphic(fitness1, precision1, generalization1, simplicity1, models):
         df1['# de repeticiones para creación de modelo'] = pd.Series(models)
         df1.boxplot(column=[key], by=['# de repeticiones para creación de modelo'])
         plot.suptitle('Mision '+mision)
-        plot.savefig("/home/jazmin/tuttifrutti/log/"+mision+"/final_log/BoxPlot_"+mision+key+".png")
+        plot.savefig(mision_folder+"/final_log/BoxPlot_"+mision+key+".png")
         plot.show()
 
 def model_evaluation(net, im, fm):
