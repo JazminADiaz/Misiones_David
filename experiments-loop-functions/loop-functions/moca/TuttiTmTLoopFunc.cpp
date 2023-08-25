@@ -113,10 +113,11 @@ void TuttiTmTLoopFunction::EventLog() {
     //mision="paralela/";
     //mision="secuencial/";
     std::fstream CreateFile("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv");
-    CreateFile<<"case_id;activity;time;robot"<<std::endl;
+    CreateFile<<"mision;activity;time;robot"<<std::endl;
     MyFile.open("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv", std::ios::app);
     time_S = std::to_string(GetSpace().GetSimulationClock());
-    then_tm.tm_sec += (GetSpace().GetSimulationClock())/10;   // add 50 seconds to the time
+    std::cout<<time_S<<std::endl;
+    then_tm.tm_sec += ((GetSpace().GetSimulationClock())/1000);   // add 50 seconds to the time
     mktime( &then_tm);      // normalize it
     struct tm tm;
     char buf[255];

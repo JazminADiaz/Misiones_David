@@ -25,7 +25,6 @@ using namespace argos;
 std::fstream MyFile;
 time_t now = time( NULL);
 struct tm now_tm = *localtime( &now);
-
 struct tm then_tm = now_tm;
 
 
@@ -139,8 +138,7 @@ class TuttiTmTLoopFunction: public CoreLoopFunctions {
     UInt32  tam1=0, tam2=0, tam3=0, tam4=0, tam5=0, tam6=0, tam7=0, tam8=0;
     std::string actionT1, actionT2, actionT3, actionT4, actionT5, actionT6, actionT7, actionT8, robot, mision;
     Real robotT1, robotT2, robotT3, robotT4, robotT5, robotT6, robotT7, robotT8;
-    UInt32 timer1=0, timer2=0, timer3=0,timer4=0,timer5=0,timer6=0,timer7=0,timer8=0, timer9=0, timer10=0, timer11=0, timer12=0, timer13=0, counter=0,
- counter2=10;
+    UInt32 timer1=0, timer2=0, timer3=0,timer4=0,timer5=0,timer6=0,timer7=0,timer8=0, timer9=0, timer10=0, timer11=0, timer12=0, timer13=0, counter=0, counter2=10;
 
     int time_saved;
     std::string time_S, file_name;

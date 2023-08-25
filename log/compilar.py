@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup as bs
 
 import os
-mision="tuttiTamT"
+mision="tuttiStop"
 os.chdir('/home/jazmin/tuttifrutti/experiments-loop-functions/build')
 os.system('make')
 os.system("make install")
