@@ -109,15 +109,19 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
 /****************************************/
 /****************************************/
 void TuttiTmTLoopFunction::EventLog() {
-    mision="secuencial_paralela/trial_folder/";
+    mision="secuencial_paralela/";
     //mision="paralela/";
     //mision="secuencial/";
     std::fstream CreateFile("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv");
     CreateFile<<"mision;activity;time;robot"<<std::endl;
     MyFile.open("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv", std::ios::app);
-    time_S = std::to_string(GetSpace().GetSimulationClock());
-    std::cout<<time_S<<std::endl;
+    float time_Sim = (GetSpace().GetSimulationClock());
+    //std::cout<<time_S<<";"<<"."<<mils<<std::endl;
     then_tm.tm_sec += ((GetSpace().GetSimulationClock())/1000);   // add 50 seconds to the time
+    double a = time_Sim/10;
+    mils=a-floor(a);
+    mils = round(mils * 1000.0);
+    then_tm.tm_sec += time_Sim/10;
     mktime( &then_tm);      // normalize it
     struct tm tm;
     char buf[255];
@@ -127,6 +131,8 @@ void TuttiTmTLoopFunction::EventLog() {
     strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tm);
     then_tm = now_tm;
     //std::cout<<buf<<std::endl;
+    //std::string milse="."+std::to_string(mils);
+    //std::cout<<mils<<std::endl;
     time_S=buf;
     
     InitBoxStates();

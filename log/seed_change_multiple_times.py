@@ -7,9 +7,9 @@ import re
 import subprocess
 import random
 
-b=60
+b=0
 mision="tuttiTamT"
-for a in range(10):
+for a in range(60):
     
     b+=1
     if b!=25 and b!=16 and b!=33 and b!=15:

@@ -39,26 +39,23 @@ def preparation(data_frame):
     case_starts_ends.columns = ['mision', 'caseend', 'casestart'] 
     # Merge with the main event log data so that for each row we have the start and end times.
     events = events.merge(case_starts_ends, on='mision')
+    print(events['mision'])
+
     # Calculate the relative time by subtracting the process start time from the event timestamp
     events['relativetime'] = events['time'] - events['casestart']
     # Convert relative times to more friendly measures
     ## seconds
-    events['relativetime_s'] = events['relativetime'].dt.seconds + 86400*events['relativetime'].dt.days 
-    ## days
-    events['relativedays'] = events['relativetime'].dt.days
+    events['relativetime_s'] = events['relativetime'].dt.seconds
+    print(events['relativetime_s'])
     ## Get an array of patient labels for the y axis - for graph labelling purposes
     misionnums = [int(e) for e in events['mision'].apply(lambda x: x.strip('mision'))]
-    misionnums_order= np.arange(min(misionnums), max(misionnums)+1, 1)
-    print(misionnums_order)
     ## Plot a scatter plot of patient events over relative time
     ax = sns.scatterplot(x=events['relativetime_s'],
     y=events['mision'], hue=events['activity'])
-    events['caselength'] = events['caseend'] - events['casestart']
     ## Set y axis ticks so that you only show every 5th patient - for readability
-    print(np.arange(min(misionnums), max(misionnums)+1, 3))
-    plot.yticks(np.arange(min(misionnums), max(misionnums)+1, 3))
+    plot.yticks(np.arange(min(misionnums), max(misionnums)+1, 5))
     plot.show()
-
+    events['caselength'] = events['caseend'] - events['casestart']
     #order the cases by overall process lengths
     ## Order by the case length
     ordered = events.sort_values(by=['caselength', 'mision', 'relativetime_s'])
@@ -165,9 +162,10 @@ def logs_folder():
             dfs.append(log)
             # Concatenate all data into one DataFrame
             big_frame = pd.concat(dfs, ignore_index=True)
-            big_frame = pm4py.format_dataframe(big_frame, case_id='mision', activity_key='activity', timestamp_key='time', timest_format='%Y-%m-%d %H:%M:%S')
             if model==model_n:
                 big_frame.to_csv(mision_folder+'/final_log/final_log.csv', sep=';', index=False)
+                big_frame = pm4py.format_dataframe(big_frame, case_id='mision', activity_key='activity', timestamp_key='time', timest_format='%Y-%m-%d %H:%M:%S')
+
                 preparation(big_frame)
 
                 #create a model every 10 repetitions stored in the log

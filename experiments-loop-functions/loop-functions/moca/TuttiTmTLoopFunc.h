@@ -142,6 +142,7 @@ class TuttiTmTLoopFunction: public CoreLoopFunctions {
 
     int time_saved;
     std::string time_S, file_name;
+    float mils;
     int c=0;
 
     struct RobotStateStruct {

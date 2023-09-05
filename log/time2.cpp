@@ -33,11 +33,11 @@ int main()
     strptime(asctime(&then_tm), "%a %b %e %H:%M:%S %Y\n", &tm);
     strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tm);
 
-    std::cout<<"buf: " <<buf<<"."<<mils<<std::endl;
+    std::cout<<"buf: "<<buf<<"."<<mils<<std::endl;
     then_tm=now_tm;
     }
     std::cout<<"now: " <<asctime( &now_save)<<std::endl;
-
+    
     //g++ time2.cpp -o time2
     // ./time2
 
