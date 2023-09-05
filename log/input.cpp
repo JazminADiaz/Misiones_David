@@ -41,7 +41,7 @@ int boxes(int box, int color){
 
 int robots(int Tm){
     //this simulates when a robot enter a TAM (t=1), r is going to be the robot 
-
+    int check =0;
     if (t==Tm){
         if( Tam_color.at(Tm)==1){
         Tam_color.at(Tm)=2;
@@ -54,16 +54,11 @@ int robots(int Tm){
             cont=0;
             t=1;
             boxa=3;
-            return 1;
+            check = 1;
         }
-        else{
-        return 0;
-
-        }
-
-        //print(Tam_color);
-
+        
     }
+    return check;
 }
 
 
@@ -107,18 +102,20 @@ int con(std::vector <int> const &a) {
     for(int i=0; i <=a.size(); i++){
         if (i<a.size()){
                 //std::cout<< a.at(i)<<' ';
-                if ( Tam_color.at(a.at(i))==0){
-                std::cout<<"primer filtro con"<<std::endl;
-                boxes(a.at(i), 1);
-                Tam_color.at(a.at(i))=1;
-                print(Tam_color);
+                if (flag_b==i){
+                    if ( Tam_color.at(a.at(i))==0){
+                    std::cout<<"primer filtro"<<std::endl;
+                    boxes(a.at(i), 1);
+                    Tam_color.at(a.at(i))=1;
+                    print(Tam_color);
+
+                    }
+
+                    flag_b+=robots(a.at(i));
+                    //std::cout<<"flag_b"<<flag_b<<std::endl;
+
+
                 }
-
-                flag_b+=robots(a.at(i));
-                //std::cout<<"flag_b"<<flag_b<<std::endl;
-
-
-                
             check= 0;
 
         }
