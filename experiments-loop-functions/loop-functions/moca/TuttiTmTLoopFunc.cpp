@@ -99,6 +99,90 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
 
         unBlocksID += 1; 
     }
+    UInt32 Blocks=0;
+    UInt32 last_Blocks=0;
+    //std::cout<<"prueba bloques"<< std::endl;
+    //Here we save the coordanates for the center of the walls of the tams.
+    for (CSpace::TMapPerType::iterator it = tBlocksMap.begin(); it != tBlocksMap.end(); ++it) {
+        CBoxEntity* pcBlock = any_cast<CBoxEntity*>(it->second);
+        cBoxPosition.Set(pcBlock->GetEmbodiedEntity().GetOriginAnchor().Position.GetX(),
+                        pcBlock->GetEmbodiedEntity().GetOriginAnchor().Position.GetY());
+
+        if (Blocks<num_Tam*3){
+
+        if ((Blocks)%3==0 ){
+            //std::cout<<"Bloque: "<< Blocks<<std::endl;
+            std::cout<<"coordinates"<<cBoxPosition.GetX()<<std::endl;
+
+            Tam_down_x.push_back(cBoxPosition.GetX());
+            Tam_down_y.push_back(cBoxPosition.GetY());
+
+        }
+        if ((Blocks-1)%3==0 and Blocks>0 ){
+            //std::cout<<"Bloque: "<< Blocks<<std::endl;
+            Tam_right_x.push_back(cBoxPosition.GetX());
+            Tam_right_y.push_back(cBoxPosition.GetY());
+
+        }
+        if ((Blocks-2)%3==0 and Blocks>1 ){
+            //std::cout<<"Bloque: "<< Blocks<<std::endl;
+            Tam_left_x.push_back(cBoxPosition.GetX());
+            Tam_left_y.push_back(cBoxPosition.GetY());
+        }
+
+        }
+
+
+        Blocks += 1; 
+    }
+    
+
+    for(int i=0; i < Tam_left_x.size(); i++){
+        if (Tam_right_x.at(i)==Tam_left_x.at(i)){
+            //The tam is vertical
+            std::cout<<"right"<<Tam_right_x.at(i)<<std::endl;
+            std::cout<<"down"<<Tam_down_x.at(i)<<std::endl;
+
+            if (Tam_right_x.at(i)<Tam_down_x.at(i)){
+                //Entry of the tam is down
+                Tam_limit_entrance.push_back(Tam_down_x.at(i)-lim_entrance);
+                Tam_limit_floor.push_back(Tam_down_x.at(i)-lim_floor);
+                check1.push_back(i);
+            }
+
+            if (Tam_right_x.at(i)>Tam_down_x.at(i)){
+                //Entry of the tam is up
+                Tam_limit_entrance.push_back(Tam_down_x.at(i)+lim_entrance);
+                Tam_limit_floor.push_back(Tam_down_x.at(i)+lim_floor);
+                check2.push_back(i);
+            }
+        }
+                if (Tam_right_y.at(i)==Tam_left_y.at(i)){
+            //The tam is horizontal
+            std::cout<<"right"<<Tam_right_x.at(i)<<std::endl;
+            std::cout<<"down"<<Tam_down_x.at(i)<<std::endl;
+
+            if (Tam_right_y.at(i)<Tam_down_y.at(i)){
+                //Entry of the tam is to the right
+                Tam_limit_entrance.push_back(Tam_down_y.at(i)-lim_entrance);
+                Tam_limit_floor.push_back(Tam_down_y.at(i)-lim_floor);
+                check3.push_back(i);
+            }
+
+            if (Tam_right_y.at(i)>Tam_down_y.at(i)){
+                //Entry of the tam is to the left
+                Tam_limit_entrance.push_back(Tam_down_y.at(i)+lim_entrance);
+                Tam_limit_floor.push_back(Tam_down_y.at(i)+lim_floor);
+                check4.push_back(i);
+            }
+        }
+    }
+
+    print2(Tam_limit_entrance);
+
+
+
+
     time_t now = time(0);
     file_name=std::to_string(now);
 
@@ -107,7 +191,22 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
 }
 
 /****************************************/
+void print(std::vector <int> const &a) {
+    std::cout<<"printing given vector : ";
+   for(int i=0; i < a.size(); i++)
+   std::cout<< a.at(i) << ' ';
+    std::cout <<";"<<std::endl;
+
+}
 /****************************************/
+void print2(std::vector <Real> const &a) {
+    std::cout<<"printing given vector : ";
+   for(int i=0; i < a.size(); i++)
+   std::cout<< a.at(i) << ' ';
+    std::cout <<";"<<std::endl;
+}
+/****************************************/
+
 void TuttiTmTLoopFunction::EventLog() {
     mision="secuencial_paralela/";
     //mision="paralela/";
@@ -613,8 +712,22 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
 
 
 /****************************************/
+Real TuttiTmTLoopFunction::GetTamControl_trial(Real a) {
+CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
+CVector2 cEpuckPosition(0,0);
+Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
 
+    for (CSpace::TMapPerType::iterator it = tEpuckMap.begin(); it != tEpuckMap.end(); ++it) {
+        CEPuckEntity* pcEpuck = any_cast<CEPuckEntity*>(it->second);
+        cEpuckPosition.Set(pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetX(),
+                           pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetY());
 
+        m_tRobotStates[pcEpuck].cLastPosition = m_tRobotStates[pcEpuck].cPosition;
+        m_tRobotStates[pcEpuck].cPosition = cEpuckPosition;
+    }
+
+}
+/********************/
 Real TuttiTmTLoopFunction::GetTamControl_Sec() {
 CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
 CVector2 cEpuckPosition(0,0);

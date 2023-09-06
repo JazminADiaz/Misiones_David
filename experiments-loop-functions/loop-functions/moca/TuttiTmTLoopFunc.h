@@ -21,11 +21,30 @@
 #include <time.h>
 #include <iomanip>
 #include <iostream>
+#include <string>
+#include <vector>
+
 using namespace argos;
 std::fstream MyFile;
+int num_Tam=8; //number of Tams
+
 time_t now = time( NULL);
 struct tm now_tm = *localtime( &now);
 struct tm then_tm = now_tm;
+std::vector<int> Tam_color(num_Tam, 0); // Indicates the color displaying in each TAM is use to register any change on the tam
+std::vector<Real> Tam_left_x;  
+std::vector<Real> Tam_left_y;  
+std::vector<Real> Tam_right_x; 
+std::vector<Real> Tam_right_y; 
+std::vector<Real> Tam_down_x; 
+std::vector<Real> Tam_down_y; 
+std::vector<Real> Tam_limit_floor; 
+std::vector<Real> Tam_limit_entrance; 
+std::vector<int> check1, check2,check3, check4 ; 
+
+
+void print (std::vector <int> const &a);
+void print2 (std::vector <Real> const &a);
 
 
 class TuttiTmTLoopFunction: public CoreLoopFunctions {
@@ -64,6 +83,8 @@ class TuttiTmTLoopFunction: public CoreLoopFunctions {
     Real GetTamControl();
     Real GetTamControl_Sec();
     Real GetTamControl_Par();
+    //std::vector <int> const &a
+    Real GetTamControl_trial(Real a);
 
 
     /*cambio void a Real solo para probar*/
@@ -137,9 +158,8 @@ class TuttiTmTLoopFunction: public CoreLoopFunctions {
     CVector2 Tam1, Tam2, Tam3, Tam4, Tam5, Tam6, Tam7, Tam8;
     UInt32  tam1=0, tam2=0, tam3=0, tam4=0, tam5=0, tam6=0, tam7=0, tam8=0;
     std::string actionT1, actionT2, actionT3, actionT4, actionT5, actionT6, actionT7, actionT8, robot, mision;
-    Real robotT1, robotT2, robotT3, robotT4, robotT5, robotT6, robotT7, robotT8;
+    Real robotT1, robotT2, robotT3, robotT4, robotT5, robotT6, robotT7, robotT8, lim_floor=0.07, lim_entrance=0.10;
     UInt32 timer1=0, timer2=0, timer3=0,timer4=0,timer5=0,timer6=0,timer7=0,timer8=0, timer9=0, timer10=0, timer11=0, timer12=0, timer13=0, counter=0, counter2=10;
-
     int time_saved;
     std::string time_S, file_name;
     float mils;
