@@ -27,24 +27,16 @@
 using namespace argos;
 std::fstream MyFile;
 int num_Tam=8; //number of Tams
-
 time_t now = time( NULL);
 struct tm now_tm = *localtime( &now);
 struct tm then_tm = now_tm;
 std::vector<int> Tam_color(num_Tam, 0); // Indicates the color displaying in each TAM is use to register any change on the tam
-std::vector<Real> Tam_left_x;  
-std::vector<Real> Tam_left_y;  
-std::vector<Real> Tam_right_x; 
-std::vector<Real> Tam_right_y; 
-std::vector<Real> Tam_down_x; 
-std::vector<Real> Tam_down_y; 
-std::vector<Real> Tam_limit_floor; 
-std::vector<Real> Tam_limit_entrance; 
-std::vector<int> check1, check2,check3, check4 ; 
-
-
+std::vector<Real> Tam_side1_x, Tam_side1_y, Tam_side2_x, Tam_side2_y, Tam_back_x, Tam_back_y, Tam_front_f, Tam_front_e, T_l, T_r, T_u, T_b;  
 void print (std::vector <int> const &a);
 void print2 (std::vector <Real> const &a);
+Real sides (Real const &a, Real const &b, Real const &c, Real const &d, Real const &e);
+Real left, right, up, down;
+
 
 
 class TuttiTmTLoopFunction: public CoreLoopFunctions {

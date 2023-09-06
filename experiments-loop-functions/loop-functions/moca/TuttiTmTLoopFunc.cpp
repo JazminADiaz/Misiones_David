@@ -114,20 +114,20 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
             //std::cout<<"Bloque: "<< Blocks<<std::endl;
             std::cout<<"coordinates"<<cBoxPosition.GetX()<<std::endl;
 
-            Tam_down_x.push_back(cBoxPosition.GetX());
-            Tam_down_y.push_back(cBoxPosition.GetY());
+            Tam_back_x.push_back(cBoxPosition.GetX());
+            Tam_back_y.push_back(cBoxPosition.GetY());
 
         }
         if ((Blocks-1)%3==0 and Blocks>0 ){
             //std::cout<<"Bloque: "<< Blocks<<std::endl;
-            Tam_right_x.push_back(cBoxPosition.GetX());
-            Tam_right_y.push_back(cBoxPosition.GetY());
+            Tam_side1_x.push_back(cBoxPosition.GetX());
+            Tam_side1_y.push_back(cBoxPosition.GetY());
 
         }
         if ((Blocks-2)%3==0 and Blocks>1 ){
             //std::cout<<"Bloque: "<< Blocks<<std::endl;
-            Tam_left_x.push_back(cBoxPosition.GetX());
-            Tam_left_y.push_back(cBoxPosition.GetY());
+            Tam_side2_x.push_back(cBoxPosition.GetX());
+            Tam_side2_y.push_back(cBoxPosition.GetY());
         }
 
         }
@@ -137,50 +137,7 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
     }
     
 
-    for(int i=0; i < Tam_left_x.size(); i++){
-        if (Tam_right_x.at(i)==Tam_left_x.at(i)){
-            //The tam is vertical
-            std::cout<<"right"<<Tam_right_x.at(i)<<std::endl;
-            std::cout<<"down"<<Tam_down_x.at(i)<<std::endl;
-
-            if (Tam_right_x.at(i)<Tam_down_x.at(i)){
-                //Entry of the tam is down
-                Tam_limit_entrance.push_back(Tam_down_x.at(i)-lim_entrance);
-                Tam_limit_floor.push_back(Tam_down_x.at(i)-lim_floor);
-                check1.push_back(i);
-            }
-
-            if (Tam_right_x.at(i)>Tam_down_x.at(i)){
-                //Entry of the tam is up
-                Tam_limit_entrance.push_back(Tam_down_x.at(i)+lim_entrance);
-                Tam_limit_floor.push_back(Tam_down_x.at(i)+lim_floor);
-                check2.push_back(i);
-            }
-        }
-                if (Tam_right_y.at(i)==Tam_left_y.at(i)){
-            //The tam is horizontal
-            std::cout<<"right"<<Tam_right_x.at(i)<<std::endl;
-            std::cout<<"down"<<Tam_down_x.at(i)<<std::endl;
-
-            if (Tam_right_y.at(i)<Tam_down_y.at(i)){
-                //Entry of the tam is to the right
-                Tam_limit_entrance.push_back(Tam_down_y.at(i)-lim_entrance);
-                Tam_limit_floor.push_back(Tam_down_y.at(i)-lim_floor);
-                check3.push_back(i);
-            }
-
-            if (Tam_right_y.at(i)>Tam_down_y.at(i)){
-                //Entry of the tam is to the left
-                Tam_limit_entrance.push_back(Tam_down_y.at(i)+lim_entrance);
-                Tam_limit_floor.push_back(Tam_down_y.at(i)+lim_floor);
-                check4.push_back(i);
-            }
-        }
-    }
-
-    print2(Tam_limit_entrance);
-
-
+    
 
 
     time_t now = time(0);
@@ -189,7 +146,48 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
     
 
 }
+/****************************************/
+Real sides (Real s1_x, Real s1_y, Real s2_x, Real s2_y, Real b_x, Real b_y, Real c){
+if (s1_x==s2_x){
+        //The tam is vertical
+        if (s1_x<b_x){
+            //Entry of the tam is down
+            left=s1_y;
+            right=s2_y;
+            up=b_x;
+            down=b_x-c;
+        }
+        if (s1_x>b_x){
+            //Entry of the tam is up
+            left=s1_y;
+            right=s2_y;
+            up=b_x+c;
+            down=b_x;
+        }
+    }
+    if (s1_y==s2_y){
+        //The tam is horizontal
 
+        if (s1_y<b_y){
+            //Entry of the tam is to the right
+            left=b_y;
+            right=b_y-c;
+            up=s1_x;
+            down=s2_x;            
+        }
+
+        if (s1_y>b_y){
+            //Entry of the tam is to the left
+            left=b_y+c;
+            right=b_y;
+            up=s1_x;
+            down=s2_x;      
+        }
+    }
+
+return left, right, up, down;
+
+}
 /****************************************/
 void print(std::vector <int> const &a) {
     std::cout<<"printing given vector : ";
@@ -1090,50 +1088,13 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
 argos::CColor TuttiTmTLoopFunction::GetFloorColor(const argos::CVector2& c_position_on_plane) {
     
         Real y_l=0.1, x_l=0.07;
-
-//tam1 
-    if (Tam1.GetY()-y_l< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= Tam1.GetY()
-    and (Tam1.GetX())-x_l< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= Tam1.GetX()
-    ){          return CColor::WHITE;    }
-//tam2
-    if (Tam2.GetY()-y_l< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= Tam2.GetY()
-    and (Tam2.GetX()-x_l)< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= Tam2.GetX()
-    ){  return CColor::WHITE;    }
-
-//tam3
-    if (Tam3.GetY()-y_l< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= Tam3.GetY()
-    and (Tam3.GetX()-x_l)< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= Tam3.GetX()
-    ){   return CColor::WHITE;    }
-//tam4
-    if (Tam4.GetY()-y_l< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= Tam4.GetY()
-    and (Tam4.GetX())-x_l< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= Tam4.GetX()
-    ){ return CColor::WHITE;    }
-    
-//tam5
-    if (Tam5.GetY()-y_l< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= Tam5.GetY()
-    and (Tam5.GetX())< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= Tam5.GetX()+x_l
-    ){  return CColor::WHITE;}
-
-
-//tam6
-    if (Tam6.GetY()-y_l< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= Tam6.GetY()
-    and (Tam6.GetX())< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= Tam6.GetX()+x_l
-    ){  return CColor::WHITE;}
-
-
-//tam7
-    if (Tam7.GetY()-y_l< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= Tam7.GetY()
-    and (Tam7.GetX())< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= Tam7.GetX()+x_l
-    ){  return CColor::WHITE;}
-
-
-//tam8
-    if (Tam8.GetY()-y_l< c_position_on_plane.GetY() and c_position_on_plane.GetY() <= Tam8.GetY()
-    and (Tam8.GetX())< c_position_on_plane.GetX() and c_position_on_plane.GetX() <= Tam8.GetX()+x_l
-    ){  return CColor::WHITE;}
-
-//else
-    //if (0.45< c_position_on_plane.GetX()){return CColor::BLACK;}
+    for(int i=0; i < Tam_back_x.size(); i++){
+        
+    left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), x_l);
+    if (right<c_position_on_plane.GetY() and c_position_on_plane.GetY()<=left and down <c_position_on_plane.GetX() and c_position_on_plane.GetX()<up){
+        return CColor::WHITE;
+    }
+    }
 
     return CColor::GRAY50;
 
