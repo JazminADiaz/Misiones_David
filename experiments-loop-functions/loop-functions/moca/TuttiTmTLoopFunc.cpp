@@ -169,18 +169,19 @@ void print2(std::vector <Real> const &a) {
 /****************************************/
 
 /****************************************/
-void TuttiTmTLoopFunction::EventLog() {
 
+void TuttiTmTLoopFunction::EventLog() {
     mision="Compuertas/";
+    //mision="paralela/";
+    //mision="secuencial/";
     std::fstream CreateFile("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv");
     CreateFile<<"mision;activity;time;robot"<<std::endl;
     MyFile.open("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv", std::ios::app);
     float time_Sim = (GetSpace().GetSimulationClock());
-
-    //then_tm.tm_sec += ((GetSpace().GetSimulationClock())/1000);   // add seconds to the time
-    //double a = time_Sim/10;
-    //mils=a-floor(a);
-    //mils = round(mils * 1000.0);
+    then_tm.tm_sec += ((GetSpace().GetSimulationClock())/1000);   // add 50 seconds to the time
+    double a = time_Sim/10;
+    mils=a-floor(a);
+    mils = round(mils * 1000.0);
     then_tm.tm_sec += time_Sim/10;
     mktime( &then_tm);      // normalize it
     struct tm tm;
@@ -188,22 +189,15 @@ void TuttiTmTLoopFunction::EventLog() {
 
     memset(&tm, 0, sizeof(tm));
     strptime(asctime(&then_tm), "%a %b %e %H:%M:%S %Y\n", &tm);
-    
-    std::cout<<"tm: "<<asctime(&tm)<<std::endl;
-
     strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tm);
-    std::cout<<"buf: "<<buf<<std::endl;
-
     then_tm = now_tm;
     time_S=buf;
-
+    std::cout<<"buf"<<buf<<std::endl;
     Gates();
-    
+    //InitBoxStates_Sec();
+    //InitBoxStates_Par();
+
     MyFile.close();
-
-
-
-
 }
 
 void TuttiTmTLoopFunction::Reset() {
