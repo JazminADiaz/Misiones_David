@@ -34,7 +34,7 @@ std::vector<int> Tam_color(num_Tam, 0); // Indicates the color displaying in eac
 std::vector<Real> Tam_side1_x, Tam_side1_y, Tam_side2_x, Tam_side2_y, Tam_back_x, Tam_back_y, Tam_front_f, Tam_front_e, T_l, T_r, T_u, T_b;  
 void print (std::vector <int> const &a);
 void print2 (std::vector <Real> const &a);
-Real sides (Real const &a, Real const &b, Real const &c, Real const &d, Real const &e);
+Real sides (Real s1_x, Real s1_y, Real s2_x, Real s2_y, Real b_x, Real b_y, Real c);
 Real left, right, up, down;
 
 

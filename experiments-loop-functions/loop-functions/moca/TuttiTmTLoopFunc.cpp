@@ -100,52 +100,33 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
         unBlocksID += 1; 
     }
     UInt32 Blocks=0;
-    UInt32 last_Blocks=0;
-    //std::cout<<"prueba bloques"<< std::endl;
     //Here we save the coordanates for the center of the walls of the tams.
     for (CSpace::TMapPerType::iterator it = tBlocksMap.begin(); it != tBlocksMap.end(); ++it) {
         CBoxEntity* pcBlock = any_cast<CBoxEntity*>(it->second);
         cBoxPosition.Set(pcBlock->GetEmbodiedEntity().GetOriginAnchor().Position.GetX(),
                         pcBlock->GetEmbodiedEntity().GetOriginAnchor().Position.GetY());
-
         if (Blocks<num_Tam*3){
 
-        if ((Blocks)%3==0 ){
-            //std::cout<<"Bloque: "<< Blocks<<std::endl;
-            std::cout<<"coordinates"<<cBoxPosition.GetX()<<std::endl;
-
-            Tam_back_x.push_back(cBoxPosition.GetX());
-            Tam_back_y.push_back(cBoxPosition.GetY());
-
+            if ((Blocks)%3==0 ){
+                Tam_back_x.push_back(cBoxPosition.GetX());
+                Tam_back_y.push_back(cBoxPosition.GetY());
+            }
+            if ((Blocks-1)%3==0 and Blocks>0 ){
+                Tam_side1_x.push_back(cBoxPosition.GetX());
+                Tam_side1_y.push_back(cBoxPosition.GetY());
+            }
+            if ((Blocks-2)%3==0 and Blocks>1 ){
+                Tam_side2_x.push_back(cBoxPosition.GetX());
+                Tam_side2_y.push_back(cBoxPosition.GetY());
+            }
         }
-        if ((Blocks-1)%3==0 and Blocks>0 ){
-            //std::cout<<"Bloque: "<< Blocks<<std::endl;
-            Tam_side1_x.push_back(cBoxPosition.GetX());
-            Tam_side1_y.push_back(cBoxPosition.GetY());
-
-        }
-        if ((Blocks-2)%3==0 and Blocks>1 ){
-            //std::cout<<"Bloque: "<< Blocks<<std::endl;
-            Tam_side2_x.push_back(cBoxPosition.GetX());
-            Tam_side2_y.push_back(cBoxPosition.GetY());
-        }
-
-        }
-
-
         Blocks += 1; 
     }
-    
-
-    
-
-
     time_t now = time(0);
     file_name=std::to_string(now);
-
-    
-
 }
+
+/****************************************/
 /****************************************/
 Real sides (Real s1_x, Real s1_y, Real s2_x, Real s2_y, Real b_x, Real b_y, Real c){
 if (s1_x==s2_x){
@@ -167,7 +148,6 @@ if (s1_x==s2_x){
     }
     if (s1_y==s2_y){
         //The tam is horizontal
-
         if (s1_y<b_y){
             //Entry of the tam is to the right
             left=b_y;
@@ -175,7 +155,6 @@ if (s1_x==s2_x){
             up=s1_x;
             down=s2_x;            
         }
-
         if (s1_y>b_y){
             //Entry of the tam is to the left
             left=b_y+c;
@@ -213,7 +192,6 @@ void TuttiTmTLoopFunction::EventLog() {
     CreateFile<<"mision;activity;time;robot"<<std::endl;
     MyFile.open("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv", std::ios::app);
     float time_Sim = (GetSpace().GetSimulationClock());
-    //std::cout<<time_S<<";"<<"."<<mils<<std::endl;
     then_tm.tm_sec += ((GetSpace().GetSimulationClock())/1000);   // add 50 seconds to the time
     double a = time_Sim/10;
     mils=a-floor(a);
@@ -227,9 +205,6 @@ void TuttiTmTLoopFunction::EventLog() {
     strptime(asctime(&then_tm), "%a %b %e %H:%M:%S %Y\n", &tm);
     strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tm);
     then_tm = now_tm;
-    //std::cout<<buf<<std::endl;
-    //std::string milse="."+std::to_string(mils);
-    //std::cout<<mils<<std::endl;
     time_S=buf;
     
     InitBoxStates();
@@ -301,59 +276,6 @@ void TuttiTmTLoopFunction::ArenaControl() {
 
 /****************************************/
 /****************************************/
-
-void TuttiTmTLoopFunction::ScoreControl(){
-
-    if (m_unClock == 1) {
-        m_unStopTime = GetRandomTime(400, 601);
-        m_unStopEdge = GetRandomTime(1, 9);
-        m_unStopBox = GetRandomTime(1, 4);
-    }
-
-
-}
-
-/****************************************/
-/****************************************/
-
-Real TuttiTmTLoopFunction::GetStopScore() {
-
-   // UpdateRobotPositions();
-    Real unScore = 0;
-    TRobotStateMap::iterator it;
-    for (it = m_tRobotStates.begin(); it != m_tRobotStates.end(); ++it) {
-        Real d = (it->second.cPosition - it->second.cLastPosition).Length();
-        if (d > 0.0005)
-            unScore+=1;
-    return unScore;
-}
-}
-
-
-
-
-/****************************************/
-/****************************************/
-
-Real TuttiTmTLoopFunction::GetMoveScore() {
-
-    UpdateRobotPositions();
-
-    Real unScore = 0;
-    TRobotStateMap::iterator it;
-    for (it = m_tRobotStates.begin(); it != m_tRobotStates.end(); ++it) {
-        Real d = (it->second.cPosition - it->second.cLastPosition).Length();
-        if (d <= 0.0005)
-            unScore+=1;
-    }
-
-    return unScore;
-}
-
-
-/****************************************/
-/*********************************/
-
 
 Real TuttiTmTLoopFunction::GetTamControl() {
 CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
@@ -1087,15 +1009,12 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
 
 argos::CColor TuttiTmTLoopFunction::GetFloorColor(const argos::CVector2& c_position_on_plane) {
     
-        Real y_l=0.1, x_l=0.07;
-    for(int i=0; i < Tam_back_x.size(); i++){
-        
-    left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), x_l);
+    for(int i=0; i < Tam_back_x.size(); i++){        
+    left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), 0.07);
     if (right<c_position_on_plane.GetY() and c_position_on_plane.GetY()<=left and down <c_position_on_plane.GetX() and c_position_on_plane.GetX()<up){
         return CColor::WHITE;
     }
     }
-
     return CColor::GRAY50;
 
 }
