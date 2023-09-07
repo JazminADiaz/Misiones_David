@@ -99,6 +99,9 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
 
         unBlocksID += 1; 
     }
+    time_t now = time(0);
+    file_name=std::to_string(now);
+
     UInt32 Blocks=0;
     //Here we save the coordanates for the center of the walls of the tams.
     for (CSpace::TMapPerType::iterator it = tBlocksMap.begin(); it != tBlocksMap.end(); ++it) {
@@ -122,8 +125,18 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
         }
         Blocks += 1; 
     }
-    time_t now = time(0);
-    file_name=std::to_string(now);
+
+
+    activities["0_sec"] = {0,1};
+   /*
+   activities["1_con"] = {2,3};
+    activities["2_sec"] ={4,5};
+    activities["3_con"] ={0,1};
+   */ 
+    for(std::map<std::string,std::vector<Real>>::iterator it = activities.begin(); it != activities.end(); ++it) {
+    key.push_back(it->first);
+    value.push_back(it->second);
+    }
 }
 
 /****************************************/
@@ -184,13 +197,122 @@ void print2(std::vector <Real> const &a) {
 }
 /****************************************/
 
+/****************************************/
+
+/****************************************/
+int boxes(int box, int color){
+    if (color ==0 and boxa==(box*3)){
+        std::cout<<"Apagado"<<std::endl;
+    }
+    if (color ==1 and boxa==(box*3)){
+        std::cout<<"Encendido"<<std::endl;
+    }
+    if (color ==2 and boxa==(box*3)){
+        std::cout<<"Ocupado"<<std::endl;
+    }
+    if (color ==3 and boxa==(box*3)){
+        std::cout<<"No-disponible"<<std::endl;
+    }
+    if (color ==4 and boxa==(box*3)){
+        std::cout<<"Waiting"<<std::endl;
+    }
+    return 0;
+}
+
+/****************************************/
+int robots_con(int Tm){
+
+    //this simulates when a robot enter a TAM (t=1), r is going to be the robot 
+    int check =0;
+    t=Tm;
+    if (t==Tm){
+        if( Tam_color.at(Tm)==1){
+        Tam_color.at(Tm)=2;
+        boxes(t,2);}
+        check = 1;
+    }
+    return check;
+    
+}
+
+/****************************************/
+int con(std::vector <int> const &a){
+    int check;
+    check= 0;
+    // Iterate the vector of each secuential activity 
+    for(int i=0; i <=a.size(); i++){
+        if (i<a.size() and Tam_color.at(a.at(i))==0){
+            std::cout<<"primer filtro con"<<std::endl;
+            boxes(a.at(i), 1);
+            Tam_color.at(a.at(i))=1;
+            //print(Tam_color);
+        }}
+        flag_b=0;
+    for(int i=0; i <a.size(); i++){
+        flag_b+=robots_con(a.at(i));
+    }
+    if (flag_b==a.size()){
+        cont+=1;
+
+        if (cont==5){
+            for(int i=0; i <a.size(); i++){
+            if (Tam_color.at(a.at(i))==2){
+
+                Tam_color.at(a.at(i))=3;
+                boxes(t,3);
+            }
+
+                }
+            cont=0;
+            t=1;
+            boxa=3;
+            check= 1;
+        }
+        flag_b=0;   
+    }
+    return check;
+}
+/****************************************/
+
+/****************************************/
+int sec(std::vector <int> const &a){
+
+    int check;
+    // Iterate the vector of each secuential activity 
+    for(int i=0; i <=a.size(); i++){
+        if (i<a.size()){
+                //std::cout<< a.at(i)<<' ';
+                if (flag_b==i){
+                    if ( Tam_color.at(a.at(i))==0){
+                    boxes(a.at(i), 1);
+                    Tam_color.at(a.at(i))=1;
+                    print(Tam_color);
+                    }
+                    flag_b+=robots_sec(a.at(i));
+                    //std::cout<<"flag_b"<<flag_b<<std::endl;
+                }
+            check= 0;
+
+        }
+        if (flag_b==a.size()){
+
+            check= 1;
+            flag_b=0;
+        }
+    }
+    return check;
+}
+/****************************************/
+
 void TuttiTmTLoopFunction::EventLog() {
+
+
     mision="secuencial_paralela/";
     //mision="paralela/";
     //mision="secuencial/";
-    std::fstream CreateFile("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv");
-    CreateFile<<"mision;activity;time;robot"<<std::endl;
-    MyFile.open("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv", std::ios::app);
+    //std::fstream CreateFile("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv");
+    //CreateFile<<"mision;activity;time;robot"<<std::endl;
+    //MyFile.open("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv", std::ios::app);
     float time_Sim = (GetSpace().GetSimulationClock());
     then_tm.tm_sec += ((GetSpace().GetSimulationClock())/1000);   // add 50 seconds to the time
     double a = time_Sim/10;
@@ -206,12 +328,34 @@ void TuttiTmTLoopFunction::EventLog() {
     strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tm);
     then_tm = now_tm;
     time_S=buf;
-    
-    InitBoxStates();
+        for (int i = 0; i < key.size(); i++) {
+        if (key[i].find(std::to_string(flag_a))!= std::string::npos){
+            if(key[i].find("sec")!= std::string::npos){
+                flag_a+=sec(value[i]);
+                std::cout<<"flag_a sec "<<flag_a<<std::endl;
+                //std::cout << "Element " << key[i] << " flag_a: "<<flag_a<< " nature sec "<<std::endl;
+            }
+            if(key[i].find("con")!= std::string::npos){
+    //            std::cout<<"sigue algo con";
+                //std::cout << "Element " << key[i] << " flag_a: "<<flag_a<< " nature con "<<std::endl;
+                flag_a+=con(value[i]);
+                std::cout<<"flag_a con "<<flag_a<<std::endl;
+            }
+            if((key[i].find("con")== std::string::npos) and (key[i].find("sec")== std::string::npos)) {
+                std::cout<<"The activiy "<<flag_a<<"is not set to be secuential or concurrent"<<std::endl;
+            }
+        }
+        //print(Tam_color);
+    }    
+    //InitBoxStates();
     //InitBoxStates_Sec();
     //InitBoxStates_Par();
+    //Boxes(0, 0);
+    //MyFile.close();
 
-    MyFile.close();
+
+
+
 }
 
 void TuttiTmTLoopFunction::Reset() {
@@ -226,7 +370,7 @@ void TuttiTmTLoopFunction::Reset() {
 
 
 
-    InitBoxStates();
+    //InitBoxStates();
     //InitBoxStates_Sec();
     //InitBoxStates_Par();
 
@@ -629,381 +773,77 @@ Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
     return tam2;
 }
 
+Real TuttiTmTLoopFunction::sec(std::vector <Real> const &a){
 
+    int check;
+    // Iterate the vector of each secuential activity 
+    for(int i=0; i <=a.size(); i++){
+        if (i<a.size()){
+                //std::cout<< a.at(i)<<' ';
+                if (flag_b==i){
+                    if ( Tam_color.at(a.at(i))==0){
+                    Boxes(a.at(i), 1);
+                    Tam_color.at(a.at(i))=1;
+                    print(Tam_color);
+                    }
+                    flag_b+=robots_sec(a.at(i));
+                    //std::cout<<"flag_b"<<flag_b<<std::endl;
+                }
+            check= 0;
 
-/****************************************/
-Real TuttiTmTLoopFunction::GetTamControl_trial(Real a) {
-CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
-CVector2 cEpuckPosition(0,0);
-Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
+        }
+        if (flag_b==a.size()){
 
-    for (CSpace::TMapPerType::iterator it = tEpuckMap.begin(); it != tEpuckMap.end(); ++it) {
-        CEPuckEntity* pcEpuck = any_cast<CEPuckEntity*>(it->second);
-        cEpuckPosition.Set(pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetX(),
-                           pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetY());
-
-        m_tRobotStates[pcEpuck].cLastPosition = m_tRobotStates[pcEpuck].cPosition;
-        m_tRobotStates[pcEpuck].cPosition = cEpuckPosition;
+            check= 1;
+            flag_b=0;
+        }
     }
-
+    return check;
 }
-/********************/
-Real TuttiTmTLoopFunction::GetTamControl_Sec() {
-CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
-CVector2 cEpuckPosition(0,0);
-Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
+/*******************************************/
+/*******************************************/
+
+
+Real TuttiTmTLoopFunction::robots_sec(Real Tm){
+    //this simulates when a robot enter a TAM (t=1), r is going to be the robot 
+    CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
+    CVector2 cEpuckPosition(0,0);
+    Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005, enter, check=0;
 
     for (CSpace::TMapPerType::iterator it = tEpuckMap.begin(); it != tEpuckMap.end(); ++it) {
         CEPuckEntity* pcEpuck = any_cast<CEPuckEntity*>(it->second);
         cEpuckPosition.Set(pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetX(),
                            pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetY());
 
+        for(int i=0; i < Tam_back_x.size(); i++){        
+        left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), 0.10);
+        if (right<cEpuckPosition.GetY() and cEpuckPosition.GetY()<=left and down <cEpuckPosition.GetX() and cEpuckPosition.GetX()<up){
+            enter=i;
+            if (enter==Tm){
+                //std::cout<<"robot"<<rob<<"enter Tam"<<i<<std::endl;
+                if( Tam_color.at(Tm)==1){
+
+                Tam_color.at(Tm)=2;}
+                Boxes(enter,2);
+                cont+=1;
+                if (cont==50 and Tam_color.at(Tm)==2){
+                    Tam_color.at(Tm)=3;
+                    Boxes(enter,3);
+                    cont=0;
+                    check = 1;
+                }
+            }
+        }
+        }
         m_tRobotStates[pcEpuck].cLastPosition = m_tRobotStates[pcEpuck].cPosition;
         m_tRobotStates[pcEpuck].cPosition = cEpuckPosition;
-
-        robot=std::to_string(rob);
-        robot.erase ( robot.find_last_not_of('0') + 1, std::string::npos );
-        robot.erase ( robot.find_last_not_of(',') + 1, std::string::npos );
-        robot.erase ( robot.find_last_not_of('.') + 1, std::string::npos );
-
-        //tam1 
-        if (Tam1.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam1.GetY()
-        and (Tam1.GetX())-x_l< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam1.GetX())
-        {  
-            robotT1=rob;
-            if(tam1==0){
-                actionT1="TA_enter";
-                std::cout<<robot<<"TA_enter"<<std::endl;
-                MyFile<<";"<<"TA_enter"<<";"<<time_S<<";"<<robot<<std::endl;
-                tam1=1;
-            }
-            timer1+=1;
-            if(timer1==50 and tam1==1){
-                    timer1=0;
-                    actionT1="TA_task1";
-                    MyFile<<";"<<actionT1<<";"<<time_S<<";"<<robot<<std::endl;
-                    std::cout<<robot<<actionT1<<std::endl;
-                    tam1=2;
-            }
-        }
-        
-        //tam2
-        if (Tam2.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam2.GetY()
-        and (Tam2.GetX())-x_l< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam2.GetX())
-        {  
-            robotT2=rob;
-            if(tam2==0){
-                actionT2="TB_enter";
-                std::cout<<robot<<"TB_enter"<<std::endl;
-                MyFile<<";"<<"TB_enter"<<";"<<time_S<<";"<<robot<<std::endl;
-                tam2=1;
-                }
-            timer2+=1;
-            if(timer2==50 and tam2==1){
-                    timer2=0;
-                    actionT2="TB_task2";
-                    MyFile<<";"<<actionT2<<";"<<time_S<<";"<<robot<<std::endl;
-                    std::cout<<robot<<actionT2<<std::endl;
-                    tam2=2;
-
-            }
-        }
-
-
-        //tam3
-        if (Tam3.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam3.GetY()
-        and (Tam3.GetX()-x_l)< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam3.GetX())
-        {  
-            robotT3=rob;
-            if(tam3==0){
-                actionT3="TC_enter";
-                std::cout<<robot<<"TC_enter"<<std::endl;
-                MyFile<<";"<<"TC_enter"<<";"<<time_S<<";"<<robot<<std::endl;
-                tam3=1;
-                }
-            timer3+=1;
-            if(timer3==50 and tam3==1){
-                    timer3=0;
-                    actionT3="TC_task3";
-                    MyFile<<";"<<actionT3<<";"<<time_S<<";"<<robot<<std::endl;
-                    std::cout<<robot<<actionT3<<std::endl;
-                    tam3=2;
-            }
-        }
-    //tam4
-        if (Tam4.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam4.GetY()
-        and (Tam4.GetX())-x_l< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam4.GetX())
-        {  
-            robotT4=rob;
-            if(tam4==0){
-                actionT4="TD_enter";
-                std::cout<<robot<<"TD_enter"<<std::endl;
-                MyFile<<";"<<"TD_enter"<<";"<<time_S<<";"<<robot<<std::endl;
-                tam4=1;
-                }
-            timer4+=1;
-            if(timer4==50 and tam4==1){
-                    timer4=0;
-                    actionT4="TD_task4";
-                    MyFile<<";"<<actionT4<<";"<<time_S<<";"<<robot<<std::endl;
-                    std::cout<<robot<<actionT4<<std::endl;
-                    tam4=2;
-            }
-        }
-        //tam5
-        if (Tam5.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam5.GetY()
-        and (Tam5.GetX())< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam5.GetX()+x_l)
-        {  
-            robotT5=rob;
-            if(tam5==0){
-                actionT5="TE_enter";
-                std::cout<<robot<<"TE_enter"<<std::endl;
-                MyFile<<";"<<"TE_enter"<<";"<<time_S<<";"<<robot<<std::endl;
-                tam5=1;
-                }
-            timer5+=1;
-            if(timer5==50 and tam5==1){
-                    timer5=0;
-                    actionT5="TE_task5";
-                    MyFile<<";"<<actionT5<<";"<<time_S<<";"<<robot<<std::endl;
-                    std::cout<<robot<<actionT5<<std::endl;
-                    tam5=2;
-            }
-        }
-        //tam6
-        if (Tam6.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam6.GetY()
-        and (Tam6.GetX())< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam6.GetX() +x_l)
-        {  
-            robotT6=rob;
-            if(tam6==0){
-                actionT6="TF_enter";
-                std::cout<<robot<<"TF_enter"<<std::endl;
-                MyFile<<";"<<"TF_enter"<<";"<<time_S<<";"<<robot<<std::endl;
-                tam6=1;
-                }
-            timer6+=1;
-            if(timer6==50 and tam6==1){
-                    timer6=0;
-                    actionT6="TF_task6";
-                    MyFile<<";"<<actionT6<<";"<<time_S<<";"<<robot<<std::endl;
-                    std::cout<<robot<<actionT6<<std::endl;
-                    tam6=2;
-            }
-        }
-        //tam7
-        if (Tam7.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam7.GetY()
-        and (Tam7.GetX())< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam7.GetX()+x_l)
-        {  
-            robotT7=rob;
-            if(tam7==0){
-                actionT7="TG_enter";
-                std::cout<<robot<<"TG_enter"<<std::endl;
-                MyFile<<";"<<"TG_enter"<<";"<<time_S<<";"<<robot<<std::endl;
-                tam7=1;
-                }
-            timer7+=1;
-            if(timer7==50 and tam7==1){
-                    timer7=0;
-                    actionT7="TG_task7";
-                    MyFile<<";"<<actionT7<<";"<<time_S<<";"<<robot<<std::endl;
-                    std::cout<<robot<<actionT7<<std::endl;
-                    tam7=2;
-            }
-        }
-
-        //tam8
-
-        if (Tam8.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam8.GetY()
-            and (Tam8.GetX())< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam8.GetX()+x_l)
-        {  
-            robotT8=rob;
-            if(tam8==0){
-                actionT8="TH_enter";
-                std::cout<<robot<<"TH_enter"<<std::endl;
-                MyFile<<";"<<"TH_enter"<<";"<<time_S<<";"<<robot<<std::endl;
-                tam8=1;
-                }
-            timer8+=1;
-            if(timer8==50 and tam8==1){
-                    timer8=0;
-                    actionT8="TH_task8";
-                    MyFile<<";"<<actionT8<<";"<<time_S<<";"<<robot<<std::endl;
-                    std::cout<<robot<<actionT8<<std::endl;
-                    tam8=2;
-            }
-        }
-        if (tam8==2){
-            timer9+=1;
-            if (timer9==100){
-            MyFile<<";"<<"T1-TH_task9"<<";"<<time_S<<";"<<robot<<std::endl;
-            std::cout<<robot<<"T1-TH_task9"<<std::endl;
-
-            tam8=3;
-            }}
-        
-
-
-        
-        rob+=1;
-
-
-    }
-    return tam2;
-}
-/****************************************/
-
-Real TuttiTmTLoopFunction::GetTamControl_Par() {
-CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
-CVector2 cEpuckPosition(0,0);
-Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005;
-
-    for (CSpace::TMapPerType::iterator it = tEpuckMap.begin(); it != tEpuckMap.end(); ++it) {
-        CEPuckEntity* pcEpuck = any_cast<CEPuckEntity*>(it->second);
-        cEpuckPosition.Set(pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetX(),
-                           pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetY());
-
-        m_tRobotStates[pcEpuck].cLastPosition = m_tRobotStates[pcEpuck].cPosition;
-        m_tRobotStates[pcEpuck].cPosition = cEpuckPosition;
-
-        robot=std::to_string(rob);
-        robot.erase ( robot.find_last_not_of('0') + 1, std::string::npos );
-        robot.erase ( robot.find_last_not_of(',') + 1, std::string::npos );
-        robot.erase ( robot.find_last_not_of('.') + 1, std::string::npos );
-
-        //tam1 
-        if (Tam1.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam1.GetY()
-        and (Tam1.GetX())-x_l< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam1.GetX())
-        {  
-            robotT1=rob;
-            if(tam1==0){
-                actionT1="TA_enter";
-                std::cout<<robot<<"TA_enter"<<std::endl;
-                MyFile<<";"<<"TA_enter"<<";"<<time_S<<";"<<robot<<std::endl;
-                tam1=1;
-            }
-        }
-        
-        //tam2
-        if (Tam2.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam2.GetY()
-        and (Tam2.GetX())-x_l< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam2.GetX())
-        {  
-            robotT2=rob;
-            if(tam2==0){
-                actionT2="TB_enter";
-                std::cout<<robot<<"TB_enter"<<std::endl;
-                MyFile<<";"<<"TB_enter"<<";"<<time_S<<";"<<robot<<std::endl;
-                tam2=1;
-                }
-            //timer2+=1;
-
-        }
-
-
-        //tam3
-        if (Tam3.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam3.GetY()
-        and (Tam3.GetX()-x_l)< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam3.GetX())
-        {  
-            robotT3=rob;
-            if(tam3==0){
-                actionT3="TC_enter";
-                std::cout<<robot<<"TC_enter"<<std::endl;
-                MyFile<<";"<<"TC_enter"<<";"<<time_S<<";"<<robot<<std::endl;
-                tam3=1;
-                }
-            //timer3+=1;
-
-        }
-    //tam4
-        if (Tam4.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam4.GetY()
-        and (Tam4.GetX())-x_l< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam4.GetX())
-        {  
-            robotT4=rob;
-            if(tam4==0){
-                actionT4="TD_enter";
-                std::cout<<robot<<"TD_enter"<<std::endl;
-                MyFile<<";"<<"TD_enter"<<";"<<time_S<<";"<<robot<<std::endl;
-                tam4=1;
-                }
-            //timer4+=1;
-        }
-
-
-        //tam5
-        if (Tam5.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam5.GetY()
-        and (Tam5.GetX())< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam5.GetX()+x_l)
-        {  
-            robotT5=rob;
-            if(tam5==0){
-                actionT5="TE_enter";
-                std::cout<<robot<<"TE_enter"<<std::endl;
-                MyFile<<";"<<"TE_enter"<<";"<<time_S<<";"<<robot<<std::endl;
-                tam5=1;
-                }
-
-        }
-        //tam6
-        if (Tam6.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam6.GetY()
-        and (Tam6.GetX())< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam6.GetX() +x_l)
-        {  
-            robotT6=rob;
-            if(tam6==0){
-                actionT6="TF_enter";
-                std::cout<<robot<<"TF_enter"<<std::endl;
-                MyFile<<";"<<"TF_enter"<<";"<<time_S<<";"<<robot<<std::endl;
-                tam6=1;
-                }
-            //timer6+=1;
-
-        }
-        //tam7
-        if (Tam7.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam7.GetY()
-        and (Tam7.GetX())< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam7.GetX()+x_l)
-        {  
-            robotT7=rob;
-            if(tam7==0){
-                actionT7="TG_enter";
-                std::cout<<robot<<"TG_enter"<<std::endl;
-                MyFile<<";"<<"TG_enter"<<";"<<time_S<<";"<<robot<<std::endl;
-                tam7=1;
-                }
-            //timer7+=1;
-
-        }
-
-        //tam8
-
-        if (Tam8.GetY()-y_l< cEpuckPosition.GetY() and cEpuckPosition.GetY() <= Tam8.GetY()
-            and (Tam8.GetX())< cEpuckPosition.GetX() and cEpuckPosition.GetX() <= Tam8.GetX()+x_l)
-        {  
-            robotT8=rob;
-            if(tam8==0){
-                actionT8="TH_enter";
-                std::cout<<robot<<"TH_enter"<<std::endl;
-                MyFile<<";"<<"TH_enter"<<";"<<time_S<<";"<<robot<<std::endl;
-                tam8=1;
-                }
-            //timer8+=1;
-
-        }
-        if (tam1==1 and tam2==1 and tam3==1 and tam4==1 and tam5==1 and tam6==1 and tam7==1 and tam8==1){
-            tam1=2;
-        }
-        if (tam1==2){
-            timer9+=1;
-            if (timer9==100){
-            MyFile<<";"<<"T1-TH_task9"<<";"<<time_S<<";"<<robot<<std::endl;
-            std::cout<<robot<<"T1-TH_task9"<<std::endl;
-
-            tam1=3;
-            }}
-
-
-        //tam7 and tam8
         rob+=1;
     }
-    return tam2;
+    return check;
 }
 
+
+/*******************************************/
 
 /*******************************************/
 
@@ -1020,35 +860,9 @@ argos::CColor TuttiTmTLoopFunction::GetFloorColor(const argos::CVector2& c_posit
 }
 
 /****************************************/
-/****************************************/
-
-Real TuttiTmTLoopFunction::UpdateRobotPositions() {
-    CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
-    CVector2 cEpuckPosition(0,0);
-    for (CSpace::TMapPerType::iterator it = tEpuckMap.begin(); it != tEpuckMap.end(); ++it) {
-        CEPuckEntity* pcEpuck = any_cast<CEPuckEntity*>(it->second);
-        cEpuckPosition.Set(pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetX(),
-                           pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetY());
-
-
-        m_tRobotStates[pcEpuck].cLastPosition = m_tRobotStates[pcEpuck].cPosition;
-
-        m_tRobotStates[pcEpuck].cPosition = cEpuckPosition;
-        
-
-        if (abs((m_tRobotStates[pcEpuck].cPosition.GetX())- m_tRobotStates[pcEpuck].cLastPosition.GetX())<=0.000005 and
-        abs((m_tRobotStates[pcEpuck].cPosition.GetY())- m_tRobotStates[pcEpuck].cLastPosition.GetY())<=0.000005){
-            tam+=1;
-        }
-
-
-    }
-    return tam;
-}
 
 
 
-/****************************************/
 /****************************************/
 
 void TuttiTmTLoopFunction::InitRobotStates() {
@@ -1067,62 +881,56 @@ void TuttiTmTLoopFunction::InitRobotStates() {
         
     }
 }
-/**Secuencial*/
-void TuttiTmTLoopFunction::InitBoxStates_Par() {
-        GetTamControl_Par();
+
+/****************************************/
+void TuttiTmTLoopFunction::Boxes(Real boxa, Real color){
     
+    //std::cout<<"boxa"<<boxa<<"color"<<color<<std::endl;
     CSpace::TMapPerType& tBlocksMap = GetSpace().GetEntitiesByType("box");
     CVector2 cBoxPosition(0,0);
-    UInt32 unBlocksID1 = 0;
+    UInt32 box = 0;
     for (CSpace::TMapPerType::iterator it = tBlocksMap.begin(); it != tBlocksMap.end(); ++it) {
         CBoxEntity* pcBlock = any_cast<CBoxEntity*>(it->second);
-            //std::cout<<"tam1:"<<tam1<<"tam2:"<<tam2<<std::endl;
-            
-            if (unBlocksID1 ==0 and tam1==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);
-            }
-            if (unBlocksID1 ==3 and tam2==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);
-            }
 
-            if (unBlocksID1 == 6 and tam3==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);
-                
-            }
-            if (unBlocksID1 == 9 and tam4==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK); 
+        if (box==(boxa*3) and color ==0){
+            std::cout<<"Apagado"<<std::endl;
+            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::GREEN);
 
-            }  
+        }
+        if (box==(boxa*3) and color ==1 ){
+            std::cout<<"Disponible"<<std::endl;
+            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);
 
-            if (unBlocksID1 == 12 and tam5==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);
-            }
-            if (unBlocksID1 == 15 and tam6==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);
-            }
+        }
+        if (box==(boxa*3) and color ==2 ){
+            std::cout<<"Ocupado"<<std::endl;
+            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::PURPLE);
 
-            if (unBlocksID1 == 18 and tam7==1) {
-            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);}
+        }
+        if (box==(boxa*3) and color ==3){
+            std::cout<<"No-disponible"<<std::endl;
+            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);
 
-            if (unBlocksID1 == 21 and tam8==1) {
-            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);}
+        }
+        if (box==(boxa*3) and color ==4){
+            std::cout<<"Waiting"<<std::endl;
+            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::CYAN);
 
-            if (tam1==2){
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::MAGENTA);}
-            
-            if (tam1==3){
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);}
-            
+        }
 
-            
-        unBlocksID1+=1;
-       // std::cout<<"bloque1:"<<unBlocksID1<<std::endl;
+        box+=1;
+        std::cout<<"boxa"<<box<<std::endl;
     }
+
 }
+
+
+/****************************************/
 /* Secuencial -Paralela*/
 
 void TuttiTmTLoopFunction::InitBoxStates() {
         GetTamControl();
+        robots_sec(1);
     
     CSpace::TMapPerType& tBlocksMap = GetSpace().GetEntitiesByType("box");
     CVector2 cBoxPosition(0,0);
@@ -1230,88 +1038,6 @@ void TuttiTmTLoopFunction::InitBoxStates() {
        // std::cout<<"bloque1:"<<unBlocksID1<<std::endl;
     }
 }
-/*Paralela*/
-
-void TuttiTmTLoopFunction::InitBoxStates_Sec() {
-        GetTamControl_Sec();
-    
-    CSpace::TMapPerType& tBlocksMap = GetSpace().GetEntitiesByType("box");
-    CVector2 cBoxPosition(0,0);
-    UInt32 unBlocksID1 = 0;
-    for (CSpace::TMapPerType::iterator it = tBlocksMap.begin(); it != tBlocksMap.end(); ++it) {
-        CBoxEntity* pcBlock = any_cast<CBoxEntity*>(it->second);
-            //std::cout<<"tam1:"<<tam1<<"tam2:"<<tam2<<std::endl;
-            //entrada
-            if (unBlocksID1 ==0 and tam1==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);}
-            if (unBlocksID1 ==0 and tam1==2 and tam3==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::CYAN);}    
-            if (unBlocksID1 ==3 and tam1==2) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);}
-            if (unBlocksID1 ==3 and tam2==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);}  
-            if (unBlocksID1 ==3 and tam2==2) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::CYAN);}
-            if (unBlocksID1 == 6 and tam2==2) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);}
-            if (unBlocksID1 == 6 and tam3==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);}
-            if (unBlocksID1 == 6 and tam3==2) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::CYAN);}
-            if (unBlocksID1 == 9 and tam3==2) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);} 
-            if (unBlocksID1 == 9 and tam4==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);}
-            if (unBlocksID1 == 9 and tam4==2) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::CYAN);}  
-            if (unBlocksID1 == 12 and tam4==2) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);}
-            if (unBlocksID1 == 12 and tam5==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);}
-            if (unBlocksID1 == 12 and tam5==2) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::CYAN);}
-            if (unBlocksID1 == 15 and tam5==2) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);}
-            if (unBlocksID1 == 15 and tam6==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);}
-            if (unBlocksID1 == 15 and tam6==2) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::CYAN);}
-            if (unBlocksID1 == 18 and tam6==2) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);}
-            if (unBlocksID1 == 18 and tam7==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);}
-            if (unBlocksID1 == 18 and tam7==2) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::CYAN);}
-            if (unBlocksID1 == 21 and tam7==2) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);}
-            if (unBlocksID1 == 21 and tam8==1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLACK);}
-            if (unBlocksID1 == 21 and tam8==2) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::CYAN);}
-            //rsalida
-            if (unBlocksID1 ==0 and tam2>=1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);}
-            if (unBlocksID1 ==3 and tam3>=1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);}
-            if (unBlocksID1 ==6 and tam4>=1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);}
-            if (unBlocksID1 ==9 and tam5>=1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);}
-            if (unBlocksID1 ==12 and tam6>=1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);}
-            if (unBlocksID1 ==15 and tam7>=1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);}
-            if (unBlocksID1 ==18 and tam8>=1) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);}
-            if (unBlocksID1 ==21 and tam8>=3) {
-                pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);}
-
-        unBlocksID1+=1;
-       // std::cout<<"bloque1:"<<unBlocksID1<<std::endl;
-    }
-}
-
-
 /****************************************/
 /****************************************/
 

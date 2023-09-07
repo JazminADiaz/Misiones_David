@@ -81,14 +81,9 @@ int sec(std::vector <int> const &a) {
                     boxes(a.at(i), 1);
                     Tam_color.at(a.at(i))=1;
                     print(Tam_color);
-
                     }
-
                     flag_b+=robots_sec(a.at(i));
-                    
                     //std::cout<<"flag_b"<<flag_b<<std::endl;
-
-
                 }
             check= 0;
 
@@ -98,7 +93,6 @@ int sec(std::vector <int> const &a) {
             check= 1;
             flag_b=0;
         }
-        
     }
     return check;
 }
@@ -117,10 +111,8 @@ int robots_con(int Tm){
 }
 
 int con(std::vector <int> const &a) {
-
     int check;
     check= 0;
-
     // Iterate the vector of each secuential activity 
     for(int i=0; i <=a.size(); i++){
         if (i<a.size() and Tam_color.at(a.at(i))==0){
@@ -131,12 +123,8 @@ int con(std::vector <int> const &a) {
         }}
         flag_b=0;
     for(int i=0; i <a.size(); i++){
-
         flag_b+=robots_con(a.at(i));
-
-        
     }
-
     if (flag_b==a.size()){
         cont+=1;
 
@@ -153,9 +141,6 @@ int con(std::vector <int> const &a) {
             t=1;
             boxa=3;
             check= 1;
-                    std::cout<<"tercer filtro con"<<std::endl;
-
-
         }
         flag_b=0;   
     }
@@ -175,16 +160,12 @@ activities["1_con"] = {2,3};
 activities["2_sec"] ={4,5};
 activities["3_con"] ={0,1};
 //We store the keys of each activity into a list (key) and each vector into a matrix (value) so we can further on manipulate them
-
 std::vector<std::string> key;
 std::vector<std::vector<int> > value;
 for(std::map<std::string,std::vector<int>>::iterator it = activities.begin(); it != activities.end(); ++it) {
 
   key.push_back(it->first);
   value.push_back(it->second);
-  //std::cout << "Key: " << it->first << std::endl;
-  //print( it->second);
-  //std::cout << "Value: " << it->second << std::endl;
 }
 //std::cout<<"vector_size:"<<value.size()<<"vector[0]: "<<value[0][0];
 
@@ -209,7 +190,7 @@ for (int i = 0; i < key.size(); i++) {
             std::cout<<"The activiy "<<flag_a<<"is not set to be secuential or concurrent"<<std::endl;
         }
     }
-    print(Tam_color);
+    //print(Tam_color);
 }
 
 }

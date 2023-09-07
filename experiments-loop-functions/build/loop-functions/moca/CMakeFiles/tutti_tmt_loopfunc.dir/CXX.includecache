@@ -655,6 +655,8 @@ string
 -
 vector
 -
+map
+-
 
 /home/jazmin/tuttifrutti/experiments-loop-functions/src/CoreLoopFunctions.h
 argos3/core/simulator/space/space.h

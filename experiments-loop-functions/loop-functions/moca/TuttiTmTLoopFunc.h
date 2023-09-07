@@ -23,19 +23,36 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
+
 
 using namespace argos;
 std::fstream MyFile;
-int num_Tam=8; //number of Tams
+// num_Tam (# Tam in the mision)- T_n (# Tam per activity)- A_n (#Activities in the map)
+int num_Tam=8, T_n=2, A_n=4, flag_a=0, flag_b=0, cont=0, t=0, boxa=0;
+
 time_t now = time( NULL);
 struct tm now_tm = *localtime( &now);
 struct tm then_tm = now_tm;
 std::vector<int> Tam_color(num_Tam, 0); // Indicates the color displaying in each TAM is use to register any change on the tam
 std::vector<Real> Tam_side1_x, Tam_side1_y, Tam_side2_x, Tam_side2_y, Tam_back_x, Tam_back_y, Tam_front_f, Tam_front_e, T_l, T_r, T_u, T_b;  
-void print (std::vector <int> const &a);
 void print2 (std::vector <Real> const &a);
 Real sides (Real s1_x, Real s1_y, Real s2_x, Real s2_y, Real b_x, Real b_y, Real c);
 Real left, right, up, down;
+int boxes(int box, int color);
+int robots_sec(int Tm);
+int robots_con(int Tm);
+
+//a map called activities is created which stores keys of type strings which indicate the order and the nature of the activity
+//(secuencial or concurrent) and corresponding vector of the TAM's each activity will ocupy
+std::map <std::string, std::vector<Real> > activities;   
+//We store the keys of each activity into a list (key) and each vector into a matrix (value) so we can further on manipulate them
+std::vector<std::string> key;
+std::vector<std::vector<Real> > value;
+
+//a map called activities is created which stores keys of type strings which indicate the order and the nature of the activity
+//(secuencial or concurrent) and corresponding vector of the TAM's each activity will ocupy
+
 
 
 
@@ -67,6 +84,8 @@ class TuttiTmTLoopFunction: public CoreLoopFunctions {
     Real GetStopScore();  
     Real GetMoveScore();
     void ActiveTamCount();
+    void Boxes(Real box, Real color);
+
     void InitBoxStates();
     void InitBoxStates_Sec();
     void InitBoxStates_Par();
@@ -77,9 +96,13 @@ class TuttiTmTLoopFunction: public CoreLoopFunctions {
     Real GetTamControl_Par();
     //std::vector <int> const &a
     Real GetTamControl_trial(Real a);
+    Real robots_sec(Real a);
+    Real sec(std::vector <Real> const &a);
+    Real con(std::vector <Real> const &a);
 
 
-    /*cambio void a Real solo para probar*/
+
+    /*cambio void a Real solo para probar*W/
     Real UpdateRobotPositions();
 
 
