@@ -209,7 +209,6 @@ void TuttiTmTLoopFunction::Reset() {
     m_fObjectiveFunction = 0;
     m_tRobotStates.clear();
     InitRobotStates();
-    Gates();
 }
 
 /****************************************/
