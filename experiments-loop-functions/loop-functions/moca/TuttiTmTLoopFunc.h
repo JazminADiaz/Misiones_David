@@ -16,32 +16,33 @@
 #include <argos3/plugins/simulator/entities/box_entity.h>
 #include <argos3/plugins/robots/arena/simulator/arena_entity.h>
 #include "../../src/CoreLoopFunctions.h"
-#include <ctime>
+#include <string>
+#include <vector>
+#include <map>
 #include <string.h>
 #include <time.h>
 #include <iomanip>
 #include <iostream>
-#include <string>
-#include <vector>
-#include <map>
+#include <cmath>
+
 
 
 using namespace argos;
 std::fstream MyFile;
-// num_Tam (# Tam in the mision)- T_n (# Tam per activity)- A_n (#Activities in the map)
-int num_Tam=8, T_n=2, A_n=4, flag_a=0, flag_b=0, cont=0, t=0, boxa=0;
 
 time_t now = time( NULL);
 struct tm now_tm = *localtime( &now);
 struct tm then_tm = now_tm;
+
+// num_Tam (# Tam in the mision)- T_n (# Tam per activity)- A_n (#Activities in the map)
+int num_Tam=8, T_n=2, A_n=4, flag_a=0, flag_b=0, cont=0, t=0, boxa=0;
+
 std::vector<int> Tam_color(num_Tam, 0); // Indicates the color displaying in each TAM is use to register any change on the tam
 std::vector<Real> Tam_side1_x, Tam_side1_y, Tam_side2_x, Tam_side2_y, Tam_back_x, Tam_back_y, Tam_front_f, Tam_front_e, T_l, T_r, T_u, T_b;  
 void print2 (std::vector <Real> const &a);
 Real sides (Real s1_x, Real s1_y, Real s2_x, Real s2_y, Real b_x, Real b_y, Real c);
 Real left, right, up, down;
-int boxes(int box, int color);
-int robots_sec(int Tm);
-int robots_con(int Tm);
+
 
 //a map called activities is created which stores keys of type strings which indicate the order and the nature of the activity
 //(secuencial or concurrent) and corresponding vector of the TAM's each activity will ocupy
@@ -61,50 +62,34 @@ class TuttiTmTLoopFunction: public CoreLoopFunctions {
     TuttiTmTLoopFunction();
     TuttiTmTLoopFunction(const TuttiTmTLoopFunction& orig);
     virtual ~TuttiTmTLoopFunction();
-
     virtual void Destroy();
-
     virtual argos::CColor GetFloorColor(const argos::CVector2& c_position_on_plane);
     virtual void PostExperiment();
     virtual void PostStep();
     virtual void Reset();
     virtual void Init(TConfigurationNode& t_tree);
-
     Real GetObjectiveFunction();
-
     CVector3 GetRandomPosition();
     UInt32 GetRandomTime(UInt32 unMin, UInt32 unMax);
-
     void ArenaControl();
-
     void InitRobotStates();
 
     void ScoreControl();
     void EventLog();
     Real GetStopScore();  
     Real GetMoveScore();
-    void ActiveTamCount();
+
     void Boxes(Real box, Real color);
-
-    void InitBoxStates();
-    void InitBoxStates_Sec();
-    void InitBoxStates_Par();
-
-
-    Real GetTamControl();
-    Real GetTamControl_Sec();
-    Real GetTamControl_Par();
-    //std::vector <int> const &a
-    Real GetTamControl_trial(Real a);
+    void Gates();
     Real robots_sec(Real a);
+    Real robots_con(Real a);
     Real sec(std::vector <Real> const &a);
     Real con(std::vector <Real> const &a);
+    Real timing();
 
 
 
-    /*cambio void a Real solo para probar*W/
-    Real UpdateRobotPositions();
-
+    /*
 
 
   private:
@@ -164,21 +149,10 @@ class TuttiTmTLoopFunction: public CoreLoopFunctions {
      */
     bool m_bMaximization;
 
-    UInt32 m_unClock;
-    UInt32 m_unStopTime;
-    UInt32 m_unStopEdge;
-    UInt32 m_unStopBox;
-    UInt32 tam;
+    UInt32 m_unClock, m_unStopTime, m_unStopEdge, m_unStopBox;
     Real m_fObjectiveFunction;
-    CVector2 Tam1, Tam2, Tam3, Tam4, Tam5, Tam6, Tam7, Tam8;
-    UInt32  tam1=0, tam2=0, tam3=0, tam4=0, tam5=0, tam6=0, tam7=0, tam8=0;
-    std::string actionT1, actionT2, actionT3, actionT4, actionT5, actionT6, actionT7, actionT8, robot, mision;
-    Real robotT1, robotT2, robotT3, robotT4, robotT5, robotT6, robotT7, robotT8, lim_floor=0.07, lim_entrance=0.10;
-    UInt32 timer1=0, timer2=0, timer3=0,timer4=0,timer5=0,timer6=0,timer7=0,timer8=0, timer9=0, timer10=0, timer11=0, timer12=0, timer13=0, counter=0, counter2=10;
-    int time_saved;
-    std::string time_S, file_name;
+    std::string time_S, file_name, mision;
     float mils;
-    int c=0;
 
     struct RobotStateStruct {
         CVector2 cLastPosition;
