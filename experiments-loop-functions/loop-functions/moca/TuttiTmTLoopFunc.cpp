@@ -192,7 +192,6 @@ void TuttiTmTLoopFunction::EventLog() {
     strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tm);
     then_tm = now_tm;
     time_S=buf;
-    std::cout<<"buf"<<buf<<std::endl;
     Gates();
     //InitBoxStates_Sec();
     //InitBoxStates_Par();
@@ -291,7 +290,7 @@ Real TuttiTmTLoopFunction::timing(){
     //std::cout<<"tm: "<<asctime(&tm)<<std::endl;
 
     strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tm);
-    //std::cout<<"buf: "<<buf<<std::endl;
+    std::cout<<"buf: "<<buf<<std::endl;
 
     then_tm = now_tm;
     time_S=buf;
@@ -354,7 +353,7 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
             if (enter==Tm){
                 if( Tam_color.at(Tm)==1){
                 timing();
-                MyFile<<";"<<"Task"<<Tm<<";"<<GetSpace().GetSimulationClock()<<";"<<rob<<std::endl;
+                MyFile<<";"<<"Task"<<Tm<<";"<<time_S<<";"<<rob<<std::endl;
 
                 Tam_color.at(Tm)=2;
                 Boxes(Tm,2);}
@@ -423,7 +422,7 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
                 cont+=1;
                 if (cont==50 and Tam_color.at(Tm)==2){
                     timing();
-                    MyFile<<";"<<"Task"<<Tm<<";"<<GetSpace().GetSimulationClock()<<";"<<rob<<std::endl;
+                    MyFile<<";"<<"Task"<<Tm<<";"<<time_S<<";"<<rob<<std::endl;
 
                     Tam_color.at(Tm)=3;
                     Boxes(enter,3);

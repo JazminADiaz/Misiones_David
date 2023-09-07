@@ -641,11 +641,7 @@ argos3/plugins/robots/arena/simulator/arena_entity.h
 -
 ../../src/CoreLoopFunctions.h
 /home/jazmin/tuttifrutti/experiments-loop-functions/src/CoreLoopFunctions.h
-string
--
-vector
--
-map
+ctime
 -
 string.h
 -
@@ -655,7 +651,11 @@ iomanip
 -
 iostream
 -
-cmath
+string
+-
+vector
+-
+map
 -
 
 /home/jazmin/tuttifrutti/experiments-loop-functions/src/CoreLoopFunctions.h

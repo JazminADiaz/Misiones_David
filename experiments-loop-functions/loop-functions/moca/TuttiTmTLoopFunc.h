@@ -16,14 +16,15 @@
 #include <argos3/plugins/simulator/entities/box_entity.h>
 #include <argos3/plugins/robots/arena/simulator/arena_entity.h>
 #include "../../src/CoreLoopFunctions.h"
-#include <string>
-#include <vector>
-#include <map>
+#include <ctime>
 #include <string.h>
 #include <time.h>
 #include <iomanip>
 #include <iostream>
-#include <cmath>
+#include <string>
+#include <vector>
+#include <map>
+
 
 
 
@@ -167,3 +168,4 @@ class TuttiTmTLoopFunction: public CoreLoopFunctions {
 };
 
 #endif
+
