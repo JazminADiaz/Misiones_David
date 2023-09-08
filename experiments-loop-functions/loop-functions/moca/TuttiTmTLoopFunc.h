@@ -35,11 +35,10 @@ struct tm then_tm = now_tm;
 int num_Tam=8, T_n=2, A_n=4, flag_a=0, flag_b=0, cont=0, t=0, boxa=0;
 
 std::vector<int> Tam_color(num_Tam, 0); // Indicates the color displaying in each TAM is use to register any change on the tam
-std::vector<Real> rob_send, Tam_side1_x, Tam_side1_y, Tam_side2_x, Tam_side2_y, Tam_back_x, Tam_back_y, Tam_front_f, Tam_front_e, T_l, T_r, T_u, T_b;  
+std::vector<Real> Tam_side1_x, Tam_side1_y, Tam_side2_x, Tam_side2_y, Tam_back_x, Tam_back_y, Tam_front_f, Tam_front_e, T_l, T_r, T_u, T_b;  
 void print2 (std::vector <Real> const &a);
 Real sides (Real s1_x, Real s1_y, Real s2_x, Real s2_y, Real b_x, Real b_y, Real c);
 Real left, right, up, down;
-
 
 //a map called activities is created which stores keys of type strings which indicate the order and the nature of the activity
 //(secuencial or concurrent) and corresponding vector of the TAM's each activity will ocupy
@@ -47,12 +46,6 @@ std::map <std::string, std::vector<Real> > activities;
 //We store the keys of each activity into a list (key) and each vector into a matrix (value) so we can further on manipulate them
 std::vector<std::string> key;
 std::vector<std::vector<Real> > value;
-
-//a map called activities is created which stores keys of type strings which indicate the order and the nature of the activity
-//(secuencial or concurrent) and corresponding vector of the TAM's each activity will ocupy
-
-
-
 
 class TuttiTmTLoopFunction: public CoreLoopFunctions {
   public:

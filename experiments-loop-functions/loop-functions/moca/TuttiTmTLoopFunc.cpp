@@ -9,44 +9,32 @@
   */
 
 #include "TuttiTmTLoopFunc.h"
-
 /****************************************/
 /****************************************/
-
+/* Configuration of the arena NOT MY AUTHORSHIP START*/
 TuttiTmTLoopFunction::TuttiTmTLoopFunction() {
     m_unClock = 0;
     m_unStopTime = 0;
     m_unStopEdge = 2;
     m_unStopBox = 2;
-    m_fObjectiveFunction = 0;
-
-    
+    m_fObjectiveFunction = 0;   
 }
-
 /****************************************/
 /****************************************/
-
 TuttiTmTLoopFunction::TuttiTmTLoopFunction(const TuttiTmTLoopFunction& orig) {
 }
-
 /****************************************/
 /****************************************/
-
 TuttiTmTLoopFunction::~TuttiTmTLoopFunction() {}
-
 /****************************************/
 /****************************************/
-
 void TuttiTmTLoopFunction::Destroy() {
     m_tRobotStates.clear();    
     Gates();
 }
-
 /****************************************/
 /****************************************/
-
 void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
-/* init of the arena NOT MY AUTHORSHIP START*/
     CoreLoopFunctions::Init(t_tree);
     TConfigurationNode cParametersNode;
     try {
@@ -66,7 +54,7 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
     }
 
     InitRobotStates();
-/* init of the arena NOT MY AUTHORSHIP END*/
+/* Configuration of the arena NOT MY AUTHORSHIP END*/
 
 
 //Saving the coordanates for the center of the walls of the tams.
@@ -307,12 +295,12 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
             Tam_color.at(a.at(i))=1;
         }}
         flag_b=0;
-        rob_send.clear();
         robots.clear();
     //Check if all the tams involved are occupied
     for(int i=0; i <a.size(); i++){
-        robots, sum=robots_con(a.at(i));
+        rob, sum=robots_con(a.at(i));
         flag_b+=sum;
+        robots.push_back(rob);
     }
     //Once all are occupied change the color to busy
     if (flag_b==a.size()){
@@ -321,9 +309,8 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
             if (Tam_color.at(a.at(i))==4){
                 Tam_color.at(a.at(i))=2;
                 Boxes(a.at(i),2);
-                for(int r=0; r<robots.size(); r++){
-                    record(a.at(i), robots.at(r), "busy");
-                }
+                record(a.at(i), robots.at(i), "busy");
+                
             }
         }
         //once 5 secs have passed change color to done
@@ -352,7 +339,7 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
     //this simulates when a robot enter a TAM (t=1), r is going to be the robot 
     CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
     CVector2 cEpuckPosition(0,0);
-    Real rob=0, enter, check=0, w=0;
+    Real rob=0, enter, check=0, w=0, rob_send;
 
     for (CSpace::TMapPerType::iterator it = tEpuckMap.begin(); it != tEpuckMap.end(); ++it) {
         CEPuckEntity* pcEpuck = any_cast<CEPuckEntity*>(it->second);
@@ -370,7 +357,7 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
                 //If a robot in the tam, make it ocupied then waiting for mate robots
                 record(Tm, rob,"ocupied");
                 record(Tm, rob,"waiting");
-                rob_send.push_back(rob);
+                rob_send=rob;
                 }
                 check = 1;
             }
@@ -378,7 +365,7 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
         }
         rob+=1;
     }
-    return rob_send, check;
+    return rob, check;
 }
 /*******************************************/
 //Secuential Activity
