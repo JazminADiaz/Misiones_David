@@ -283,7 +283,6 @@ Real TuttiTmTLoopFunction::record(Real Tm, Real rob, std::string action){
 //Concurrent Activity
 /*******************************************/
 Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
-    std::vector<Real> robots; 
     Real rob, sum;
     int check;
     check= 0;
@@ -295,12 +294,12 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
             Tam_color.at(a.at(i))=1;
         }}
         flag_b=0;
-        robots.clear();
+
+    rob_send.clear();
     //Check if all the tams involved are occupied
     for(int i=0; i <a.size(); i++){
-        rob, sum=robots_con(a.at(i));
+        sum=robots_con(a.at(i));
         flag_b+=sum;
-        robots.push_back(rob);
     }
     //Once all are occupied change the color to busy
     if (flag_b==a.size()){
@@ -309,8 +308,7 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
             if (Tam_color.at(a.at(i))==4){
                 Tam_color.at(a.at(i))=2;
                 Boxes(a.at(i),2);
-                record(a.at(i), robots.at(i), "busy");
-                
+                record(a.at(i), rob_send.at(i), "busy");
             }
         }
         //once 5 secs have passed change color to done
@@ -319,7 +317,7 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
             if (Tam_color.at(a.at(i))==2){
                 Tam_color.at(a.at(i))=3;
                 Boxes(a.at(i),3);
-                record(a.at(i), rob, "done");
+                record(a.at(i), rob_send.at(i), "done");
 
             }
             }
@@ -339,7 +337,7 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
     //this simulates when a robot enter a TAM (t=1), r is going to be the robot 
     CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
     CVector2 cEpuckPosition(0,0);
-    Real rob=0, enter, check=0, w=0, rob_send;
+    Real rob=0, enter, check=0, w=0;
 
     for (CSpace::TMapPerType::iterator it = tEpuckMap.begin(); it != tEpuckMap.end(); ++it) {
         CEPuckEntity* pcEpuck = any_cast<CEPuckEntity*>(it->second);
@@ -357,15 +355,16 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
                 //If a robot in the tam, make it ocupied then waiting for mate robots
                 record(Tm, rob,"ocupied");
                 record(Tm, rob,"waiting");
-                rob_send=rob;
                 }
                 check = 1;
+                rob_send.push_back(rob);
+
             }
         }
         }
         rob+=1;
     }
-    return rob, check;
+    return check;
 }
 /*******************************************/
 //Secuential Activity
@@ -381,7 +380,7 @@ Real TuttiTmTLoopFunction::sec(std::vector <Real> const &a){
                     //the first tam is made available, after that it waits for the later action to be done to make the next available
                     Boxes(a.at(i), 1);
                     Tam_color.at(a.at(i))=1;
-                    print(Tam_color);
+                    //print(Tam_color);
                     }
                     flag_b+=robots_sec(a.at(i));
                 }
