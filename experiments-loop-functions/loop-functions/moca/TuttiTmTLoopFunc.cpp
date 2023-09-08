@@ -38,10 +38,7 @@ TuttiTmTLoopFunction::~TuttiTmTLoopFunction() {}
 /****************************************/
 
 void TuttiTmTLoopFunction::Destroy() {
-
-    m_tRobotStates.clear();
-    
-    //RemoveArena();
+    m_tRobotStates.clear();    
     EventLog();
 }
 
@@ -110,6 +107,64 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
 
 }
 
+/***********************  Not my authory, but can not be erase   START  *****************/
+void TuttiTmTLoopFunction::Reset() {
+    CoreLoopFunctions::Reset();
+    m_unClock = 0;
+    m_unStopEdge = 2;
+    m_unStopBox = 2;
+    m_unStopTime = 0;
+    m_fObjectiveFunction = 0;
+    m_tRobotStates.clear();
+    InitRobotStates();
+}
+/****************************************/
+void TuttiTmTLoopFunction::PostStep() {
+    EventLog();
+}
+/****************************************/
+void TuttiTmTLoopFunction::PostExperiment() {
+    if (m_bMaximization == true){
+        LOG << -m_fObjectiveFunction << std::endl;
+    }
+    else {
+        LOG << m_fObjectiveFunction << std::endl;
+    }
+}
+/****************************************/
+Real TuttiTmTLoopFunction::GetObjectiveFunction() {
+    if (m_bMaximization == true){
+        return -m_fObjectiveFunction;
+    }
+    else {
+        return m_fObjectiveFunction;
+    }
+}
+/****************************************/
+void TuttiTmTLoopFunction::ArenaControl() {
+
+    if (m_unClock == m_unStopTime)
+        m_pcArena->SetBoxColor(m_unStopBox,m_unStopEdge,CColor::GREEN);
+    return;
+}
+
+/***********************  Not my authory, but can not be erase END    *****************/
+
+/****************************************/
+void print(std::vector <int> const &a) {
+    std::cout<<"vec : ";
+   for(int i=0; i < a.size(); i++)
+   std::cout<< a.at(i) << ' ';
+    std::cout <<";"<<std::endl;
+
+}
+/****************************************/
+void print2(std::vector <Real> const &a) {
+    std::cout<<"vec : ";
+   for(int i=0; i < a.size(); i++)
+   std::cout<< a.at(i) << ' ';
+    std::cout <<";"<<std::endl;
+}
 /****************************************/
 /****************************************/
 Real sides (Real s1_x, Real s1_y, Real s2_x, Real s2_y, Real b_x, Real b_y, Real c){
@@ -149,109 +204,18 @@ if (s1_x==s2_x){
     }
 
 return left, right, up, down;
-
 }
 /****************************************/
-void print(std::vector <int> const &a) {
-    std::cout<<"vec : ";
-   for(int i=0; i < a.size(); i++)
-   std::cout<< a.at(i) << ' ';
-    std::cout <<";"<<std::endl;
-
-}
 /****************************************/
-void print2(std::vector <Real> const &a) {
-    std::cout<<"vec : ";
-   for(int i=0; i < a.size(); i++)
-   std::cout<< a.at(i) << ' ';
-    std::cout <<";"<<std::endl;
-}
-/****************************************/
-
-/****************************************/
-
 void TuttiTmTLoopFunction::EventLog() {
     mision="Compuertas/";
-    //mision="paralela/";
-    //mision="secuencial/";
     std::fstream CreateFile("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv");
-    CreateFile<<"mision;activity;time;robot"<<std::endl;
+    CreateFile<<"mision, action, DateTime, org:resource"<<std::endl;
     MyFile.open("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv", std::ios::app);
-    float time_Sim = (GetSpace().GetSimulationClock());
-    then_tm.tm_sec += ((GetSpace().GetSimulationClock())/1000);   // add 50 seconds to the time
-    double a = time_Sim/10;
-    mils=a-floor(a);
-    mils = round(mils * 1000.0);
-    then_tm.tm_sec += time_Sim/10;
-    mktime( &then_tm);      // normalize it
-    struct tm tm;
-    char buf[255];
-
-    memset(&tm, 0, sizeof(tm));
-    strptime(asctime(&then_tm), "%a %b %e %H:%M:%S %Y\n", &tm);
-    strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tm);
-    then_tm = now_tm;
-    time_S=buf;
     Gates();
-    //InitBoxStates_Sec();
-    //InitBoxStates_Par();
-
     MyFile.close();
 }
-
-void TuttiTmTLoopFunction::Reset() {
-    CoreLoopFunctions::Reset();
-    m_unClock = 0;
-    m_unStopEdge = 2;
-    m_unStopBox = 2;
-    m_unStopTime = 0;
-    m_fObjectiveFunction = 0;
-    m_tRobotStates.clear();
-    InitRobotStates();
-}
-
 /****************************************/
-/****************************************/
-
-void TuttiTmTLoopFunction::PostStep() {
-    EventLog();
-}
-
-/****************************************/
-/****************************************/
-
-void TuttiTmTLoopFunction::PostExperiment() {
-    if (m_bMaximization == true){
-        LOG << -m_fObjectiveFunction << std::endl;
-    }
-    else {
-        LOG << m_fObjectiveFunction << std::endl;
-    }
-}
-
-/****************************************/
-/****************************************/
-
-Real TuttiTmTLoopFunction::GetObjectiveFunction() {
-    if (m_bMaximization == true){
-        return -m_fObjectiveFunction;
-    }
-    else {
-        return m_fObjectiveFunction;
-    }
-}
-
-/****************************************/
-/****************************************/
-
-void TuttiTmTLoopFunction::ArenaControl() {
-
-    if (m_unClock == m_unStopTime)
-        m_pcArena->SetBoxColor(m_unStopBox,m_unStopEdge,CColor::GREEN);
-    return;
-}
-
-
 /*******************************************/
 void TuttiTmTLoopFunction::Gates(){
     for (int i = 0; i < key.size(); i++) {
@@ -270,6 +234,42 @@ void TuttiTmTLoopFunction::Gates(){
 
 }
 
+/****************************************/
+void TuttiTmTLoopFunction::Boxes(Real boxa, Real color){
+    
+    CSpace::TMapPerType& tBlocksMap = GetSpace().GetEntitiesByType("box");
+    CVector2 cBoxPosition(0,0);
+    UInt32 box = 0;
+    for (CSpace::TMapPerType::iterator it = tBlocksMap.begin(); it != tBlocksMap.end(); ++it) {
+        CBoxEntity* pcBlock = any_cast<CBoxEntity*>(it->second);
+
+        if (box==(boxa*3) and color ==0){
+            std::cout<<"Apagado "<<"Tam: "<<boxa<<std::endl;
+            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::GREEN);
+        }
+        if (box==(boxa*3) and color ==1 ){
+            std::cout<<"Disponible "<<"Tam: "<<boxa<<std::endl;
+            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);
+        }
+        if (box==(boxa*3) and color ==2 ){
+            std::cout<<"Ocupado "<<"Tam: "<<boxa<<std::endl;
+            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::PURPLE);
+        }
+        if (box==(boxa*3) and color ==3){
+            std::cout<<"No-disponible "<<"Tam: "<<boxa<<std::endl;
+            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);
+        }
+        if (box==(boxa*3) and color ==4){
+            std::cout<<"Waiting"<<"Tam: "<<boxa<<std::endl;
+            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::CYAN);
+        }
+
+        box+=1;
+    }
+
+}
+
+/****************************************/
 /*******************************************/
 Real TuttiTmTLoopFunction::record(Real Tm, Real rob, std::string action){
     float time_Sim = (GetSpace().GetSimulationClock());
@@ -282,10 +282,7 @@ Real TuttiTmTLoopFunction::record(Real Tm, Real rob, std::string action){
     strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tm);
     then_tm = now_tm;
     time_S=buf;
-
-    MyFile<<";"<<"T_"<<Tm<<action<<";"<<time_S<<";"<<rob<<std::endl;
-
-
+    MyFile<<", "<<"T_"<<Tm<<"_"<<action<<", "<<time_S<<", "<<rob<<std::endl;
     return 0;
 } 
 
@@ -346,7 +343,7 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
     //this simulates when a robot enter a TAM (t=1), r is going to be the robot 
     CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
     CVector2 cEpuckPosition(0,0);
-    Real rob=0, enter, check=0;
+    Real rob=0, enter, check=0, w=0;
 
     for (CSpace::TMapPerType::iterator it = tEpuckMap.begin(); it != tEpuckMap.end(); ++it) {
         CEPuckEntity* pcEpuck = any_cast<CEPuckEntity*>(it->second);
@@ -361,7 +358,9 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
                 if( Tam_color.at(Tm)==1){
                 Tam_color.at(Tm)=4;
                 Boxes(Tm,4);
+                
                 record(Tm, rob,"ocupied");
+
                 record(Tm, rob,"waiting");
                 rob_send.push_back(rob);
                 }
@@ -482,42 +481,6 @@ void TuttiTmTLoopFunction::InitRobotStates() {
     }
 }
 
-/****************************************/
-void TuttiTmTLoopFunction::Boxes(Real boxa, Real color){
-    
-    CSpace::TMapPerType& tBlocksMap = GetSpace().GetEntitiesByType("box");
-    CVector2 cBoxPosition(0,0);
-    UInt32 box = 0;
-    for (CSpace::TMapPerType::iterator it = tBlocksMap.begin(); it != tBlocksMap.end(); ++it) {
-        CBoxEntity* pcBlock = any_cast<CBoxEntity*>(it->second);
-
-        if (box==(boxa*3) and color ==0){
-            std::cout<<"Apagado "<<"Tam: "<<boxa<<std::endl;
-            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::GREEN);
-        }
-        if (box==(boxa*3) and color ==1 ){
-            std::cout<<"Disponible "<<"Tam: "<<boxa<<std::endl;
-            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);
-        }
-        if (box==(boxa*3) and color ==2 ){
-            std::cout<<"Ocupado "<<"Tam: "<<boxa<<std::endl;
-            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::PURPLE);
-        }
-        if (box==(boxa*3) and color ==3){
-            std::cout<<"No-disponible "<<"Tam: "<<boxa<<std::endl;
-            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);
-        }
-        if (box==(boxa*3) and color ==4){
-            std::cout<<"Waiting"<<"Tam: "<<boxa<<std::endl;
-            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::CYAN);
-        }
-
-        box+=1;
-    }
-
-}
-
-/****************************************/
 
 CVector3 TuttiTmTLoopFunction::GetRandomPosition() {
   Real temp;

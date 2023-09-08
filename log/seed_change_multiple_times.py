@@ -7,30 +7,30 @@ import re
 import subprocess
 import random
 
-b=0
+b=60
 mision="tuttiTamT"
-for a in range(60):
+for a in range(40):
     
     b+=1
-    if b!=25 and b!=16 and b!=33 and b!=15:
-        with open("/home/jazmin/tuttifrutti/experiments-loop-functions/scenarios/tuttifrutti/"+mision+".argos") as fp:
-            soup = bs(fp, 'html.parser')
+    
+    with open("/home/jazmin/tuttifrutti/experiments-loop-functions/scenarios/tuttifrutti/"+mision+".argos") as fp:
+        soup = bs(fp, 'html.parser')
 
-        tag = soup.experiment
+    tag = soup.experiment
 
-        tag['random_seed'] = b
-        print('tag='+str(tag.attrs))
-        with open("/home/jazmin/tuttifrutti/experiments-loop-functions/scenarios/tuttifrutti/"+mision+".argos", "w") as outf:
-            outf.write(str(soup))
+    tag['random_seed'] = b
+    print('tag='+str(tag.attrs))
+    with open("/home/jazmin/tuttifrutti/experiments-loop-functions/scenarios/tuttifrutti/"+mision+".argos", "w") as outf:
+        outf.write(str(soup))
 
-        os.chdir('/home/jazmin/tuttifrutti/experiments-loop-functions/build')
-        os.system('make')
+    os.chdir('/home/jazmin/tuttifrutti/experiments-loop-functions/build')
+    os.system('make')
 
 
-        os.chdir('/home/jazmin/tuttifrutti/experiments-loop-functions/scenarios/tuttifrutti/')
-        os.system("cd ~/tuttifrutti/experiments-loop-functions/build")
+    os.chdir('/home/jazmin/tuttifrutti/experiments-loop-functions/scenarios/tuttifrutti/')
+    os.system("cd ~/tuttifrutti/experiments-loop-functions/build")
 
-        os.system("argos3 -c "+mision+".argos")
+    os.system("argos3 -c "+mision+".argos")
 
 
 '''

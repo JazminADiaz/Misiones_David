@@ -13,11 +13,11 @@ fitness1=[]
 precision1=[]
 generalization1=[]
 simplicity1=[]
-model_n=50
+model_n=60
 samples=10
 
 #choose the mision
-mision="secuencial_paralela"
+mision="Compuertas"
 mision_folder="/home/jazmin/tuttifrutti/log/Tesis/"+mision
 trial_folder=mision_folder+"/trial_folder"
 
@@ -146,7 +146,7 @@ def logs_folder():
     #Read all the csv files cotain in the folder if the choosen mision
     filenames = glob.glob(mision_folder + "/*.csv")
     dfs = []
-    model=10
+    model=0
     for filename in filenames:
         log = pd.read_csv(filename, sep=';')
         case_id=[]
@@ -154,24 +154,24 @@ def logs_folder():
         log['mision']=case_id
         #Make sure only complete logs are used
 
-        if (len(log.mision)>=check):
-            model+=1
+#       if (len(log.mision)>=check):
+        model+=1
 
-            #max 50 logs for final model
+        #max 50 logs for final model
 #            if model<=model_n:
-            dfs.append(log)
-            # Concatenate all data into one DataFrame
-            big_frame = pd.concat(dfs, ignore_index=True)
-            if model==model_n:
-                big_frame.to_csv(mision_folder+'/final_log/final_log.csv', sep=';', index=False)
-                big_frame = pm4py.format_dataframe(big_frame, case_id='mision', activity_key='activity', timestamp_key='time', timest_format='%Y-%m-%d %H:%M:%S')
+        dfs.append(log)
+        # Concatenate all data into one DataFrame
+        big_frame = pd.concat(dfs, ignore_index=True)
+        if model==model_n:
+            big_frame.to_csv(mision_folder+'/final_log/final_log_2.csv', sep=';', index=False)
+            big_frame = pm4py.format_dataframe(big_frame, case_id='mision', activity_key='activity', timestamp_key='time', timest_format='%Y-%m-%d %H:%M:%S')
 
-                preparation(big_frame)
+            #preparation(big_frame)
 
-                #create a model every 10 repetitions stored in the log
+            #create a model every 10 repetitions stored in the log
 #                if model%samples==0:
 #                    inductive(big_frame)
-                
+            
 
 
 if __name__ == "__main__":
