@@ -39,14 +39,14 @@ TuttiTmTLoopFunction::~TuttiTmTLoopFunction() {}
 
 void TuttiTmTLoopFunction::Destroy() {
     m_tRobotStates.clear();    
-    EventLog();
+    Gates();
 }
 
 /****************************************/
 /****************************************/
 
 void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
-
+/* init of the arena NOT MY AUTHORSHIP START*/
     CoreLoopFunctions::Init(t_tree);
     TConfigurationNode cParametersNode;
     try {
@@ -66,11 +66,13 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
     }
 
     InitRobotStates();
+/* init of the arena NOT MY AUTHORSHIP END*/
 
+
+//Saving the coordanates for the center of the walls of the tams.
     CSpace::TMapPerType& tBlocksMap = GetSpace().GetEntitiesByType("box");
     CVector2 cBoxPosition;
     UInt32 Blocks=0;
-    //Here we save the coordanates for the center of the walls of the tams.
     for (CSpace::TMapPerType::iterator it = tBlocksMap.begin(); it != tBlocksMap.end(); ++it) {
         CBoxEntity* pcBlock = any_cast<CBoxEntity*>(it->second);
         cBoxPosition.Set(pcBlock->GetEmbodiedEntity().GetOriginAnchor().Position.GetX(),
@@ -92,19 +94,23 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
         }
         Blocks += 1; 
     }
+//Enter the activies for the mision, key vectors represent the TAM involved -> refer to argos file to now its number
     activities["0_sec"] = {0,1};
     activities["1_con"] = {2,3};
     activities["2_sec"] ={4,5};
     activities["3_con"] ={0,1};
-
+//save the activities and values in vectors to access to them
     for(std::map<std::string,std::vector<Real>>::iterator it = activities.begin(); it != activities.end(); ++it) {
     key.push_back(it->first);
     value.push_back(it->second);
     }
-
+//To not have repetitive names in the creation of the files we named then according to the time of their creation
     time_t now = time(0);
     file_name=std::to_string(now);
-
+//Creating the register file
+    mision="Compuertas/";
+    std::fstream CreateFile("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv");
+    CreateFile<<"mision, action, DateTime, org:resource"<<std::endl;
 }
 
 /***********************  Not my authory, but can not be erase   START  *****************/
@@ -120,7 +126,13 @@ void TuttiTmTLoopFunction::Reset() {
 }
 /****************************************/
 void TuttiTmTLoopFunction::PostStep() {
-    EventLog();
+
+
+
+    MyFile.open("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv", std::ios::app);
+
+    Gates();
+    MyFile.close();
 }
 /****************************************/
 void TuttiTmTLoopFunction::PostExperiment() {
@@ -147,9 +159,10 @@ void TuttiTmTLoopFunction::ArenaControl() {
         m_pcArena->SetBoxColor(m_unStopBox,m_unStopEdge,CColor::GREEN);
     return;
 }
-
 /***********************  Not my authory, but can not be erase END    *****************/
 
+/****************************************/
+//Use if you can print any vector in the code
 /****************************************/
 void print(std::vector <int> const &a) {
     std::cout<<"vec : ";
@@ -166,6 +179,7 @@ void print2(std::vector <Real> const &a) {
     std::cout <<";"<<std::endl;
 }
 /****************************************/
+//The tam's have diferent orientations, but if send to this function it returns its values for a box with always the same orientation
 /****************************************/
 Real sides (Real s1_x, Real s1_y, Real s2_x, Real s2_y, Real b_x, Real b_y, Real c){
 if (s1_x==s2_x){
@@ -206,16 +220,7 @@ if (s1_x==s2_x){
 return left, right, up, down;
 }
 /****************************************/
-/****************************************/
-void TuttiTmTLoopFunction::EventLog() {
-    mision="Compuertas/";
-    std::fstream CreateFile("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv");
-    CreateFile<<"mision, action, DateTime, org:resource"<<std::endl;
-    MyFile.open("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv", std::ios::app);
-    Gates();
-    MyFile.close();
-}
-/****************************************/
+//checking the vectors with the activies map information, according to its nature (secuential or concurrent)
 /*******************************************/
 void TuttiTmTLoopFunction::Gates(){
     for (int i = 0; i < key.size(); i++) {
@@ -233,7 +238,8 @@ void TuttiTmTLoopFunction::Gates(){
     }
 
 }
-
+/****************************************/
+//The tams comunicate with the robots according to colors, this functions allows you to change the Tam's led color
 /****************************************/
 void TuttiTmTLoopFunction::Boxes(Real boxa, Real color){
     
@@ -268,8 +274,8 @@ void TuttiTmTLoopFunction::Boxes(Real boxa, Real color){
     }
 
 }
-
 /****************************************/
+//Call function to register info in the event log
 /*******************************************/
 Real TuttiTmTLoopFunction::record(Real Tm, Real rob, std::string action){
     float time_Sim = (GetSpace().GetSimulationClock());
@@ -285,28 +291,30 @@ Real TuttiTmTLoopFunction::record(Real Tm, Real rob, std::string action){
     MyFile<<", "<<"T_"<<Tm<<"_"<<action<<", "<<time_S<<", "<<rob<<std::endl;
     return 0;
 } 
-
 /*******************************************/
-
+//Concurrent Activity
+/*******************************************/
 Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
     std::vector<Real> robots; 
     Real rob, sum;
     int check;
     check= 0;
-    // Iterate the vector of each secuential activity 
+    // Iterate the vector of each concurrent activity 
     for(int i=0; i <=a.size(); i++){
         if (i<a.size() and ((Tam_color.at(a.at(i))==0) or (Tam_color.at(a.at(i))==3))){
-        //if (i<a.size()){
+            //All tams involved are available
             Boxes(a.at(i), 1);
             Tam_color.at(a.at(i))=1;
         }}
         flag_b=0;
         rob_send.clear();
         robots.clear();
+    //Check if all the tams involved are occupied
     for(int i=0; i <a.size(); i++){
         robots, sum=robots_con(a.at(i));
         flag_b+=sum;
     }
+    //Once all are occupied change the color to busy
     if (flag_b==a.size()){
         cont+=1;
         for(int i=0; i <a.size(); i++){
@@ -318,7 +326,7 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
                 }
             }
         }
-
+        //once 5 secs have passed change color to done
         if (cont==50){
             for(int i=0; i <a.size(); i++){
             if (Tam_color.at(a.at(i))==2){
@@ -328,6 +336,7 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
 
             }
             }
+            //The activity is done
             cont=0;
             check= 1;
         }
@@ -337,8 +346,8 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
 }
 
 /*******************************************/
+//Called from concurrent funtion, checks if there's a robot in each TAM of the activity
 /*******************************************/
-
 Real TuttiTmTLoopFunction::robots_con(Real Tm){
     //this simulates when a robot enter a TAM (t=1), r is going to be the robot 
     CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
@@ -358,9 +367,8 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
                 if( Tam_color.at(Tm)==1){
                 Tam_color.at(Tm)=4;
                 Boxes(Tm,4);
-                
+                //If a robot in the tam, make it ocupied then waiting for mate robots
                 record(Tm, rob,"ocupied");
-
                 record(Tm, rob,"waiting");
                 rob_send.push_back(rob);
                 }
@@ -368,15 +376,13 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
             }
         }
         }
-        m_tRobotStates[pcEpuck].cLastPosition = m_tRobotStates[pcEpuck].cPosition;
-        m_tRobotStates[pcEpuck].cPosition = cEpuckPosition;
         rob+=1;
     }
     return rob_send, check;
 }
-
 /*******************************************/
-
+//Secuential Activity
+/*******************************************/
 Real TuttiTmTLoopFunction::sec(std::vector <Real> const &a){
 
     int check;
@@ -385,6 +391,7 @@ Real TuttiTmTLoopFunction::sec(std::vector <Real> const &a){
         if (i<a.size()){
                 if (flag_b==i){
                     if ( Tam_color.at(a.at(i))==0){
+                    //the first tam is made available, after that it waits for the later action to be done to make the next available
                     Boxes(a.at(i), 1);
                     Tam_color.at(a.at(i))=1;
                     print(Tam_color);
@@ -394,6 +401,7 @@ Real TuttiTmTLoopFunction::sec(std::vector <Real> const &a){
             check= 0;
 
         }
+        //once all the acitivies from the group are done, it checks as the group being done
         if (flag_b==a.size()){
 
             check= 1;
@@ -403,9 +411,8 @@ Real TuttiTmTLoopFunction::sec(std::vector <Real> const &a){
     return check;
 }
 /*******************************************/
+//Checks if the robot is in the tam indicated
 /*******************************************/
-
-
 Real TuttiTmTLoopFunction::robots_sec(Real Tm){
     //this simulates when a robot enter a TAM (t=1), r is going to be the robot 
     CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
@@ -423,12 +430,14 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
             enter=i;
             if (enter==Tm){
                 if( Tam_color.at(Tm)==1){
+                    //if robot enters tam change to busy
                 Boxes(enter,2);
                 record(Tm, rob,"Busy");
 
                 Tam_color.at(Tm)=2;}
                 cont+=1;
                 if (cont==50 and Tam_color.at(Tm)==2){
+                    //if robot has been in the tam for 5 secs change to Done
                     Tam_color.at(Tm)=3;
                     Boxes(enter,3);
                     record(Tm, rob,"Done");
@@ -439,8 +448,6 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
             }
         }
         }
-        m_tRobotStates[pcEpuck].cLastPosition = m_tRobotStates[pcEpuck].cPosition;
-        m_tRobotStates[pcEpuck].cPosition = cEpuckPosition;
         rob+=1;
     }
     return check;
@@ -448,7 +455,6 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
 
 /*******************************************/
 /*******************************************/
-
 argos::CColor TuttiTmTLoopFunction::GetFloorColor(const argos::CVector2& c_position_on_plane) {
     
     for(int i=0; i < Tam_back_x.size(); i++){        
