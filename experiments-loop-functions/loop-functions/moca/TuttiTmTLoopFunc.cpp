@@ -95,7 +95,7 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
         }
         Blocks += 1; 
     }
-    activities["0_sec"] = {0,1,6};
+    activities["0_sec"] = {0,1};
     activities["1_con"] = {2,3};
     activities["2_sec"] ={4,5};
     activities["3_con"] ={0,1};
@@ -271,29 +271,20 @@ void TuttiTmTLoopFunction::Gates(){
 }
 
 /*******************************************/
-Real TuttiTmTLoopFunction::timing(){
-
+Real TuttiTmTLoopFunction::record(Real Tm, Real rob, std::string action){
     float time_Sim = (GetSpace().GetSimulationClock());
-
-    //then_tm.tm_sec += ((GetSpace().GetSimulationClock())/1000);   // add seconds to the time
-    //double a = time_Sim/10;
-    //mils=a-floor(a);
-    //mils = round(mils * 1000.0);
     then_tm.tm_sec += time_Sim/10;
     mktime( &then_tm);      // normalize it
     struct tm tm;
     char buf[255];
-
     memset(&tm, 0, sizeof(tm));
     strptime(asctime(&then_tm), "%a %b %e %H:%M:%S %Y\n", &tm);
-
-    //std::cout<<"tm: "<<asctime(&tm)<<std::endl;
-
     strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tm);
-    std::cout<<"buf: "<<buf<<std::endl;
-
     then_tm = now_tm;
     time_S=buf;
+
+    MyFile<<";"<<"T_"<<Tm<<action<<";"<<time_S<<";"<<rob<<std::endl;
+
 
     return 0;
 } 
@@ -301,7 +292,8 @@ Real TuttiTmTLoopFunction::timing(){
 /*******************************************/
 
 Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
-
+    std::vector<Real> robots; 
+    Real rob, sum;
     int check;
     check= 0;
     // Iterate the vector of each secuential activity 
@@ -312,16 +304,31 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
             Tam_color.at(a.at(i))=1;
         }}
         flag_b=0;
+        rob_send.clear();
+        robots.clear();
     for(int i=0; i <a.size(); i++){
-        flag_b+=robots_con(a.at(i));
+        robots, sum=robots_con(a.at(i));
+        flag_b+=sum;
     }
     if (flag_b==a.size()){
         cont+=1;
+        for(int i=0; i <a.size(); i++){
+            if (Tam_color.at(a.at(i))==4){
+                Tam_color.at(a.at(i))=2;
+                Boxes(a.at(i),2);
+                for(int r=0; r<robots.size(); r++){
+                    record(a.at(i), robots.at(r), "busy");
+                }
+            }
+        }
+
         if (cont==50){
             for(int i=0; i <a.size(); i++){
             if (Tam_color.at(a.at(i))==2){
                 Tam_color.at(a.at(i))=3;
                 Boxes(a.at(i),3);
+                record(a.at(i), rob, "done");
+
             }
             }
             cont=0;
@@ -339,7 +346,7 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
     //this simulates when a robot enter a TAM (t=1), r is going to be the robot 
     CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
     CVector2 cEpuckPosition(0,0);
-    Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005, enter, check=0;
+    Real rob=0, enter, check=0;
 
     for (CSpace::TMapPerType::iterator it = tEpuckMap.begin(); it != tEpuckMap.end(); ++it) {
         CEPuckEntity* pcEpuck = any_cast<CEPuckEntity*>(it->second);
@@ -352,11 +359,12 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
             enter=i;
             if (enter==Tm){
                 if( Tam_color.at(Tm)==1){
-                timing();
-                MyFile<<";"<<"Task"<<Tm<<";"<<time_S<<";"<<rob<<std::endl;
-
-                Tam_color.at(Tm)=2;
-                Boxes(Tm,2);}
+                Tam_color.at(Tm)=4;
+                Boxes(Tm,4);
+                record(Tm, rob,"ocupied");
+                record(Tm, rob,"waiting");
+                rob_send.push_back(rob);
+                }
                 check = 1;
             }
         }
@@ -365,7 +373,7 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
         m_tRobotStates[pcEpuck].cPosition = cEpuckPosition;
         rob+=1;
     }
-    return check;
+    return rob_send, check;
 }
 
 /*******************************************/
@@ -403,7 +411,7 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
     //this simulates when a robot enter a TAM (t=1), r is going to be the robot 
     CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
     CVector2 cEpuckPosition(0,0);
-    Real y_l=0.1,x_l=0.10, rob=0, lim=0.000005, enter, check=0;
+    Real rob=0, enter, check=0;
 
     for (CSpace::TMapPerType::iterator it = tEpuckMap.begin(); it != tEpuckMap.end(); ++it) {
         CEPuckEntity* pcEpuck = any_cast<CEPuckEntity*>(it->second);
@@ -417,15 +425,15 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
             if (enter==Tm){
                 if( Tam_color.at(Tm)==1){
                 Boxes(enter,2);
+                record(Tm, rob,"Busy");
 
                 Tam_color.at(Tm)=2;}
                 cont+=1;
                 if (cont==50 and Tam_color.at(Tm)==2){
-                    timing();
-                    MyFile<<";"<<"Task"<<Tm<<";"<<time_S<<";"<<rob<<std::endl;
-
                     Tam_color.at(Tm)=3;
                     Boxes(enter,3);
+                    record(Tm, rob,"Done");
+
                     cont=0;
                     check = 1;
                 }
@@ -445,7 +453,7 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
 argos::CColor TuttiTmTLoopFunction::GetFloorColor(const argos::CVector2& c_position_on_plane) {
     
     for(int i=0; i < Tam_back_x.size(); i++){        
-    left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), 0.07);
+    left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), 0.08);
     if (right<c_position_on_plane.GetY() and c_position_on_plane.GetY()<=left and down <c_position_on_plane.GetX() and c_position_on_plane.GetX()<up){
         return CColor::WHITE;
     }
