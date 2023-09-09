@@ -10,7 +10,6 @@
 
 #include "TuttiTmTLoopFunc.h"
 /****************************************/
-/****************************************/
 /* Configuration of the arena NOT MY AUTHORSHIP START*/
 TuttiTmTLoopFunction::TuttiTmTLoopFunction() {
     m_unClock = 0;
@@ -20,19 +19,15 @@ TuttiTmTLoopFunction::TuttiTmTLoopFunction() {
     m_fObjectiveFunction = 0;   
 }
 /****************************************/
-/****************************************/
 TuttiTmTLoopFunction::TuttiTmTLoopFunction(const TuttiTmTLoopFunction& orig) {
 }
 /****************************************/
-/****************************************/
 TuttiTmTLoopFunction::~TuttiTmTLoopFunction() {}
-/****************************************/
 /****************************************/
 void TuttiTmTLoopFunction::Destroy() {
     m_tRobotStates.clear();    
     Gates();
 }
-/****************************************/
 /****************************************/
 void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
     CoreLoopFunctions::Init(t_tree);
@@ -97,8 +92,7 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
     file_name=std::to_string(now);
 //Creating the register file
     mision="Compuertas/";
-    std::fstream CreateFile("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv");
-    CreateFile<<"mision, action, DateTime, org:resource"<<std::endl;
+    std::fstream CreateFile("/home/jazmin/tuttifrutti/log/Tesis/EventLogs/"+file_name+"data.csv");
 }
 
 /***********************  Not my authory, but can not be erase   START  *****************/
@@ -111,16 +105,6 @@ void TuttiTmTLoopFunction::Reset() {
     m_fObjectiveFunction = 0;
     m_tRobotStates.clear();
     InitRobotStates();
-}
-/****************************************/
-void TuttiTmTLoopFunction::PostStep() {
-
-
-
-    MyFile.open("/home/jazmin/tuttifrutti/log/Tesis/"+mision+file_name+"data.csv", std::ios::app);
-
-    Gates();
-    MyFile.close();
 }
 /****************************************/
 void TuttiTmTLoopFunction::PostExperiment() {
@@ -149,6 +133,16 @@ void TuttiTmTLoopFunction::ArenaControl() {
 }
 /***********************  Not my authory, but can not be erase END    *****************/
 
+/****************************************/
+//saving the info after each simulation step
+/****************************************/
+void TuttiTmTLoopFunction::PostStep() {
+    MyFile.open("/home/jazmin/tuttifrutti/log/Tesis/EventLogs/"+file_name+"data.csv", std::ios::app);
+    if (GetSpace().GetSimulationClock()==1){MyFile<<"mision, action, DateTime, org:resource"<<std::endl;}
+    Gates();
+    MyFile.close();
+}
+/****************************************/
 /****************************************/
 //Use if you can print any vector in the code
 /****************************************/
@@ -204,8 +198,19 @@ if (s1_x==s2_x){
             down=s2_x;      
         }
     }
-
 return left, right, up, down;
+}
+/*******************************************/
+/*The robots stop when encounter white floor, this funcion changes the floor color to black*/
+/*******************************************/
+argos::CColor TuttiTmTLoopFunction::GetFloorColor(const argos::CVector2& c_position_on_plane) {
+    for(int i=0; i < Tam_back_x.size(); i++){        
+    left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), 0.08);
+    if (right<c_position_on_plane.GetY() and c_position_on_plane.GetY()<=left and down <c_position_on_plane.GetX() and c_position_on_plane.GetX()<up){
+        return CColor::WHITE;
+    }
+    }
+    return CColor::GRAY50;
 }
 /****************************************/
 //checking the vectors with the activies map information, according to its nature (secuential or concurrent)
@@ -224,7 +229,6 @@ void TuttiTmTLoopFunction::Gates(){
             }
         }
     }
-
 }
 /****************************************/
 //The tams comunicate with the robots according to colors, this functions allows you to change the Tam's led color
@@ -257,10 +261,8 @@ void TuttiTmTLoopFunction::Boxes(Real boxa, Real color){
             std::cout<<"Waiting"<<"Tam: "<<boxa<<std::endl;
             pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::CYAN);
         }
-
         box+=1;
     }
-
 }
 /****************************************/
 //Call function to register info in the event log
@@ -283,7 +285,7 @@ Real TuttiTmTLoopFunction::record(Real Tm, Real rob, std::string action){
 //Concurrent Activity
 /*******************************************/
 Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
-    Real rob, sum;
+    Real sum;
     int check;
     check= 0;
     // Iterate the vector of each concurrent activity 
@@ -318,7 +320,6 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
                 Tam_color.at(a.at(i))=3;
                 Boxes(a.at(i),3);
                 record(a.at(i), rob_send.at(i), "done");
-
             }
             }
             //The activity is done
@@ -337,7 +338,7 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
     //this simulates when a robot enter a TAM (t=1), r is going to be the robot 
     CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
     CVector2 cEpuckPosition(0,0);
-    Real rob=0, enter, check=0, w=0;
+    Real rob=0, enter, check=0;
 
     for (CSpace::TMapPerType::iterator it = tEpuckMap.begin(); it != tEpuckMap.end(); ++it) {
         CEPuckEntity* pcEpuck = any_cast<CEPuckEntity*>(it->second);
@@ -358,7 +359,6 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
                 }
                 check = 1;
                 rob_send.push_back(rob);
-
             }
         }
         }
@@ -370,7 +370,6 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
 //Secuential Activity
 /*******************************************/
 Real TuttiTmTLoopFunction::sec(std::vector <Real> const &a){
-
     int check;
     // Iterate the vector of each secuential activity 
     for(int i=0; i <=a.size(); i++){
@@ -385,11 +384,9 @@ Real TuttiTmTLoopFunction::sec(std::vector <Real> const &a){
                     flag_b+=robots_sec(a.at(i));
                 }
             check= 0;
-
         }
         //once all the acitivies from the group are done, it checks as the group being done
         if (flag_b==a.size()){
-
             check= 1;
             flag_b=0;
         }
@@ -440,27 +437,13 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
 }
 
 /*******************************************/
-/*******************************************/
-argos::CColor TuttiTmTLoopFunction::GetFloorColor(const argos::CVector2& c_position_on_plane) {
-    
-    for(int i=0; i < Tam_back_x.size(); i++){        
-    left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), 0.08);
-    if (right<c_position_on_plane.GetY() and c_position_on_plane.GetY()<=left and down <c_position_on_plane.GetX() and c_position_on_plane.GetX()<up){
-        return CColor::WHITE;
-    }
-    }
-    return CColor::GRAY50;
-
-}
-
-/****************************************/
+//Config not my autorship 
 /****************************************/
 
 void TuttiTmTLoopFunction::InitRobotStates() {
 
     CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
     CVector2 cEpuckPosition(0,0);
-    int x;
     for (CSpace::TMapPerType::iterator it = tEpuckMap.begin(); it != tEpuckMap.end(); ++it) {
         CEPuckEntity* pcEpuck = any_cast<CEPuckEntity*>(it->second);
         cEpuckPosition.Set(pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetX(),
@@ -472,7 +455,6 @@ void TuttiTmTLoopFunction::InitRobotStates() {
         
     }
 }
-
 
 CVector3 TuttiTmTLoopFunction::GetRandomPosition() {
   Real temp;
@@ -489,35 +471,12 @@ CVector3 TuttiTmTLoopFunction::GetRandomPosition() {
   m_fDistributionRadius = 0.4;
   Real fPosX = (c * m_fDistributionRadius / 2) + m_fDistributionRadius * cos(2 * -CRadians::PI_OVER_TWO .GetValue() * (a/b));
   Real fPosY = -0.20 + (d * m_fDistributionRadius / 2) + m_fDistributionRadius * sin(2 * -CRadians::PI_OVER_TWO.GetValue() * (a/b));
-
   return CVector3(fPosX, fPosY, 0);
 }
-
 /****************************************/
 /****************************************/
-
-UInt32 TuttiTmTLoopFunction::GetRandomTime(UInt32 unMin, UInt32 unMax) {
-  UInt32 unStopAt = m_pcRng->Uniform(CRange<UInt32>(unMin, unMax));
-  return unStopAt;
-
-}
-
-/****************************************/
-/****************************************/
-
 void TuttiTmTLoopFunction::PositionArena() {
   CArenaEntity* pcArena;
-  /*
-    pcArena = new CArenaEntity("arena",
-                               CVector3(0,0,0),
-                               CQuaternion().FromEulerAngles(CRadians::ZERO,CRadians::ZERO,CRadians::ZERO), // TODO
-                               CVector3(0.01,m_fLenghtBoxes,0.1),
-                               "leds",
-                               m_unNumberBoxes,
-                               m_unNumberEdges,
-                               0.017f,
-                               1.0f);   */ // arena with 12 leds per block
-
   pcArena = new CArenaEntity("arena",
                              CVector3(0,0,0),
                              CQuaternion().FromEulerAngles(CRadians::ZERO,CRadians::ZERO,CRadians::ZERO), // TODO
@@ -531,33 +490,24 @@ void TuttiTmTLoopFunction::PositionArena() {
   AddEntity(*pcArena);
   m_pcArena = pcArena;
 }
-
 /****************************************/
 /****************************************/
-
 void TuttiTmTLoopFunction::RemoveArena() {
     std::ostringstream id;
     id << "arena";
     RemoveEntity(id.str().c_str());
 }
-
 /****************************************/
 /****************************************/
-
 Real TuttiTmTLoopFunction::GetArenaRadious() {
-
     Real fRadious;
     //fRadious =  (m_fLenghtBoxes*m_unNumberBoxes) / (2 * Tan(CRadians::PI / m_unNumberEdges));
     //fRadious = fRadious - 0.10; // Avoids to place robots close the walls.
     fRadious = fRadious - 0.65; // Reduced cluster at the begining
-    return fRadious;
-
-    
+    return fRadious;    
 }
-
 /****************************************/
 /****************************************/
-
 bool TuttiTmTLoopFunction::IsEven(UInt32 unNumber) {
     bool even;
     if((unNumber%2)==0)
@@ -567,8 +517,6 @@ bool TuttiTmTLoopFunction::IsEven(UInt32 unNumber) {
 
     return even;
 }
-
-/****************************************/
 /****************************************/
 
 REGISTER_LOOP_FUNCTIONS(TuttiTmTLoopFunction, "tutti_tmt_loop_function");
