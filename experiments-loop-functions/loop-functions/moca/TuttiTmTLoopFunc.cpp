@@ -92,6 +92,11 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
     file_name=std::to_string(now);
 //Creating the register file
     mision="Compuertas/";
+    f.open("/home/jazmin/tuttifrutti/log/wordlist.txt"); //open your word list
+    std::getline(f, s); 
+    std::cout <<"s isssssssssssssssssssssssssssssssssssssss"<< s << "\n"; //output string
+
+    f.close();
     std::fstream CreateFile("/home/jazmin/tuttifrutti/log/Tesis/EventLogs/"+file_name+"data.csv");
 }
 
@@ -138,7 +143,7 @@ void TuttiTmTLoopFunction::ArenaControl() {
 /****************************************/
 void TuttiTmTLoopFunction::PostStep() {
     MyFile.open("/home/jazmin/tuttifrutti/log/Tesis/EventLogs/"+file_name+"data.csv", std::ios::app);
-    if (GetSpace().GetSimulationClock()==1){MyFile<<"mision, action, DateTime, org:resource"<<std::endl;}
+    if (GetSpace().GetSimulationClock()==1){MyFile<<"mision, action, DateTime, org:resource, randomSeed "<<std::endl;}
     Gates();
     MyFile.close();
 }
@@ -278,7 +283,7 @@ Real TuttiTmTLoopFunction::record(Real Tm, Real rob, std::string action){
     strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tm);
     then_tm = now_tm;
     time_S=buf;
-    MyFile<<", "<<"T_"<<Tm<<"_"<<action<<", "<<time_S<<", "<<rob<<std::endl;
+    MyFile<<","<<"T_"<<Tm<<"_"<<action<<","<<time_S<<","<<rob<<","<<s<<std::endl;
     return 0;
 } 
 /*******************************************/

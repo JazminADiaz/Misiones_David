@@ -39,6 +39,8 @@ std::vector<Real> rob_send, Tam_side1_x, Tam_side1_y, Tam_side2_x, Tam_side2_y, 
 void print2 (std::vector <Real> const &a);
 Real sides (Real s1_x, Real s1_y, Real s2_x, Real s2_y, Real b_x, Real b_y, Real c);
 Real left, right, up, down;
+std::string s; //string
+std::fstream f; //file stream
 
 //a map called activities is created which stores keys of type strings which indicate the order and the nature of the activity
 //(secuencial or concurrent) and corresponding vector of the TAM's each activity will ocupy

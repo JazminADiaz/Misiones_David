@@ -18,7 +18,7 @@ samples=10
 
 #choose the mision
 mision="Compuertas"
-mision_folder="/home/jazmin/tuttifrutti/log/Tesis/"+mision
+mision_folder="/home/jazmin/tuttifrutti/log/Tesis/EventLogs"
 trial_folder=mision_folder+"/trial_folder"
 
 
@@ -148,9 +148,9 @@ def logs_folder():
     dfs = []
     model=0
     for filename in filenames:
-        log = pd.read_csv(filename, sep=';')
+        log = pd.read_csv(filename, sep=',')
         case_id=[]
-        case_id += len(log.time) * ["mision "+str(model)]
+        case_id += len(log.mision) * ["mision "+str(model)]
         log['mision']=case_id
         #Make sure only complete logs are used
 
@@ -162,9 +162,7 @@ def logs_folder():
         dfs.append(log)
         # Concatenate all data into one DataFrame
         big_frame = pd.concat(dfs, ignore_index=True)
-        if model==model_n:
-            big_frame.to_csv(mision_folder+'/final_log/final_log_2.csv', sep=';', index=False)
-            big_frame = pm4py.format_dataframe(big_frame, case_id='mision', activity_key='activity', timestamp_key='time', timest_format='%Y-%m-%d %H:%M:%S')
+        big_frame.to_csv('/home/jazmin/tuttifrutti/log/Tesis/LogFinal/final_log_2.csv', sep=',', index=False)
 
             #preparation(big_frame)
 
