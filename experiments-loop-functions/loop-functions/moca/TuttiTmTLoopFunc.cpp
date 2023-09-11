@@ -281,7 +281,12 @@ bool TuttiTmTLoopFunction::sucess(){
     float probability=1;
     return rand()%100 <= (probability * 100);        
 }
-
+/****************************************/
+bool TuttiTmTLoopFunction::sucess_con(){
+    srand((unsigned)time(0)); 
+    float probability=0.5;
+    return rand()%100 <= (probability * 100);        
+}
 /****************************************/
 /****************************************/
 //Call function to register info in the event log
@@ -308,13 +313,44 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
     int check;
     check= 0;
     // Iterate the vector of each concurrent activity 
-    for(int i=0; i <=a.size(); i++){
-        if (i<a.size() and ((Tam_color.at(a.at(i))==0) or (Tam_color.at(a.at(i))==3))){
+    if (flag_reboot==1){
+    cont+=1;
+        for(int i=0; i <a.size(); i++){
+
+            if ((cont>50 and cont<55) and Tam_color.at(a.at(i))==3){
+                Boxes(a.at(i),5);
+                Tam_color.at(a.at(i))=5;
+                record(a.at(i), rob_reb_con.at(i),"rebooting");
+                std::cout<<"cambia"<<a.at(i)<<std::endl;
+             //   print(Tam_color);
+            }
+
+            if ((cont>70) ){
+                if (cont>70 and cont<75 and (Tam_color.at(a.at(i))==5)){
+                    std::cout<<"cambia2"<<a.at(i)<<std::endl;
+                    Tam_color.at(a.at(i))=0;
+                   // print(Tam_color);
+                }
+                if (cont>=75 and Tam_color.at(a.at(i))==0){
+                    cont=0;
+                    flag_reboot=0;
+                    print(Tam_color);
+
+                }
+            }
+
+        }
+    }
+
+    for(int i=0; i <a.size(); i++){
+    if (i<a.size() and flag_reboot==0 and  ((Tam_color.at(a.at(i))==0) or (Tam_color.at(a.at(i))==3))){
             //All tams involved are available
             Boxes(a.at(i), 1);
             Tam_color.at(a.at(i))=1;
-        }}
-        flag_b=0;
+        }
+    }
+
+    flag_b=0;
 
     rob_send.clear();
     //Check if all the tams involved are occupied
@@ -330,6 +366,8 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
                 Tam_color.at(a.at(i))=2;
                 Boxes(a.at(i),2);
                 record(a.at(i), rob_send.at(i), "busy");
+                rate_con=sucess_con();
+
             }
         }
         //once 5 secs have passed change color to done
@@ -338,12 +376,24 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
             if (Tam_color.at(a.at(i))==2){
                 Tam_color.at(a.at(i))=3;
                 Boxes(a.at(i),3);
-                record(a.at(i), rob_send.at(i), "done");
+                 
+            }}
+            for(int i=0; i <a.size(); i++){
+                if (Tam_color.at(a.at(i))==3){
+                    if (rate_con==1){
+                    record(a.at(i), rob_send.at(i), "done");
+                    //The activity is done
+                    cont=0;
+                    check= 1;
+                    } 
+                    if (rate_con==0){
+                    flag_reboot=1;
+                    rob_reb_con=rob_send;
+                    cont=0;
+                    } 
+
+                }
             }
-            }
-            //The activity is done
-            cont=0;
-            check= 1;
         }
         flag_b=0;   
     }
@@ -423,8 +473,7 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
     if ((cont>50 and cont<55) and Tam_color.at(Tm)==3){
         Boxes(Tm,5);
         Tam_color.at(Tm)=5;
-        record(Tm, 100,"rebooting");
-        std::cout<<"que putas"<<std::endl;
+        record(Tm, rob_reb,"rebooting");
     }
     if ((cont>70 and cont<75) and (Tam_color.at(Tm)==5)){
         Tam_color.at(Tm)=0;
@@ -466,20 +515,16 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
                     if (rate_sec==1){
                     record(Tm, rob,"Done");
                     check = 1;
-                    cont=0;
                     }
-                }
-                if ((cont>=50 and rate_sec==0) and (Tam_color.at(Tm)==3)){
+                    if (rate_sec==0){
                     flag_reboot=1;
+                    rob_reb=rob;
+                    }
                     cont=0;
                 }
-
-            }
         }
-        
-
         }
-
+        }
         rob+=1;
 
     }
