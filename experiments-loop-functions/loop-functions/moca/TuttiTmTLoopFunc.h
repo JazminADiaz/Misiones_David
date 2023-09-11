@@ -32,8 +32,8 @@ struct tm now_tm = *localtime( &now);
 struct tm then_tm = now_tm;
 
 // num_Tam (# Tam in the mision)- T_n (# Tam per activity)- A_n (#Activities in the map)
-int  T_n=2, A_n=4, flag_a=0, flag_b=0, cont=0, t=0, boxa=0;
-Real num_Tam=8;
+int  T_n=2, A_n=4, flag_a=0, flag_b=0, flag_reboot=0, cont=0, t=0, boxa=0;
+Real num_Tam=8,  cont2=0;
 std::vector<int> Tam_color(num_Tam, 0); // Indicates the color displaying in each TAM is use to register any change on the tam
 std::vector<Real> rob_send, Tam_side1_x, Tam_side1_y, Tam_side2_x, Tam_side2_y, Tam_back_x, Tam_back_y, Tam_front_f, Tam_front_e, T_l, T_r, T_u, T_b;  
 void print2 (std::vector <Real> const &a);
@@ -41,6 +41,8 @@ Real sides (Real s1_x, Real s1_y, Real s2_x, Real s2_y, Real b_x, Real b_y, Real
 Real left, right, up, down;
 std::string s; //string
 std::fstream f; //file stream
+bool rate_sec, rate_con;
+
 
 //a map called activities is created which stores keys of type strings which indicate the order and the nature of the activity
 //(secuencial or concurrent) and corresponding vector of the TAM's each activity will ocupy
@@ -67,12 +69,13 @@ class TuttiTmTLoopFunction: public CoreLoopFunctions {
     void InitRobotStates();
 
     void ScoreControl();
-    void EventLog();
     Real GetStopScore();  
     Real GetMoveScore();
 
     void Boxes(Real box, Real color);
     void Gates();
+    bool sucess();
+    Real reboting(Real a);
     Real robots_sec(Real a);
     Real robots_con(Real a);
     Real sec(std::vector <Real> const &a);

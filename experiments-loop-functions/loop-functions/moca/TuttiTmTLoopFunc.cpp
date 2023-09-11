@@ -251,7 +251,7 @@ void TuttiTmTLoopFunction::Boxes(Real boxa, Real color){
             pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::GREEN);
         }
         if (box==(boxa*3) and color ==1 ){
-            std::cout<<"Disponible "<<"Tam: "<<boxa<<std::endl;
+            std::cout<<"Available "<<"Tam: "<<boxa<<std::endl;
             pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);
         }
         if (box==(boxa*3) and color ==2 ){
@@ -266,9 +266,23 @@ void TuttiTmTLoopFunction::Boxes(Real boxa, Real color){
             std::cout<<"Waiting"<<"Tam: "<<boxa<<std::endl;
             pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::CYAN);
         }
+        if (box==(boxa*3) and color ==5){
+            std::cout<<"reebooting"<<"Tam: "<<boxa<<std::endl;
+            pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::YELLOW);
+        }
         box+=1;
     }
 }
+/****************************************/
+//This function returns wether an activity was succesfull or not
+/****************************************/
+bool TuttiTmTLoopFunction::sucess(){
+    srand((unsigned)time(0)); 
+    float probability=1;
+    return rand()%100 <= (probability * 100);        
+}
+
+/****************************************/
 /****************************************/
 //Call function to register info in the event log
 /*******************************************/
@@ -374,6 +388,7 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
 /*******************************************/
 //Secuential Activity
 /*******************************************/
+
 Real TuttiTmTLoopFunction::sec(std::vector <Real> const &a){
     int check;
     // Iterate the vector of each secuential activity 
@@ -402,11 +417,25 @@ Real TuttiTmTLoopFunction::sec(std::vector <Real> const &a){
 //Checks if the robot is in the tam indicated
 /*******************************************/
 Real TuttiTmTLoopFunction::robots_sec(Real Tm){
+    if (flag_reboot==1){
+    cont+=1;
+
+    if ((cont>50 and cont<55) and Tam_color.at(Tm)==3){
+        Boxes(Tm,5);
+        Tam_color.at(Tm)=5;
+        record(Tm, 100,"rebooting");
+        std::cout<<"que putas"<<std::endl;
+    }
+    if ((cont>70 and cont<75) and (Tam_color.at(Tm)==5)){
+        Tam_color.at(Tm)=0;
+        flag_reboot=0;
+        cont=0;
+        }
+    }
     //this simulates when a robot enter a TAM (t=1), r is going to be the robot 
     CSpace::TMapPerType& tEpuckMap = GetSpace().GetEntitiesByType("epuck");
     CVector2 cEpuckPosition(0,0);
     Real rob=0, enter, check=0;
-
     for (CSpace::TMapPerType::iterator it = tEpuckMap.begin(); it != tEpuckMap.end(); ++it) {
         CEPuckEntity* pcEpuck = any_cast<CEPuckEntity*>(it->second);
         cEpuckPosition.Set(pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetX(),
@@ -417,27 +446,46 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
         if (right<cEpuckPosition.GetY() and cEpuckPosition.GetY()<=left and down <cEpuckPosition.GetX() and cEpuckPosition.GetX()<up){
             enter=i;
             if (enter==Tm){
+
                 if( Tam_color.at(Tm)==1){
+                rate_sec=sucess();
+
                     //if robot enters tam change to busy
                 Boxes(enter,2);
                 record(Tm, rob,"Busy");
-
-                Tam_color.at(Tm)=2;}
+                Tam_color.at(Tm)=2;
+                }
                 cont+=1;
+                //if robot has been in the tam for 5 secs call the success function to check 
+                //wether it was sucessfull or not
                 if (cont==50 and Tam_color.at(Tm)==2){
-                    //if robot has been in the tam for 5 secs change to Done
                     Tam_color.at(Tm)=3;
                     Boxes(enter,3);
-                    record(Tm, rob,"Done");
-
-                    cont=0;
-                    check = 1;
                 }
+                if (cont==50 and (Tam_color.at(Tm)==3)){
+                    if (rate_sec==1){
+                    record(Tm, rob,"Done");
+                    check = 1;
+                    cont=0;
+                    }
+                }
+                if ((cont>=50 and rate_sec==0) and (Tam_color.at(Tm)==3)){
+                    flag_reboot=1;
+                    cont=0;
+                }
+
             }
         }
+        
+
         }
+
         rob+=1;
+
     }
+
+
+
     return check;
 }
 
