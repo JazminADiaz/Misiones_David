@@ -10,7 +10,7 @@ import random
 b=0
 mision="tuttiTamT"
 
-dir = "/home/jazmin/tuttifrutti/log/Tesis/EventLogs/"
+dir = "/home/jazmin/tuttifrutti/log/Tesis/EventLogs_reboot/"
 filelist = glob.glob(os.path.join(dir, "*"))
 
 for f in filelist:

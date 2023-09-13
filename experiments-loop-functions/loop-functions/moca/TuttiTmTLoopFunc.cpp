@@ -78,10 +78,10 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
         Blocks += 1; 
     }
 //Enter the activies for the mision, key vectors represent the TAM involved -> refer to argos file to now its number
-    activities["0_sec"] = {0,1};
-    activities["1_con"] = {2,3};
-    activities["2_sec"] ={4,5};
-    activities["3_con"] ={0,1};
+    activities["0_sec"] = {5,2};
+    activities["1_con"] = {1,2,6};
+
+
 //save the activities and values in vectors to access to them
     for(std::map<std::string,std::vector<Real>>::iterator it = activities.begin(); it != activities.end(); ++it) {
     key.push_back(it->first);
@@ -94,10 +94,8 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
     mision="Compuertas/";
     f.open("/home/jazmin/tuttifrutti/log/wordlist.txt"); //open your word list
     std::getline(f, s); 
-    std::cout <<"s isssssssssssssssssssssssssssssssssssssss"<< s << "\n"; //output string
-
     f.close();
-    std::fstream CreateFile("/home/jazmin/tuttifrutti/log/Tesis/EventLogs/"+file_name+"data.csv");
+    std::fstream CreateFile("/home/jazmin/tuttifrutti/log/Tesis/EventLogs_reboot/"+file_name+"data.csv");
 }
 
 /***********************  Not my authory, but can not be erase   START  *****************/
@@ -142,7 +140,7 @@ void TuttiTmTLoopFunction::ArenaControl() {
 //saving the info after each simulation step
 /****************************************/
 void TuttiTmTLoopFunction::PostStep() {
-    MyFile.open("/home/jazmin/tuttifrutti/log/Tesis/EventLogs/"+file_name+"data.csv", std::ios::app);
+    MyFile.open("/home/jazmin/tuttifrutti/log/Tesis/EventLogs_reboot/"+file_name+"data.csv", std::ios::app);
     if (GetSpace().GetSimulationClock()==1){MyFile<<"mision, action, DateTime, org:resource, randomSeed "<<std::endl;}
     Gates();
     MyFile.close();
@@ -278,13 +276,13 @@ void TuttiTmTLoopFunction::Boxes(Real boxa, Real color){
 /****************************************/
 bool TuttiTmTLoopFunction::sucess(){
     srand((unsigned)time(0)); 
-    float probability=1;
+    float probability=0.9;
     return rand()%100 <= (probability * 100);        
 }
 /****************************************/
 bool TuttiTmTLoopFunction::sucess_con(){
     srand((unsigned)time(0)); 
-    float probability=0.5;
+    float probability=0.9;
     return rand()%100 <= (probability * 100);        
 }
 /****************************************/
@@ -321,21 +319,15 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
                 Boxes(a.at(i),5);
                 Tam_color.at(a.at(i))=5;
                 record(a.at(i), rob_reb_con.at(i),"rebooting");
-                std::cout<<"cambia"<<a.at(i)<<std::endl;
-             //   print(Tam_color);
             }
 
             if ((cont>70) ){
                 if (cont>70 and cont<75 and (Tam_color.at(a.at(i))==5)){
-                    std::cout<<"cambia2"<<a.at(i)<<std::endl;
                     Tam_color.at(a.at(i))=0;
-                   // print(Tam_color);
                 }
                 if (cont>=75 and Tam_color.at(a.at(i))==0){
                     cont=0;
                     flag_reboot=0;
-                    print(Tam_color);
-
                 }
             }
 
@@ -367,7 +359,6 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
                 Boxes(a.at(i),2);
                 record(a.at(i), rob_send.at(i), "busy");
                 rate_con=sucess_con();
-
             }
         }
         //once 5 secs have passed change color to done

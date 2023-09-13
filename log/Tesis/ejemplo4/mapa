@@ -1,0 +1,2 @@
+    activities["0_sec"] = {5,2};
+    activities["1_con"] = {1,2,6};
