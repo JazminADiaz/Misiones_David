@@ -4,7 +4,7 @@
 <!-- * Framework * -->
 <!-- ************* -->
 <framework>
-<experiment length="400" random_seed="10" ticks_per_second="10"></experiment>
+<experiment length="400" random_seed="3" ticks_per_second="10"></experiment>
 <!--si 77 30 55 20 66 89 99 (no detecta timer5=100) 18 20 -->
 <!--no 65 25 16 33-->
 </framework>
@@ -40,7 +40,7 @@
 <!-- ********* -->
 <!-- * Arena * -->
 <!-- ********* -->
-<arena center="0,0,0.075" size="3, 3, 0.25">
+<arena center="0,0,0.075" size="6, 6, 0.25">
 <!-- Change the floor here -->
 <floor id="floor" pixels_per_meter="300" source="loop_functions"></floor>
 <!-- Change the light here -->
@@ -161,10 +161,127 @@
 <box id="wall_i5" movable="false" size="0.01,0.1,0.08">
 <body orientation="90,0,0" position="0,-0.4,0"></body>
 </box>
-<!-- * Tams Secuencial paralela 
-
-
- -->
+<!-- * Wall1_1 -->
+                <box id="wall_i1_1" movable="false" size="0.01,0.4,0.09">
+                <body orientation="0,0,0" position="0.5,0.3,0"></body>
+                </box><!-- * TAMS_1_1-->    
+                        <box id="tam_1_1" movable="false" size="0.01,0.1,0.12">
+                        <body orientation="0,0,0" position="0.6,0.049999999999999975,0"></body>
+                        <leds medium="leds">
+                        <led anchor="origin" color="green" id="led_1" intensity="100.0" offset="-0.01,0,0.08"></led>
+                        <led anchor="origin" color="green" id="led_1_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+                        <led anchor="origin" color="green" id="led_1_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
+                        </leds>
+                        </box>
+                        <box id="tam_1_2" movable="false" size="0.01,0.11,0.12">
+                        <body orientation="90,0,0" position="0.55,0.09999999999999998,0"></body>
+                        </box>
+                        <box id="tam_1_3" movable="false" size="0.01,0.11,0.12">
+                        <body orientation="90,0,0" position="0.55,-2.7755575615628914e-17,0"></body>
+                        </box>
+                    <!-- * Wall1_2 -->
+                <box id="wall_i1_2" movable="false" size="0.01,0.4,0.09">
+                <body orientation="0,0,0" position="0.5,-0.2,0"></body>
+                </box><!-- * TAMS_1_2-->    
+                        <box id="tam_2_1" movable="false" size="0.01,0.1,0.12">
+                        <body orientation="0,0,0" position="0.6,-0.45,0"></body>
+                        <leds medium="leds">
+                        <led anchor="origin" color="green" id="led_1" intensity="100.0" offset="-0.01,0,0.08"></led>
+                        <led anchor="origin" color="green" id="led_1_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+                        <led anchor="origin" color="green" id="led_1_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
+                        </leds>
+                        </box>
+                        <box id="tam_2_2" movable="false" size="0.01,0.11,0.12">
+                        <body orientation="90,0,0" position="0.55,-0.4,0"></body>
+                        </box>
+                        <box id="tam_2_3" movable="false" size="0.01,0.11,0.12">
+                        <body orientation="90,0,0" position="0.55,-0.5,0"></body>
+                        </box>
+                    <!-- * Wall1_3 -->
+                <box id="wall_i1_3" movable="false" size="0.01,0.4,0.09">
+                <body orientation="0,0,0" position="0.5,-0.7,0"></body>
+                </box><!-- * TAMS_1_3-->    
+                        <box id="tam_3_1" movable="false" size="0.01,0.1,0.12">
+                        <body orientation="0,0,0" position="0.6,-0.95,0"></body>
+                        <leds medium="leds">
+                        <led anchor="origin" color="green" id="led_1" intensity="100.0" offset="-0.01,0,0.08"></led>
+                        <led anchor="origin" color="green" id="led_1_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+                        <led anchor="origin" color="green" id="led_1_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
+                        </leds>
+                        </box>
+                        <box id="tam_3_2" movable="false" size="0.01,0.11,0.12">
+                        <body orientation="90,0,0" position="0.55,-0.9,0"></body>
+                        </box>
+                        <box id="tam_3_3" movable="false" size="0.01,0.11,0.12">
+                        <body orientation="90,0,0" position="0.55,-1.0,0"></body>
+                        </box>
+                    <!-- * Wall1_4 -->
+                <box id="wall_i1_4" movable="false" size="0.01,0.4,0.09">
+                <body orientation="0,0,0" position="0.5,-1.2,0"></body>
+                </box><!-- * TAMS_1_4-->    
+                        <box id="tam_4_1" movable="false" size="0.01,0.1,0.12">
+                        <body orientation="0,0,0" position="0.6,-1.45,0"></body>
+                        <leds medium="leds">
+                        <led anchor="origin" color="green" id="led_1" intensity="100.0" offset="-0.01,0,0.08"></led>
+                        <led anchor="origin" color="green" id="led_1_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+                        <led anchor="origin" color="green" id="led_1_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
+                        </leds>
+                        </box>
+                        <box id="tam_4_2" movable="false" size="0.01,0.11,0.12">
+                        <body orientation="90,0,0" position="0.55,-1.4,0"></body>
+                        </box>
+                        <box id="tam_4_3" movable="false" size="0.01,0.11,0.12">
+                        <body orientation="90,0,0" position="0.55,-1.5,0"></body>
+                        </box>
+                    <!-- * Wall1_5 -->
+                <box id="wall_i1_5" movable="false" size="0.01,0.4,0.09">
+                <body orientation="0,0,0" position="0.5,-1.7,0"></body>
+                </box><!-- * Wall_2_1-->
+                <box id="wall_i2_1" movable="false" size="0.01,0.4,0.09">
+                <body orientation="90,0,0" position="0.3,0.5,0"></body>
+                </box><!-- * Wall_2_2-->
+                <box id="wall_i2_2" movable="false" size="0.01,0.4,0.09">
+                <body orientation="90,0,0" position="-0.2,0.5,0"></body>
+                </box><!-- * Wall_2_3-->
+                <box id="wall_i2_3" movable="false" size="0.01,0.4,0.09">
+                <body orientation="90,0,0" position="-0.7,0.5,0"></body>
+                </box><!-- * Wall_2_4-->
+                <box id="wall_i2_4" movable="false" size="0.01,0.4,0.09">
+                <body orientation="90,0,0" position="-1.2,0.5,0"></body>
+                </box><!-- * Wall_2_5-->
+                <box id="wall_i2_5" movable="false" size="0.01,0.4,0.09">
+                <body orientation="90,0,0" position="-1.7,0.5,0"></body>
+                </box><!-- * Wall3_1 -->
+                <box id="wall_i3_1" movable="false" size="0.01,0.4,0.09">
+                <body orientation="0,0,0" position="-1.9,0.3,0"></body>
+                </box><!-- * Wall3_2 -->
+                <box id="wall_i3_2" movable="false" size="0.01,0.4,0.09">
+                <body orientation="0,0,0" position="-1.9,-0.2,0"></body>
+                </box><!-- * Wall3_3 -->
+                <box id="wall_i3_3" movable="false" size="0.01,0.4,0.09">
+                <body orientation="0,0,0" position="-1.9,-0.7,0"></body>
+                </box><!-- * Wall3_4 -->
+                <box id="wall_i3_4" movable="false" size="0.01,0.4,0.09">
+                <body orientation="0,0,0" position="-1.9,-1.2,0"></body>
+                </box><!-- * Wall3_5 -->
+                <box id="wall_i3_5" movable="false" size="0.01,0.4,0.09">
+                <body orientation="0,0,0" position="-1.9,-1.7,0"></body>
+                </box><!-- * Wall_4_1-->
+                <box id="wall_i4_1" movable="false" size="0.01,0.4,0.09">
+                <body orientation="90,0,0" position="0.3,-1.9,0"></body>
+                </box><!-- * Wall_4_2-->
+                <box id="wall_i4_2" movable="false" size="0.01,0.4,0.09">
+                <body orientation="90,0,0" position="-0.2,-1.9,0"></body>
+                </box><!-- * Wall_4_3-->
+                <box id="wall_i4_3" movable="false" size="0.01,0.4,0.09">
+                <body orientation="90,0,0" position="-0.7,-1.9,0"></body>
+                </box><!-- * Wall_4_4-->
+                <box id="wall_i4_4" movable="false" size="0.01,0.4,0.09">
+                <body orientation="90,0,0" position="-1.2,-1.9,0"></body>
+                </box><!-- * Wall_4_5-->
+                <box id="wall_i4_5" movable="false" size="0.01,0.4,0.09">
+                <body orientation="90,0,0" position="-1.7,-1.9,0"></body>
+                </box>
 <!-- * Tam 1 -->
 <box id="tam_01_1" movable="false" size="0.01,0.1,0.12">
 <body orientation="0,0,0" position="0.79,0.75,0"></body>
@@ -304,12 +421,12 @@
 </media>
 <!-- ***************** -->
 <!-- * Visualization * -->
-<!-- *****************
+<!-- ***************** -->
 <visualization>
 <qt-opengl>
 <camera>
 <placement idx="0" lens_focal_length="30" look_at="0,0,0" position="0,0,2.7"></placement>
 </camera>
 </qt-opengl>
-</visualization> -->
+</visualization>
 </argos-configuration>

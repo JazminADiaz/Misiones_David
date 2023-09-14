@@ -1,0 +1,12 @@
+<box id="wall_i1" movable="false" size="0.01,4,0.09">
+  <body orientation="0,0,0" position="2.0,0,0"></body>
+</box>
+<box id="wall_i2" movable="false" size="0.01,4,0.08">
+  <body orientation="90,0,0" position="0,2.0,0"></body>
+</box>
+<box id="wall_i3" movable="false" size="0.01,4,0.08">
+  <body orientation="0,0,0" position="-2.0,0,0"></body>
+</box>
+<box id="wall_i4" movable="false" size="0.01,4,0.08">
+  <body orientation="90,0,0" position="0,-2.0,0"></body>
+</box>
