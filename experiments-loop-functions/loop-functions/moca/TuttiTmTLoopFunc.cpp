@@ -78,8 +78,11 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
         Blocks += 1; 
     }
 //Enter the activies for the mision, key vectors represent the TAM involved -> refer to argos file to now its number
-    activities["0_sec"] = {5,2};
-    activities["1_con"] = {1,2,6};
+#include "/home/jazmin/tuttifrutti/log/Tesis/mision_variables/activities.txt"
+#include "/home/jazmin/tuttifrutti/log/Tesis/mision_variables/seed.txt"
+
+//    activities["0_sec"] = {5,2};
+//    activities["1_con"] = {1,2,6};
 
 
 //save the activities and values in vectors to access to them
@@ -91,11 +94,8 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
     time_t now = time(0);
     file_name=std::to_string(now);
 //Creating the register file
-    mision="Compuertas/";
-    f.open("/home/jazmin/tuttifrutti/log/wordlist.txt"); //open your word list
-    std::getline(f, s); 
-    f.close();
-    std::fstream CreateFile("/home/jazmin/tuttifrutti/log/Tesis/EventLogs_reboot/"+file_name+"data.csv");
+    std::cout<<"folder:"<<events_folder<<std::endl;
+    std::fstream CreateFile(events_folder+file_name+"data.csv");
 }
 
 /***********************  Not my authory, but can not be erase   START  *****************/
@@ -140,7 +140,7 @@ void TuttiTmTLoopFunction::ArenaControl() {
 //saving the info after each simulation step
 /****************************************/
 void TuttiTmTLoopFunction::PostStep() {
-    MyFile.open("/home/jazmin/tuttifrutti/log/Tesis/EventLogs_reboot/"+file_name+"data.csv", std::ios::app);
+    MyFile.open(events_folder+file_name+"data.csv", std::ios::app);
     if (GetSpace().GetSimulationClock()==1){MyFile<<"mision, action, DateTime, org:resource, randomSeed "<<std::endl;}
     Gates();
     MyFile.close();
@@ -219,19 +219,27 @@ argos::CColor TuttiTmTLoopFunction::GetFloorColor(const argos::CVector2& c_posit
 //checking the vectors with the activies map information, according to its nature (secuential or concurrent)
 /*******************************************/
 void TuttiTmTLoopFunction::Gates(){
-    for (int i = 0; i < key.size(); i++) {
-        if (key[i].find(std::to_string(flag_a))!= std::string::npos){
-            if(key[i].find("sec")!= std::string::npos){
-                flag_a+=sec(value[i]);
+        for (int i = 0; i < key.size(); i++) {
+
+
+            if (key[i].find(std::to_string(flag_a))!= std::string::npos){
+                if(key[i].find("sec")!= std::string::npos){
+                    flag_a+=sec(value[i]);
+                }
+                if(key[i].find("con")!= std::string::npos){
+                    flag_a+=con(value[i]);
+                }
+                if((key[i].find("con")== std::string::npos) and (key[i].find("sec")== std::string::npos)) {
+                    std::cout<<"The activiy "<<flag_a<<"is not set to be secuential or concurrent"<<std::endl;
+                }
             }
-            if(key[i].find("con")!= std::string::npos){
-                flag_a+=con(value[i]);
-            }
-            if((key[i].find("con")== std::string::npos) and (key[i].find("sec")== std::string::npos)) {
-                std::cout<<"The activiy "<<flag_a<<"is not set to be secuential or concurrent"<<std::endl;
-            }
+            
+            
+            
+                
         }
-    }
+
+
 }
 /****************************************/
 //The tams comunicate with the robots according to colors, this functions allows you to change the Tam's led color
@@ -276,13 +284,13 @@ void TuttiTmTLoopFunction::Boxes(Real boxa, Real color){
 /****************************************/
 bool TuttiTmTLoopFunction::sucess(){
     srand((unsigned)time(0)); 
-    float probability=0.9;
+    std::cout<<"prob: "<<probability<<std::endl;
     return rand()%100 <= (probability * 100);        
 }
 /****************************************/
 bool TuttiTmTLoopFunction::sucess_con(){
     srand((unsigned)time(0)); 
-    float probability=0.9;
+    std::cout<<"prob: "<<probability<<std::endl;
     return rand()%100 <= (probability * 100);        
 }
 /****************************************/
@@ -300,7 +308,12 @@ Real TuttiTmTLoopFunction::record(Real Tm, Real rob, std::string action){
     strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tm);
     then_tm = now_tm;
     time_S=buf;
-    MyFile<<","<<"T_"<<Tm<<"_"<<action<<","<<time_S<<","<<rob<<","<<s<<std::endl;
+    if (action!="time_out"){
+        MyFile<<","<<"T_"<<Tm<<"_"<<action<<","<<time_S<<","<<rob<<","<<s<<std::endl;
+    }
+    else{
+        MyFile<<","<<action<<","<<time_S<<","<<"user"<<","<<s<<std::endl;
+    }
     return 0;
 } 
 /*******************************************/
@@ -357,7 +370,7 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
             if (Tam_color.at(a.at(i))==4){
                 Tam_color.at(a.at(i))=2;
                 Boxes(a.at(i),2);
-                record(a.at(i), rob_send.at(i), "busy");
+                record(a.at(i), rob_send.at(i), "Busy");
                 rate_con=sucess_con();
             }
         }

@@ -629,6 +629,10 @@ argos3/plugins/simulator/entities/led_entity.h
 /home/jazmin/tuttifrutti/experiments-loop-functions/loop-functions/moca/TuttiTmTLoopFunc.cpp
 TuttiTmTLoopFunc.h
 /home/jazmin/tuttifrutti/experiments-loop-functions/loop-functions/moca/TuttiTmTLoopFunc.h
+/home/jazmin/tuttifrutti/log/Tesis/mision_variables/activities.txt
+-
+/home/jazmin/tuttifrutti/log/Tesis/mision_variables/seed.txt
+-
 
 /home/jazmin/tuttifrutti/experiments-loop-functions/loop-functions/moca/TuttiTmTLoopFunc.h
 argos3/core/simulator/space/space.h
@@ -665,4 +669,8 @@ argos3/core/simulator/loop_functions.h
 -
 argos3/plugins/robots/e-puck/simulator/epuck_entity.h
 -
+
+/home/jazmin/tuttifrutti/log/Tesis/mision_variables/activities.txt
+
+/home/jazmin/tuttifrutti/log/Tesis/mision_variables/seed.txt
 

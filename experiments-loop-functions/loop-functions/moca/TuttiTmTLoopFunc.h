@@ -24,6 +24,7 @@
 #include <string>
 #include <vector>
 #include <map>
+
 using namespace argos;
 std::fstream MyFile;
 
@@ -39,9 +40,10 @@ std::vector<Real> rob_send, rob_reb_con, Tam_side1_x, Tam_side1_y, Tam_side2_x, 
 void print2 (std::vector <Real> const &a);
 Real sides (Real s1_x, Real s1_y, Real s2_x, Real s2_y, Real b_x, Real b_y, Real c);
 Real left, right, up, down;
-std::string s; //string
+std::string s, events_folder; //string
 std::fstream f; //file stream
 bool rate_sec, rate_con;
+float probability;
 
 
 //a map called activities is created which stores keys of type strings which indicate the order and the nature of the activity
@@ -146,7 +148,7 @@ class TuttiTmTLoopFunction: public CoreLoopFunctions {
      */
     bool m_bMaximization;
 
-    UInt32 m_unClock, m_unStopTime, m_unStopEdge, m_unStopBox;
+    UInt32 m_unClock, m_unStopTime, m_unStopEdge, m_unStopBox, timer_simulation;
     Real m_fObjectiveFunction;
     std::string time_S, file_name, mision;
     float mils;
