@@ -35,9 +35,9 @@ def generate_argos_wall(length):
                         <box id="tam_{wall_id}_{wall_division}_1" movable="false" size="0.01,0.1,0.12">
                         <body orientation="0,0,0" position="{estatic1},{t_move1},0"></body>
                         <leds medium="leds">
-                        <led anchor="origin" color="green" id="led_{wall_id}_{wall_division}" intensity="100.0" offset="0.01,0,0.08"></led>
-                        <led anchor="origin" color="green" id="led_{wall_id}_{wall_division}_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
-                        <led anchor="origin" color="green" id="led_{wall_id}_{wall_division}_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
+                        <led anchor="origin" color="green" id="led_{wall_id}_{wall_division}" intensity="100.0" offset="-0.01,0,0.08"></led>
+                        <led anchor="origin" color="green" id="led_{wall_id}_{wall_division}_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+                        <led anchor="origin" color="green" id="led_{wall_id}_{wall_division}_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
                         </leds>
                         </box>
                         <box id="tam_{wall_id}_{wall_division}_2" movable="false" size="0.01,0.11,0.12">
@@ -272,8 +272,8 @@ s_island=4
 s_island_center=8
 half_length = wall_length / 2.0
 tam_size=0.1
-division=13
-size_division=0.6
+division=12
+size_division=0.4
 num_tam=division-2
 
 # Generate the Argos XML code for the big walls
