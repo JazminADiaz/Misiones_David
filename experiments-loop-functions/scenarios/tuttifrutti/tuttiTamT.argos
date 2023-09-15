@@ -900,9 +900,9 @@
             <box id="island_1_tam_3_1" movable="false" size="0.01,0.1,0.12">
             <body orientation="0,0,0" position="1.3,1.4000000000000001,0"></body>
             <leds medium="leds">
-            <led anchor="origin" color="green" id="led_isla_1_tam2_1" intensity="100.0" offset="0.01,0,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_1_tam2_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_1_tam2_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_1_tam2_1" intensity="100.0" offset="-0.01,0,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_1_tam2_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_1_tam2_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
             </leds>
             </box>
             <box id="island_1_tam_3_2" movable="false" size="0.01,0.11,0.12">
@@ -915,9 +915,9 @@
             <box id="island_1_tam_4_1" movable="false" size="0.01,0.1,0.12">
             <body orientation="90,0,0" position="1.35,1.35,0"></body>
             <leds medium="leds">
-            <led anchor="origin" color="green" id="led_isla_1_tam3_1" intensity="100.0" offset="0.01,0,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_1_tam3_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_1_tam4_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_1_tam3_1" intensity="100.0" offset="-0.01,0,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_1_tam3_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_1_tam4_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
             </leds>
             </box>
             <box id="island_1_tam_4_2" movable="false" size="0.01,0.11,0.12">
@@ -960,9 +960,9 @@
             <box id="island_2_tam_3_1" movable="false" size="0.01,0.1,0.12">
             <body orientation="0,0,0" position="1.3,-2.2999999999999994,0"></body>
             <leds medium="leds">
-            <led anchor="origin" color="green" id="led_isla_2_tam2_1" intensity="100.0" offset="0.01,0,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_2_tam2_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_2_tam2_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_2_tam2_1" intensity="100.0" offset="-0.01,0,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_2_tam2_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_2_tam2_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
             </leds>
             </box>
             <box id="island_2_tam_3_2" movable="false" size="0.01,0.11,0.12">
@@ -975,9 +975,9 @@
             <box id="island_2_tam_4_1" movable="false" size="0.01,0.1,0.12">
             <body orientation="90,0,0" position="1.35,-2.349999999999999,0"></body>
             <leds medium="leds">
-            <led anchor="origin" color="green" id="led_isla_2_tam3_1" intensity="100.0" offset="0.01,0,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_2_tam3_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_2_tam4_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_2_tam3_1" intensity="100.0" offset="-0.01,0,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_2_tam3_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_2_tam4_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
             </leds>
             </box>
             <box id="island_2_tam_4_2" movable="false" size="0.01,0.11,0.12">
@@ -1020,9 +1020,9 @@
             <box id="island_3_tam_3_1" movable="false" size="0.01,0.1,0.12">
             <body orientation="0,0,0" position="-2.3999999999999995,-2.2999999999999994,0"></body>
             <leds medium="leds">
-            <led anchor="origin" color="green" id="led_isla_3_tam2_1" intensity="100.0" offset="0.01,0,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_3_tam2_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_3_tam2_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_3_tam2_1" intensity="100.0" offset="-0.01,0,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_3_tam2_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_3_tam2_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
             </leds>
             </box>
             <box id="island_3_tam_3_2" movable="false" size="0.01,0.11,0.12">
@@ -1035,9 +1035,9 @@
             <box id="island_3_tam_4_1" movable="false" size="0.01,0.1,0.12">
             <body orientation="90,0,0" position="-2.349999999999999,-2.349999999999999,0"></body>
             <leds medium="leds">
-            <led anchor="origin" color="green" id="led_isla_3_tam3_1" intensity="100.0" offset="0.01,0,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_3_tam3_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_3_tam4_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_3_tam3_1" intensity="100.0" offset="-0.01,0,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_3_tam3_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_3_tam4_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
             </leds>
             </box>
             <box id="island_3_tam_4_2" movable="false" size="0.01,0.11,0.12">
@@ -1080,9 +1080,9 @@
             <box id="island_4_tam_3_1" movable="false" size="0.01,0.1,0.12">
             <body orientation="0,0,0" position="-2.3999999999999995,1.4000000000000001,0"></body>
             <leds medium="leds">
-            <led anchor="origin" color="green" id="led_isla_4_tam2_1" intensity="100.0" offset="0.01,0,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_4_tam2_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_4_tam2_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_4_tam2_1" intensity="100.0" offset="-0.01,0,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_4_tam2_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_4_tam2_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
             </leds>
             </box>
             <box id="island_4_tam_3_2" movable="false" size="0.01,0.11,0.12">
@@ -1095,9 +1095,9 @@
             <box id="island_4_tam_4_1" movable="false" size="0.01,0.1,0.12">
             <body orientation="90,0,0" position="-2.349999999999999,1.35,0"></body>
             <leds medium="leds">
-            <led anchor="origin" color="green" id="led_isla_4_tam3_1" intensity="100.0" offset="0.01,0,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_4_tam3_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_4_tam4_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_4_tam3_1" intensity="100.0" offset="-0.01,0,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_4_tam3_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_4_tam4_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
             </leds>
             </box>
             <box id="island_4_tam_4_2" movable="false" size="0.01,0.11,0.12">
@@ -1108,7 +1108,7 @@
             </box>
         <!-- * TAMS_Island_5-->    
             <box id="island_5_tam_1_1" movable="false" size="0.01,0.1,0.12">
-            <body orientation="0,0,0" position="-2.45,-2.45,0"></body>
+            <body orientation="0,0,0" position="-0.4500000000000002,-0.4500000000000002,0"></body>
             <leds medium="leds">
             <led anchor="origin" color="green" id="led_isla_5_tam1_1" intensity="100.0" offset="0.01,0,0.08"></led>
             <led anchor="origin" color="green" id="led_isla_5_tam1_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
@@ -1116,14 +1116,14 @@
             </leds>
             </box>
             <box id="island_5_tam_1_2" movable="false" size="0.01,0.11,0.12">
-            <body orientation="90,0,0" position="-2.4000000000000004,-2.4000000000000004,0"></body>
+            <body orientation="90,0,0" position="-0.4000000000000002,-0.4000000000000002,0"></body>
             </box>
             <box id="island_5_tam_1_3" movable="false" size="0.01,0.11,0.12">
-            <body orientation="90,0,0" position="-2.4000000000000004,-2.5,0"></body>
+            <body orientation="90,0,0" position="-0.4000000000000002,-0.5000000000000002,0"></body>
             </box>
 
             <box id="island_5_tam_2_1" movable="false" size="0.01,0.1,0.12">
-            <body orientation="90,0,0" position="-2.5,-2.4000000000000004,0"></body>
+            <body orientation="90,0,0" position="-0.5000000000000002,-0.4000000000000002,0"></body>
             <leds medium="leds">
             <led anchor="origin" color="green" id="led_isla_5_1" intensity="100.0" offset="0.01,0,0.08"></led>
             <led anchor="origin" color="green" id="led_isla_5_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
@@ -1131,40 +1131,40 @@
             </leds>
             </box>
             <box id="island_5_tam_2_2" movable="false" size="0.01,0.11,0.12">
-            <body orientation="0,0,0" position="-2.45,-2.3500000000000005,0"></body>
+            <body orientation="0,0,0" position="-0.45000000000000023,-0.3500000000000002,0"></body>
             </box>
             <box id="island_5_tam_2_3" movable="false" size="0.01,0.11,0.12">
-            <body orientation="0,0,0" position="-2.55,-2.3500000000000005,0"></body>
+            <body orientation="0,0,0" position="-0.5500000000000003,-0.3500000000000002,0"></body>
             </box>
 
             <box id="island_5_tam_3_1" movable="false" size="0.01,0.1,0.12">
-            <body orientation="0,0,0" position="-2.5500000000000003,-2.45,0"></body>
+            <body orientation="0,0,0" position="-0.5500000000000002,-0.4500000000000002,0"></body>
             <leds medium="leds">
-            <led anchor="origin" color="green" id="led_isla_5_tam2_1" intensity="100.0" offset="0.01,0,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_5_tam2_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_5_tam2_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_5_tam2_1" intensity="100.0" offset="-0.01,0,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_5_tam2_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_5_tam2_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
             </leds>
             </box>
             <box id="island_5_tam_3_2" movable="false" size="0.01,0.11,0.12">
-            <body orientation="90,0,0" position="-2.6,-2.4000000000000004,0"></body>
+            <body orientation="90,0,0" position="-0.6000000000000002,-0.4000000000000002,0"></body>
             </box>
             <box id="island_5_tam_3_3" movable="false" size="0.01,0.11,0.12">
-            <body orientation="90,0,0" position="-2.6,-2.5,0"></body>
+            <body orientation="90,0,0" position="-0.6000000000000002,-0.5000000000000002,0"></body>
             </box>
 
             <box id="island_5_tam_4_1" movable="false" size="0.01,0.1,0.12">
-            <body orientation="90,0,0" position="-2.5,-2.5,0"></body>
+            <body orientation="90,0,0" position="-0.5000000000000002,-0.5000000000000002,0"></body>
             <leds medium="leds">
-            <led anchor="origin" color="green" id="led_isla_5_tam3_1" intensity="100.0" offset="0.01,0,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_5_tam3_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_5_tam4_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_5_tam3_1" intensity="100.0" offset="-0.01,0,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_5_tam3_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_5_tam4_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
             </leds>
             </box>
             <box id="island_5_tam_4_2" movable="false" size="0.01,0.11,0.12">
-            <body orientation="0,0,0" position="-2.45,-2.55,0"></body>
+            <body orientation="0,0,0" position="-0.45000000000000023,-0.5500000000000003,0"></body>
             </box>
             <box id="island_5_tam_4_3" movable="false" size="0.01,0.11,0.12">
-            <body orientation="0,0,0" position="-2.55,-2.55+,0"></body>
+            <body orientation="0,0,0" position="-0.5500000000000003,-0.5500000000000003+,0"></body>
             </box>
         
 </arena>

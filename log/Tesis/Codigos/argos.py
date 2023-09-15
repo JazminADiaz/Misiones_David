@@ -189,8 +189,8 @@ def generate_argos_wall(length):
             p1_x=half_length+(size_division)*(s_island-division)+(tam_size)*(s_island-2-num_tam)
             p1_y=half_length-(size_division*s_island)-(tam_size*(s_island-2))
         if (i==5):
-            p1_x=(half_length-((division)*(size_division)+(num_tam)*(tam_size)))/2
-            p1_y=(half_length-((division)*(size_division)+(num_tam)*(tam_size)))/2
+            p1_x=half_length-(((division)*(size_division)+(num_tam)*(tam_size)))/2
+            p1_y=half_length-(((division)*(size_division)+(num_tam)*(tam_size)))/2
             p=5
 
         p2_x=p1_x-tam_size/2
@@ -234,9 +234,9 @@ def generate_argos_wall(length):
             <box id="island_{i}_tam_3_1" movable="false" size="0.01,0.1,0.12">
             <body orientation="0,0,0" position="{p3_x},{p3_y},0"></body>
             <leds medium="leds">
-            <led anchor="origin" color="green" id="led_isla_{i}_tam2_1" intensity="100.0" offset="0.01,0,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_{i}_tam2_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_{i}_tam2_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_{i}_tam2_1" intensity="100.0" offset="-0.01,0,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_{i}_tam2_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_{i}_tam2_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
             </leds>
             </box>
             <box id="island_{i}_tam_3_2" movable="false" size="0.01,0.11,0.12">
@@ -249,9 +249,9 @@ def generate_argos_wall(length):
             <box id="island_{i}_tam_4_1" movable="false" size="0.01,0.1,0.12">
             <body orientation="90,0,0" position="{p4_x},{p4_y},0"></body>
             <leds medium="leds">
-            <led anchor="origin" color="green" id="led_isla_{i}_tam3_1" intensity="100.0" offset="0.01,0,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_{i}_tam3_2" intensity="100.0" offset="0.01,0.04,0.08"></led>
-            <led anchor="origin" color="green" id="led_isla_{i}_tam4_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_{i}_tam3_1" intensity="100.0" offset="-0.01,0,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_{i}_tam3_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
+            <led anchor="origin" color="green" id="led_isla_{i}_tam4_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
             </leds>
             </box>
             <box id="island_{i}_tam_4_2" movable="false" size="0.01,0.11,0.12">
