@@ -1,4 +1,5 @@
-
+division=13
+size_division=0.6
 def generate_argos_wall(length):
     # Calculate half the length
     xml_code = ""
@@ -28,8 +29,8 @@ def generate_argos_wall(length):
                 <box id="wall_i{wall_id}_{wall_division}" movable="false" size="0.01,{size_division},0.09">
                 <body orientation="0,0,0" position="{half_length},{move},0"></body>
                 </box>"""
-                if (wall_division==division-1):
 
+                if (wall_division<division-1):
                     xml_code += f"""<!-- * TAMS_{wall_id}_{wall_division}-->    
                         <box id="tam_{wall_id}_{wall_division}_1" movable="false" size="0.01,0.1,0.12">
                         <body orientation="0,0,0" position="{estatic1},{t_move1},0"></body>
@@ -161,9 +162,10 @@ def generate_argos_wall(length):
                 t_move1+=adding
                 t_move2+=adding
                 t_move3+=adding
-    ret
 
-def islas():
+    
+
+
     p1_x=0
 
     for i in range (1,6):
