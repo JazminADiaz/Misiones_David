@@ -1,10 +1,10 @@
-division=6
-
+division=13
+size_division=0.6
 def generate_argos_wall(length):
     # Calculate half the length
     xml_code = ""
     half_length = length / 2.0
-    size_division=0.4
+
     move=half_length-size_division/2.0
     guarda_lat=0
     guarda_up=0
@@ -163,27 +163,9 @@ def generate_argos_wall(length):
                 t_move3+=adding
 
     return xml_code
-'''
-<box id="tam_01_1" movable="false" size="0.01,0.1,0.12">
-<body orientation="0,0,0" position="0.79,0.75,0"></body>
-<leds medium="leds">
-<led anchor="origin" color="green" id="led_1" intensity="100.0" offset="-0.01,0,0.08"></led>
-<led anchor="origin" color="green" id="led_1_2" intensity="100.0" offset="-0.01,0.04,0.08"></led>
-<led anchor="origin" color="green" id="led_1_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
-</leds>
-</box>
-<box id="tam_01_2" movable="false" size="0.01,0.11,0.12">
-<body orientation="90,0,0" position="0.73,0.8,0"></body>
-</box>
-<box id="tam_01_3" movable="false" size="0.01,0.11,0.12">
-<body orientation="90,0,0" position="0.73,0.7,0"></body>
-</box>
-
-'''
-
 
 # Input wall length
-wall_length = 2.0  # Adjust this value as needed
+wall_length = 8  # Adjust this value as needed
 
 # Generate the Argos XML code for the big walls
 argos_xml = generate_argos_wall(wall_length)
