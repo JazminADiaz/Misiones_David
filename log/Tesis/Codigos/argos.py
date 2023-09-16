@@ -266,7 +266,7 @@ def generate_argos_wall(length):
 
 
 # Input wall length
-wall_length = 8  # Adjust this value as needed
+wall_length = 5  # Adjust this value as needed
 #Spaces for the islands
 s_island=4
 s_island_center=8

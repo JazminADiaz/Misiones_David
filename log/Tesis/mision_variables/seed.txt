@@ -1,4 +1,4 @@
 
-s= "1";
-events_folder= "/home/jazmin/tuttifrutti/log/Tesis/EventLogs/";
-timer_simulation= 6000;
+s= "50";
+events_folder= "/home/jazmin/tuttifrutti/log/Tesis/EventLogs_fail/";
+timer_simulation= 10000;
