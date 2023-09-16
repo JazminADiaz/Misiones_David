@@ -4,7 +4,7 @@
 <!-- * Framework * -->
 <!-- ************* -->
 <framework>
-<experiment length="1000" random_seed="50" ticks_per_second="10"></experiment>
+<experiment length="4000" random_seed="1" ticks_per_second="10"></experiment>
 <!--si 77 30 55 20 66 89 99 (no detecta timer5=100) 18 20 -->
 <!--no 65 25 16 33-->
 </framework>

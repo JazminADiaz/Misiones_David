@@ -221,8 +221,10 @@ argos::CColor TuttiTmTLoopFunction::GetFloorColor(const argos::CVector2& c_posit
 void TuttiTmTLoopFunction::Gates(){
         for (int i = 0; i < key.size(); i++) {
 
-        if (GetSpace().GetSimulationClock()>=(timer_simulation-1) and flag_a!=(key.size()))
-        {record(0,0,"time_out");}
+        if (GetSpace().GetSimulationClock()>=(timer_simulation-1) and flag_a!=(key.size()) and end==0)
+        {record(0,0,"time_out");
+        end=1;
+        }
         else{
             if (key[i].find(std::to_string(flag_a))!= std::string::npos){
                 if(key[i].find("sec")!= std::string::npos){
@@ -235,6 +237,10 @@ void TuttiTmTLoopFunction::Gates(){
                     std::cout<<"The activiy "<<flag_a<<"is not set to be secuential or concurrent"<<std::endl;
                 }
             }
+            if (flag_a==key.size() and end==0){
+                record(0,0,"simulation_successful");
+                end=1;
+            }   
         }
 
             
@@ -312,11 +318,13 @@ Real TuttiTmTLoopFunction::record(Real Tm, Real rob, std::string action){
     strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tm);
     then_tm = now_tm;
     time_S=buf;
-    if (action!="time_out"){
+    if (action!="time_out" and action!="simulation_successful"){
         MyFile<<","<<"T_"<<Tm<<"_"<<action<<","<<time_S<<","<<rob<<","<<s<<std::endl;
     }
     else{
         MyFile<<","<<action<<","<<time_S<<","<<"user"<<","<<s<<std::endl;
+        std::cout<<action<<std::endl;
+
     }
     return 0;
 } 
