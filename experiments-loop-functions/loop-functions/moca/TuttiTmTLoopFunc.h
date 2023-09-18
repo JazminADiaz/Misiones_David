@@ -24,6 +24,9 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <csignal>
+#include <cstdlib>
+#include <unistd.h> 
 
 using namespace argos;
 std::fstream MyFile;

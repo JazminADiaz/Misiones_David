@@ -224,6 +224,7 @@ void TuttiTmTLoopFunction::Gates(){
         if (GetSpace().GetSimulationClock()>=(timer_simulation-1) and flag_a!=(key.size()) and end==0)
         {record(0,0,"time_out");
         end=1;
+        kill(getpid(), SIGINT);
         }
         else{
             if (key[i].find(std::to_string(flag_a))!= std::string::npos){
@@ -240,6 +241,7 @@ void TuttiTmTLoopFunction::Gates(){
             if (flag_a==key.size() and end==0){
                 record(0,0,"simulation_successful");
                 end=1;
+                kill(getpid(), SIGINT);
             }   
         }
 
