@@ -208,7 +208,7 @@ return left, right, up, down;
 /*******************************************/
 argos::CColor TuttiTmTLoopFunction::GetFloorColor(const argos::CVector2& c_position_on_plane) {
     for(int i=0; i < Tam_back_x.size(); i++){        
-    left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), 0.06);
+    left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), 0.065);
     if (right<c_position_on_plane.GetY() and c_position_on_plane.GetY()<=left and down <c_position_on_plane.GetX() and c_position_on_plane.GetX()<up){
         return CColor::WHITE;
     }
@@ -294,13 +294,11 @@ void TuttiTmTLoopFunction::Boxes(Real boxa, Real color){
 /****************************************/
 bool TuttiTmTLoopFunction::sucess(){
     srand((unsigned)time(0)); 
-    std::cout<<"prob: "<<probability<<std::endl;
     return rand()%100 <= (probability * 100);        
 }
 /****************************************/
 bool TuttiTmTLoopFunction::sucess_con(){
     srand((unsigned)time(0)); 
-    std::cout<<"prob: "<<probability<<std::endl;
     return rand()%100 <= (probability * 100);        
 }
 /****************************************/
@@ -398,6 +396,7 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
                 if (Tam_color.at(a.at(i))==3){
                     if (rate_con==1){
                     record(a.at(i), rob_send.at(i), "Done");
+                    Tam_color.at(a.at(i))=0;
                     //The activity is done
                     cont=0;
                     check= 1;
@@ -431,7 +430,7 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
                            pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetY());
 
         for(int i=0; i < Tam_back_x.size(); i++){        
-        left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), 0.10);
+        left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), 0.7);
         if (right<cEpuckPosition.GetY() and cEpuckPosition.GetY()<=left and down <cEpuckPosition.GetX() and cEpuckPosition.GetX()<up){
             enter=i;
             if (enter==Tm){
@@ -530,6 +529,7 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
                 if (cont==50 and (Tam_color.at(Tm)==3)){
                     if (rate_sec==1){
                     record(Tm, rob,"Done");
+                    Tam_color.at(Tm)==0;
                     check = 1;
                     }
                     if (rate_sec==0){

@@ -4,7 +4,7 @@ import random
 sum_total = 0
 dictionary_lists = {}
 
-list_counter = 1
+list_counter = 0
 initial_word = random.choice(["con\"", "sec\""])
 previous_word = initial_word
 

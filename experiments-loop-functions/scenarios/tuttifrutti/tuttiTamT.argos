@@ -4,7 +4,7 @@
 <!-- * Framework * -->
 <!-- ************* -->
 <framework>
-<experiment length="4000" random_seed="1" ticks_per_second="10"></experiment>
+<experiment length="8000" random_seed="4" ticks_per_second="10"></experiment>
 <!--si 77 30 55 20 66 89 99 (no detecta timer5=100) 18 20 -->
 <!--no 65 25 16 33-->
 </framework>
@@ -1093,7 +1093,7 @@
 <range_and_bearing grid_size="10,10,1" id="rab"></range_and_bearing>
 </media>
 <!-- ***************** -->
-<!-- * Visualization * -->
+<!-- * Visualization *-->
 <!-- *****************
 <visualization>
 <qt-opengl>
