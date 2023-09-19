@@ -36,17 +36,17 @@ struct tm now_tm = *localtime( &now);
 struct tm then_tm = now_tm;
 
 // num_Tam (# Tam in the mision)- T_n (# Tam per activity)- A_n (#Activities in the map)
-int  T_n=2, A_n=4, flag_a=0, flag_b=0, flag_reboot=0, cont=0, t=0, boxa=0, end=0;
+int  T_n=2, A_n=4, flag_a=0, flag_b=0, flag_reboot=0, cont=0, t=0, boxa=0, end=0, cont_pos=0;
 Real num_Tam=60,  cont2=0, rob_reb;
 std::vector<int> Tam_color(num_Tam, 0); // Indicates the color displaying in each TAM is use to register any change on the tam
-std::vector<Real> rob_send, rob_reb_con, Tam_side1_x, Tam_side1_y, Tam_side2_x, Tam_side2_y, Tam_back_x, Tam_back_y, Tam_front_f, Tam_front_e, T_l, T_r, T_u, T_b;  
+std::vector<Real> rob_send, rob_reb_con, Tam_side1_x, Tam_side1_y, Tam_side2_x, Tam_side2_y, Tam_back_x, Tam_back_y, Tam_front_f, Tam_front_e, T_l, T_r, T_u, T_b, robot_positions;  
 void print2 (std::vector <Real> const &a);
 Real sides (Real s1_x, Real s1_y, Real s2_x, Real s2_y, Real b_x, Real b_y, Real c);
 Real left, right, up, down;
 std::string s, events_folder; //string
 std::fstream f; //file stream
-bool rate_sec, rate_con;
-float probability;
+bool rate_sec, rate_con, value_stop;
+float probability, floor_white=0.1, floor_detection=0.15, stop_change=0.0005;
 
 
 //a map called activities is created which stores keys of type strings which indicate the order and the nature of the activity
@@ -88,6 +88,7 @@ class TuttiTmTLoopFunction: public CoreLoopFunctions {
     Real sec(std::vector <Real> const &a);
     Real con(std::vector <Real> const &a);
     Real record(Real Tam,Real rob, std::string action);
+    Real stop(Real rob);
 
 
 

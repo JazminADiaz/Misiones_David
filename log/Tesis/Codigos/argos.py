@@ -10,8 +10,8 @@ def generate_argos_wall(length):
 
     tam_size=0.1
     adding=-tam_size-size_division
-    estatic1=half_length+tam_size
-    estatic2=half_length+tam_size/2.0
+    estatic1=half_length+tam_size_sides
+    estatic2=half_length+tam_size_sides/2.0
     # Create XML code for the square wall
     for wall_id in range(1, 5):
         move=half_length-size_division/2.0
@@ -22,8 +22,8 @@ def generate_argos_wall(length):
                     t_move1=half_length-size_division-tam_size/2.0
                     t_move2=half_length-size_division
                     t_move3=half_length-size_division-tam_size
-                    estatic1=half_length+tam_size
-                    estatic2=half_length+tam_size/2.0
+                    estatic1=half_length+tam_size_sides
+                    estatic2=half_length+tam_size_sides/2.0
 
                 xml_code += f"""<!-- * Wall{wall_id}_{wall_division} -->
                 <box id="wall_i{wall_id}_{wall_division}" movable="false" size="0.01,{size_division},0.09">
@@ -32,7 +32,7 @@ def generate_argos_wall(length):
 
                 if (wall_division<division-1):
                     xml_code += f"""<!-- * TAMS_{wall_id}_{wall_division}-->    
-                        <box id="tam_{wall_id}_{wall_division}_1" movable="false" size="0.01,0.1,0.12">
+                        <box id="tam_{wall_id}_{wall_division}_1" movable="false" size="0.01,{tam_size_bottom},0.12">
                         <body orientation="0,0,0" position="{estatic1},{t_move1},0"></body>
                         <leds medium="leds">
                         <led anchor="origin" color="green" id="led_{wall_id}_{wall_division}" intensity="100.0" offset="-0.01,0,0.08"></led>
@@ -40,10 +40,10 @@ def generate_argos_wall(length):
                         <led anchor="origin" color="green" id="led_{wall_id}_{wall_division}_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
                         </leds>
                         </box>
-                        <box id="tam_{wall_id}_{wall_division}_2" movable="false" size="0.01,0.11,0.12">
+                        <box id="tam_{wall_id}_{wall_division}_2" movable="false" size="0.01,{tam_size_sides},0.12">
                         <body orientation="90,0,0" position="{estatic2},{t_move2},0"></body>
                         </box>
-                        <box id="tam_{wall_id}_{wall_division}_3" movable="false" size="0.01,0.11,0.12">
+                        <box id="tam_{wall_id}_{wall_division}_3" movable="false" size="0.01,{tam_size_sides},0.12">
                         <body orientation="90,0,0" position="{estatic2},{t_move3},0"></body>
                         </box>
                     """                 
@@ -61,8 +61,8 @@ def generate_argos_wall(length):
                     t_move1=half_length-size_division-tam_size/2.0
                     t_move2=half_length-size_division
                     t_move3=half_length-size_division-tam_size
-                    estatic1=half_length+tam_size
-                    estatic2=half_length+tam_size/2.0
+                    estatic1=half_length+tam_size_sides
+                    estatic2=half_length+tam_size_sides/2.0
 
                 xml_code += f"""<!-- * Wall_{wall_id}_{wall_division}-->
                 <box id="wall_i{wall_id}_{wall_division}" movable="false" size="0.01,{size_division},0.09">
@@ -70,7 +70,7 @@ def generate_argos_wall(length):
                 </box>"""
                 if (wall_division<division-1):
                     xml_code += f"""<!-- * TAMS_{wall_id}_{wall_division}-->    
-                        <box id="tam_{wall_id}_{wall_division}_1" movable="false" size="0.01,0.1,0.12">
+                        <box id="tam_{wall_id}_{wall_division}_1" movable="false" size="0.01,{tam_size},0.12">
                         <body orientation="90,0,0" position="{t_move1},{estatic1},0"></body>
                         <leds medium="leds">
                         <led anchor="origin" color="green" id="led_{wall_id}_{wall_division}" intensity="100.0" offset="-0.01,0,0.08"></led>
@@ -78,10 +78,10 @@ def generate_argos_wall(length):
                         <led anchor="origin" color="green" id="led_{wall_id}_{wall_division}_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
                         </leds>
                         </box>
-                        <box id="tam_{wall_id}_{wall_division}_2" movable="false" size="0.01,0.11,0.12">
+                        <box id="tam_{wall_id}_{wall_division}_2" movable="false" size="0.01,{tam_size_sides},0.12">
                         <body orientation="0,0,0" position="{t_move2},{estatic2},0"></body>
                         </box>
-                        <box id="tam_{wall_id}_{wall_division}_3" movable="false" size="0.01,0.11,0.12">
+                        <box id="tam_{wall_id}_{wall_division}_3" movable="false" size="0.01,{tam_size_sides},0.12">
                         <body orientation="0,0,0" position="{t_move3},{estatic2},0"></body>
                         </box>
                     """
@@ -98,8 +98,8 @@ def generate_argos_wall(length):
                     t_move1=half_length-size_division-tam_size/2.0
                     t_move2=half_length-size_division
                     t_move3=half_length-size_division-tam_size
-                    estatic1=guarda_up-tam_size
-                    estatic2=guarda_up-tam_size/2.0
+                    estatic1=guarda_up-tam_size_sides
+                    estatic2=guarda_up-tam_size_sides/2.0
                 xml_code += f"""<!-- * Wall{wall_id}_{wall_division} -->
                 <box id="wall_i{wall_id}_{wall_division}" movable="false" size="0.01,{size_division},0.09">
                 <body orientation="0,0,0" position="{guarda_lat},{move},0"></body>
@@ -115,10 +115,10 @@ def generate_argos_wall(length):
                         <led anchor="origin" color="green" id="led_{wall_id}_{wall_division}_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
                         </leds>
                         </box>
-                        <box id="tam_{wall_id}_{wall_division}_2" movable="false" size="0.01,0.11,0.12">
+                        <box id="tam_{wall_id}_{wall_division}_2" movable="false" size="0.01,{tam_size_sides},0.12">
                         <body orientation="90,0,0" position="{estatic2},{t_move2},0"></body>
                         </box>
-                        <box id="tam_{wall_id}_{wall_division}_3" movable="false" size="0.01,0.11,0.12">
+                        <box id="tam_{wall_id}_{wall_division}_3" movable="false" size="0.01,{tam_size_sides},0.12">
                         <body orientation="90,0,0" position="{estatic2},{t_move3},0"></body>
                         </box>
                     """
@@ -133,8 +133,8 @@ def generate_argos_wall(length):
                     t_move1=half_length-size_division-tam_size/2.0
                     t_move2=half_length-size_division
                     t_move3=half_length-size_division-tam_size
-                    estatic1=guarda_lat-tam_size
-                    estatic2=guarda_lat-tam_size/2.0
+                    estatic1=guarda_lat-tam_size_sides
+                    estatic2=guarda_lat-tam_size_sides/2.0
 
                 xml_code += f"""<!-- * Wall_{wall_id}_{wall_division}-->
                 <box id="wall_i{wall_id}_{wall_division}" movable="false" size="0.01,{size_division},0.09">
@@ -151,10 +151,10 @@ def generate_argos_wall(length):
                         <led anchor="origin" color="green" id="led_{wall_id}_{wall_division}_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
                         </leds>
                         </box>
-                        <box id="tam_{wall_id}_{wall_division}_2" movable="false" size="0.01,0.11,0.12">
+                        <box id="tam_{wall_id}_{wall_division}_2" movable="false" size="0.01,{tam_size_sides},0.12">
                         <body orientation="0,0,0" position="{t_move2},{estatic2},0"></body>
                         </box>
-                        <box id="tam_{wall_id}_{wall_division}_3" movable="false" size="0.01,0.11,0.12">
+                        <box id="tam_{wall_id}_{wall_division}_3" movable="false" size="0.01,{tam_size_sides},0.12">
                         <body orientation="0,0,0" position="{t_move3},{estatic2},0"></body>
                         </box>
                     """
@@ -209,11 +209,11 @@ def generate_argos_wall(length):
             <led anchor="origin" color="green" id="led_isla_{i}_tam1_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
             </leds>
             </box>
-            <box id="island_{i}_tam_1_2" movable="false" size="0.01,0.11,0.12">
-            <body orientation="90,0,0" position="{p1_x+tam_size/2},{p1_y+tam_size/2},0"></body>
+            <box id="island_{i}_tam_1_2" movable="false" size="0.01,{tam_size_sides},0.12">
+            <body orientation="90,0,0" position="{p1_x+tam_size_sides/2},{p1_y+tam_size/2},0"></body>
             </box>
-            <box id="island_{i}_tam_1_3" movable="false" size="0.01,0.11,0.12">
-            <body orientation="90,0,0" position="{p1_x+tam_size/2},{p1_y-tam_size/2},0"></body>
+            <box id="island_{i}_tam_1_3" movable="false" size="0.01,{tam_size_sides},0.12">
+            <body orientation="90,0,0" position="{p1_x+tam_size_sides/2},{p1_y-tam_size/2},0"></body>
             </box>
 
             <box id="island_{i}_tam_2_1" movable="false" size="0.01,0.1,0.12">
@@ -224,11 +224,11 @@ def generate_argos_wall(length):
             <led anchor="origin" color="green" id="led_isla_{i}_3" intensity="100.0" offset="0.01,-0.04,0.08"></led>
             </leds>
             </box>
-            <box id="island_{i}_tam_2_2" movable="false" size="0.01,0.11,0.12">
-            <body orientation="0,0,0" position="{p2_x+tam_size/2},{p2_y+tam_size/2},0"></body>
+            <box id="island_{i}_tam_2_2" movable="false" size="0.01,{tam_size_sides},0.12">
+            <body orientation="0,0,0" position="{p2_x+tam_size/2},{p2_y+tam_size_sides/2},0"></body>
             </box>
-            <box id="island_{i}_tam_2_3" movable="false" size="0.01,0.11,0.12">
-            <body orientation="0,0,0" position="{p2_x-tam_size/2},{p2_y+tam_size/2},0"></body>
+            <box id="island_{i}_tam_2_3" movable="false" size="0.01,{tam_size_sides},0.12">
+            <body orientation="0,0,0" position="{p2_x-tam_size/2},{p2_y+tam_size_sides/2},0"></body>
             </box>
 
             <box id="island_{i}_tam_3_1" movable="false" size="0.01,0.1,0.12">
@@ -239,11 +239,11 @@ def generate_argos_wall(length):
             <led anchor="origin" color="green" id="led_isla_{i}_tam2_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
             </leds>
             </box>
-            <box id="island_{i}_tam_3_2" movable="false" size="0.01,0.11,0.12">
-            <body orientation="90,0,0" position="{p3_x-tam_size/2},{p3_y+tam_size/2},0"></body>
+            <box id="island_{i}_tam_3_2" movable="false" size="0.01,{tam_size_sides},0.12">
+            <body orientation="90,0,0" position="{p3_x-tam_size_sides/2},{p3_y+tam_size/2},0"></body>
             </box>
-            <box id="island_{i}_tam_3_3" movable="false" size="0.01,0.11,0.12">
-            <body orientation="90,0,0" position="{p3_x-tam_size/2},{p3_y-tam_size/2},0"></body>
+            <box id="island_{i}_tam_3_3" movable="false" size="0.01,{tam_size_sides},0.12">
+            <body orientation="90,0,0" position="{p3_x-tam_size_sides/2},{p3_y-tam_size/2},0"></body>
             </box>
 
             <box id="island_{i}_tam_4_1" movable="false" size="0.01,0.1,0.12">
@@ -254,11 +254,11 @@ def generate_argos_wall(length):
             <led anchor="origin" color="green" id="led_isla_{i}_tam4_3" intensity="100.0" offset="-0.01,-0.04,0.08"></led>
             </leds>
             </box>
-            <box id="island_{i}_tam_4_2" movable="false" size="0.01,0.11,0.12">
-            <body orientation="0,0,0" position="{p4_x+tam_size/2},{p4_y-tam_size/2},0"></body>
+            <box id="island_{i}_tam_4_2" movable="false" size="0.01,{tam_size_sides},0.12">
+            <body orientation="0,0,0" position="{p4_x+tam_size/2},{p4_y-tam_size_sides/2},0"></body>
             </box>
-            <box id="island_{i}_tam_4_3" movable="false" size="0.01,0.11,0.12">
-            <body orientation="0,0,0" position="{p4_x-tam_size/2},{p4_y-tam_size/2}+,0"></body>
+            <box id="island_{i}_tam_4_3" movable="false" size="0.01,{tam_size_sides},0.12">
+            <body orientation="0,0,0" position="{p4_x-tam_size/2},{p4_y-tam_size_sides/2}+,0"></body>
             </box>
         """
 
@@ -272,6 +272,8 @@ s_island=4
 s_island_center=8
 half_length = wall_length / 2.0
 tam_size=0.1
+tam_size_sides=0.2
+tam_size_bottom=0.1
 division=12
 size_division=0.4
 num_tam=division-2

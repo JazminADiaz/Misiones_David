@@ -529,6 +529,12 @@ plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuc
  /home/jazmin/tuttifrutti/argos3-dist/include/argos3/core/utility/plugins/factory_impl.h
  /home/jazmin/tuttifrutti/argos3-dist/include/argos3/core/utility/plugins/vtable.h
  /home/jazmin/tuttifrutti/argos3-dist/include/argos3/core/utility/string_utilities.h
+ /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/robots/e-puck/control_interface/ci_epuck_battery_sensor.h
+ /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/robots/e-puck/control_interface/ci_epuck_range_and_bearing_actuator.h
+ /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/robots/e-puck/control_interface/ci_epuck_range_and_bearing_sensor.h
+ /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/robots/e-puck/simulator/battery_equipped_entity.h
+ /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/robots/e-puck/simulator/epuck_battery_sensor.h
+ /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/robots/e-puck/simulator/epuck_rab_equipped_entity.h
  /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/simulator/entities/ground_sensor_equipped_entity.h
  /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/simulator/entities/led_entity.h
  /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/simulator/entities/led_equipped_entity.h
@@ -537,12 +543,6 @@ plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuc
  /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/simulator/entities/proximity_sensor_equipped_entity.h
  /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/simulator/entities/rab_equipped_entity.h
  /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/simulator/entities/wheeled_entity.h
- /home/jazmin/tuttifrutti/argos3-epuck/src/argos3/plugins/robots/e-puck/control_interface/ci_epuck_battery_sensor.h
- /home/jazmin/tuttifrutti/argos3-epuck/src/argos3/plugins/robots/e-puck/control_interface/ci_epuck_range_and_bearing_actuator.h
- /home/jazmin/tuttifrutti/argos3-epuck/src/argos3/plugins/robots/e-puck/control_interface/ci_epuck_range_and_bearing_sensor.h
- /home/jazmin/tuttifrutti/argos3-epuck/src/argos3/plugins/robots/e-puck/simulator/battery_equipped_entity.h
- /home/jazmin/tuttifrutti/argos3-epuck/src/argos3/plugins/robots/e-puck/simulator/epuck_battery_sensor.h
- /home/jazmin/tuttifrutti/argos3-epuck/src/argos3/plugins/robots/e-puck/simulator/epuck_rab_equipped_entity.h
  /home/jazmin/tuttifrutti/argos3-epuck/src/plugins/robots/e-puck/simulator/epuck_entity.cpp
  /home/jazmin/tuttifrutti/argos3-epuck/src/plugins/robots/e-puck/simulator/epuck_entity.h
 plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_ground_rotzonly_sensor.cpp.o

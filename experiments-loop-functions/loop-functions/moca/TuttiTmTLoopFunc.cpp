@@ -208,7 +208,7 @@ return left, right, up, down;
 /*******************************************/
 argos::CColor TuttiTmTLoopFunction::GetFloorColor(const argos::CVector2& c_position_on_plane) {
     for(int i=0; i < Tam_back_x.size(); i++){        
-    left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), 0.065);
+    left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), floor_white);
     if (right<c_position_on_plane.GetY() and c_position_on_plane.GetY()<=left and down <c_position_on_plane.GetX() and c_position_on_plane.GetX()<up){
         return CColor::WHITE;
     }
@@ -329,6 +329,25 @@ Real TuttiTmTLoopFunction::record(Real Tm, Real rob, std::string action){
     return 0;
 } 
 /*******************************************/
+//Stop Checking, checks wether the robot stoped.
+/*******************************************/
+Real TuttiTmTLoopFunction::stop(Real rob){
+    cont_pos+=1;
+    if (cont_pos==5){
+        if (abs(robot_positions.at(rob))>= stop_change){
+                value_stop=1;
+                cont_pos=0;
+        }
+        else{
+            value_stop=0;
+        }
+    }
+    
+
+    return value_stop;
+}
+
+/*******************************************/
 //Concurrent Activity
 /*******************************************/
 Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
@@ -432,7 +451,7 @@ Real TuttiTmTLoopFunction::robots_con(Real Tm){
                            pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetY());
 
         for(int i=0; i < Tam_back_x.size(); i++){        
-        left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), 0.7);
+        left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), floor_detection);
         if (right<cEpuckPosition.GetY() and cEpuckPosition.GetY()<=left and down <cEpuckPosition.GetX() and cEpuckPosition.GetX()<up){
             enter=i;
             if (enter==Tm){
@@ -508,18 +527,26 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
                            pcEpuck->GetEmbodiedEntity().GetOriginAnchor().Position.GetY());
 
         for(int i=0; i < Tam_back_x.size(); i++){        
-        left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), 0.08);
+        left, right, up, down= sides (Tam_side1_x.at(i), Tam_side1_y.at(i), Tam_side2_x.at(i), Tam_side2_y.at(i), Tam_back_x.at(i), Tam_back_y.at(i), floor_detection);
         if (right<cEpuckPosition.GetY() and cEpuckPosition.GetY()<=left and down <cEpuckPosition.GetX() and cEpuckPosition.GetX()<up){
             enter=i;
+
+
             if (enter==Tm){
 
                 if( Tam_color.at(Tm)==1){
-                rate_sec=sucess();
+
 
                     //if robot enters tam change to busy
-                Boxes(enter,2);
-                record(Tm, rob,"Busy");
-                Tam_color.at(Tm)=2;
+                    if (cont==10){
+                        rate_sec=sucess();
+                        Boxes(enter,2);
+                        record(Tm, rob,"Busy");
+                        Tam_color.at(Tm)=2;
+
+                    }
+
+
                 }
                 cont+=1;
                 //if robot has been in the tam for 5 secs call the success function to check 
@@ -533,12 +560,15 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
                     record(Tm, rob,"Done");
                     Tam_color.at(Tm)==0;
                     check = 1;
+
                     }
                     if (rate_sec==0){
                     flag_reboot=1;
                     rob_reb=rob;
                     }
                     cont=0;
+                    value_stop=0;
+
                 }
         }
         }

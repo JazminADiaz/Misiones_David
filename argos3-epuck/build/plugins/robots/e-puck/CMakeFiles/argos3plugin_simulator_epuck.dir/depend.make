@@ -528,6 +528,12 @@ plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuc
 plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-dist/include/argos3/core/utility/plugins/factory_impl.h
 plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-dist/include/argos3/core/utility/plugins/vtable.h
 plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-dist/include/argos3/core/utility/string_utilities.h
+plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/robots/e-puck/control_interface/ci_epuck_battery_sensor.h
+plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/robots/e-puck/control_interface/ci_epuck_range_and_bearing_actuator.h
+plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/robots/e-puck/control_interface/ci_epuck_range_and_bearing_sensor.h
+plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/robots/e-puck/simulator/battery_equipped_entity.h
+plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/robots/e-puck/simulator/epuck_battery_sensor.h
+plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/robots/e-puck/simulator/epuck_rab_equipped_entity.h
 plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/simulator/entities/ground_sensor_equipped_entity.h
 plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/simulator/entities/led_entity.h
 plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/simulator/entities/led_equipped_entity.h
@@ -536,12 +542,6 @@ plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuc
 plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/simulator/entities/proximity_sensor_equipped_entity.h
 plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/simulator/entities/rab_equipped_entity.h
 plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-dist/include/argos3/plugins/simulator/entities/wheeled_entity.h
-plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-epuck/src/argos3/plugins/robots/e-puck/control_interface/ci_epuck_battery_sensor.h
-plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-epuck/src/argos3/plugins/robots/e-puck/control_interface/ci_epuck_range_and_bearing_actuator.h
-plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-epuck/src/argos3/plugins/robots/e-puck/control_interface/ci_epuck_range_and_bearing_sensor.h
-plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-epuck/src/argos3/plugins/robots/e-puck/simulator/battery_equipped_entity.h
-plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-epuck/src/argos3/plugins/robots/e-puck/simulator/epuck_battery_sensor.h
-plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-epuck/src/argos3/plugins/robots/e-puck/simulator/epuck_rab_equipped_entity.h
 plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-epuck/src/plugins/robots/e-puck/simulator/epuck_entity.cpp
 plugins/robots/e-puck/CMakeFiles/argos3plugin_simulator_epuck.dir/simulator/epuck_entity.cpp.o: /home/jazmin/tuttifrutti/argos3-epuck/src/plugins/robots/e-puck/simulator/epuck_entity.h
 
