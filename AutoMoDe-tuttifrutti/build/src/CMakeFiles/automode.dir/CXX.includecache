@@ -6,29 +6,23 @@
 
 #IncludeRegexTransform: 
 
-/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviour.h
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeCondition.h
 argos3/core/utility/math/vector2.h
 -
 argos3/core/utility/logging/argos_log.h
--
-argos3/core/utility/configuration/argos_exception.h
--
-argos3/plugins/robots/e-puck/control_interface/ci_epuck_proximity_sensor.h
--
-argos3/plugins/robots/e-puck/control_interface/ci_epuck_range_and_bearing_sensor.h
 -
 argos3/demiurge/epuck-dao/EpuckDAO.h
 -
 map
 -
 
-/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourGoAwayColor.cpp
-AutoMoDeBehaviourGoAwayColor.h
-/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourGoAwayColor.h
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeConditionWhiteFloor.cpp
+AutoMoDeConditionWhiteFloor.h
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeConditionWhiteFloor.h
 
-/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviourGoAwayColor.h
-AutoMoDeBehaviour.h
-/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeBehaviour.h
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeConditionWhiteFloor.h
+AutoMoDeCondition.h
+/home/jazmin/tuttifrutti/AutoMoDe-tuttifrutti/src/modules/AutoMoDeCondition.h
 
 /home/jazmin/tuttifrutti/argos3-dist/include/argos3/core/config.h
 

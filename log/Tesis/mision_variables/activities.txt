@@ -1,4 +1,9 @@
 probability=1;
-
-activities["0_sec"] = {20, 31, 32, 43,45,52,16};
-activities["1_con"] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
+activities["0_con"] = {34, 51, 20, 53, 26};
+activities["1_sec"] = {29, 30};
+activities["2_con"] = {5, 8, 13, 51, 22, 59};
+activities["3_sec"] = {0, 12};
+activities["4_con"] = {38, 12, 54};
+activities["5_sec"] = {7, 40, 49, 19, 59};
+activities["6_con"] = {20, 22, 7};
+activities["7_sec"] = {34, 35};

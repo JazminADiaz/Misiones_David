@@ -4,7 +4,7 @@ import glob
 import argparse
 
 def simulacion(directorio, repetition, time):
-    print("Simulación aqui.")
+    #print("Simulación aqui.")
 
     mision = "tuttiTamT"
 
@@ -34,16 +34,17 @@ def simulacion(directorio, repetition, time):
         os.chdir('/home/jazmin/tuttifrutti/experiments-loop-functions/build')
         os.system('make')
         os.chdir('/home/jazmin/tuttifrutti/experiments-loop-functions/scenarios/tuttifrutti/')
-        os.system("cd ~/tuttifrutti/experiments-loop-functions/build")
+        #os.system("cd ~/tuttifrutti/experiments-loop-functions/build")
         os.system(f"argos3 -c {mision}.argos")
 
 def main():
     parser = argparse.ArgumentParser(description="Descripción de tu script.")
-    parser.add_argument('directorio', type=str, help='Ruta al directorio')
+    parser.add_argument('--directorio', type=str, help='Ruta al directorio')
     parser.add_argument('--repetition', type=int, default=1, help='Número de repeticiones (por defecto: 1)')
     parser.add_argument('--time', type=int, default=0, help='Valor de time (por defecto: 0)')
     args = parser.parse_args()
 
+    
     simulacion(args.directorio, args.repetition, args.time)
     print("Simulación completada.")
 

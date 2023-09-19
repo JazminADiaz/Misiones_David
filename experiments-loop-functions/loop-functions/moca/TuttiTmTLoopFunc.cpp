@@ -94,7 +94,6 @@ void TuttiTmTLoopFunction::Init(TConfigurationNode& t_tree) {
     time_t now = time(0);
     file_name=std::to_string(now);
 //Creating the register file
-    std::cout<<"folder:"<<events_folder<<std::endl;
     std::fstream CreateFile(events_folder+file_name+"data.csv");
 }
 
@@ -265,27 +264,26 @@ void TuttiTmTLoopFunction::Boxes(Real boxa, Real color){
         CBoxEntity* pcBlock = any_cast<CBoxEntity*>(it->second);
 
         if (box==(boxa*3) and color ==0){
-            std::cout<<"Apagado "<<"Tam: "<<boxa<<std::endl;
             pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::GREEN);
         }
         if (box==(boxa*3) and color ==1 ){
-            std::cout<<"Available "<<"Tam: "<<boxa<<std::endl;
+            //std::cout<<"Available "<<"Tam: "<<boxa<<std::endl;
             pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::BLUE);
         }
         if (box==(boxa*3) and color ==2 ){
-            std::cout<<"Ocupado "<<"Tam: "<<boxa<<std::endl;
+            //std::cout<<"Ocupado "<<"Tam: "<<boxa<<std::endl;
             pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::PURPLE);
         }
         if (box==(boxa*3) and color ==3){
-            std::cout<<"No-disponible "<<"Tam: "<<boxa<<std::endl;
+            //std::cout<<"No-disponible "<<"Tam: "<<boxa<<std::endl;
             pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::RED);
         }
         if (box==(boxa*3) and color ==4){
-            std::cout<<"Waiting"<<"Tam: "<<boxa<<std::endl;
+            //std::cout<<"Waiting"<<"Tam: "<<boxa<<std::endl;
             pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::CYAN);
         }
         if (box==(boxa*3) and color ==5){
-            std::cout<<"reebooting"<<"Tam: "<<boxa<<std::endl;
+            //std::cout<<"reebooting"<<"Tam: "<<boxa<<std::endl;
             pcBlock->GetLEDEquippedEntity().SetAllLEDsColors(CColor::YELLOW);
         }
         box+=1;
@@ -543,7 +541,6 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
                         Boxes(enter,2);
                         record(Tm, rob,"Busy");
                         Tam_color.at(Tm)=2;
-
                     }
 
 
@@ -558,7 +555,7 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
                 if (cont==50 and (Tam_color.at(Tm)==3)){
                     if (rate_sec==1){
                     record(Tm, rob,"Done");
-                    Tam_color.at(Tm)==0;
+                    Tam_color.at(Tm)=0;
                     check = 1;
 
                     }
