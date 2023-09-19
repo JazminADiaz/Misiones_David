@@ -4,7 +4,7 @@
 <!-- * Framework * -->
 <!-- ************* -->
 <framework>
-<experiment length="8000" random_seed="2" ticks_per_second="10"></experiment>
+<experiment length="8000" random_seed="30" ticks_per_second="10"></experiment>
 </framework>
 <!-- ****************** -->
 <!-- * Loop functions * -->

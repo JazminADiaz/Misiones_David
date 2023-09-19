@@ -611,7 +611,7 @@ CVector3 TuttiTmTLoopFunction::GetRandomPosition() {
     a = b;
     b = temp;
   }
-  m_fDistributionRadius = 0.4;
+  m_fDistributionRadius = 0.8;
   Real fPosX = (c * m_fDistributionRadius / 2) + m_fDistributionRadius * cos(2 * -CRadians::PI_OVER_TWO .GetValue() * (a/b));
   Real fPosY = -0.20 + (d * m_fDistributionRadius / 2) + m_fDistributionRadius * sin(2 * -CRadians::PI_OVER_TWO.GetValue() * (a/b));
   return CVector3(fPosX, fPosY, 0);
