@@ -163,7 +163,7 @@ CEPuckEntity::CEPuckEntity(const std::string& str_id,
 
       /* Omnidirectional camera equipped entity */
       //CDegrees cAperture(70.0f); // The robot can see objects within a raidous of about 35 cm
-      CDegrees cAperture(85.0f); // The robot can see objects within a raidous of about 50 cm
+      CDegrees cAperture(77.0f); // The robot can see objects within a raidous of about 50 cm
 
       //GetNodeAttributeOrDefault(t_tree, "omnidirectional_camera_aperture", cAperture, cAperture);
       m_pcOmnidirectionalCameraEquippedEntity = new COmnidirectionalCameraEquippedEntity(this,
@@ -297,7 +297,7 @@ void CEPuckEntity::Init(TConfigurationNode& t_tree) {
 
         /* Omnidirectional camera equipped entity */
         //CDegrees cAperture(70.0f);
-        CDegrees cAperture(85.0f);
+        CDegrees cAperture(77.0f);
         GetNodeAttributeOrDefault(t_tree, "omnidirectional_camera_aperture", cAperture, cAperture);
         m_pcOmnidirectionalCameraEquippedEntity = new COmnidirectionalCameraEquippedEntity(this,
                                                                                            "omnidirectional_camera_0",
