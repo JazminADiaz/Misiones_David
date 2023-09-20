@@ -44,8 +44,8 @@ def main():
     parser.add_argument('--time', type=int, default=0, help='Valor de time (por defecto: 0)')
     args = parser.parse_args()
 
-    
-    simulacion(args.directorio, args.repetition, args.time)
+    simulacion("/home/jazmin/tuttifrutti/log/Tesis/Codigos/seed_change_multiple_times.py", 2, 2000)
+    #simulacion(args.directorio, args.repetition, args.time)
     print("Simulación completada.")
 
 if __name__ == "__main__":
