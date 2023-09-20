@@ -1,4 +1,4 @@
-probability=1;
+probability=0.8;
 activities["0_con"] = {48, 31, 7, 29, 36, 59, 41, 56, 30, 53, 55, 51, 47, 46, 33, 45, 9};
 activities["1_sec"] = {7, 19, 43, 37, 39, 10, 2, 4, 55, 47, 42};
 activities["2_con"] = {24, 50};
