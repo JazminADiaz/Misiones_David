@@ -46,7 +46,7 @@ Real left, right, up, down;
 std::string s, events_folder; //string
 std::fstream f; //file stream
 bool rate_sec, rate_con, value_stop;
-float probability, floor_white=0.1, floor_detection=0.13, stop_change=0.0005;
+float probability, floor_white=0.1, floor_detection=0.12, stop_change=0.0005;
 
 
 //a map called activities is created which stores keys of type strings which indicate the order and the nature of the activity

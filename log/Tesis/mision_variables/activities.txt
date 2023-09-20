@@ -1,4 +1,9 @@
-probability=0.8;
-activities["0_sec"] = {38, 22, 51, 48, 43, 5, 42, 9, 55, 34, 11, 49, 59, 34, 4, 25, 58, 7, 19, 51};
-activities["1_con"] = {57, 52, 29, 16};
-activities["2_sec"] = {33, 30};
+probability=1;
+activities["0_sec"] = {42, 46, 49, 2};
+activities["1_con"] = {40, 0, 13, 10, 31, 26, 29, 3, 29, 52, 51, 52, 48, 55, 36, 54, 9, 30, 24, 35, 6, 50, 38};
+activities["2_sec"] = {48, 7, 41, 35, 21};
+activities["3_con"] = {32, 34};
+activities["4_sec"] = {39, 53, 21, 27, 31, 6, 23, 7, 30, 22};
+activities["5_con"] = {27, 58, 19, 49};
+activities["6_sec"] = {6, 41, 51};
+activities["7_con"] = {26, 59, 38, 16, 2};
