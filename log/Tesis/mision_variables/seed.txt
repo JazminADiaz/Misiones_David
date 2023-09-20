@@ -1,4 +1,10 @@
 
+<<<<<<< HEAD
 s= "2";
 events_folder= "/home/jazmin/tuttifrutti/log/Tesis/EventLogs/";
 timer_simulation= 80000;
+=======
+s= "10";
+events_folder= "/home/jazmin/tuttifrutti/log/Tesis/EventLogs_fail/";
+timer_simulation= 20000;
+>>>>>>> HEAD@{1}

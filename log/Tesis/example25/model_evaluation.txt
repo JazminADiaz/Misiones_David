@@ -1,0 +1,8 @@
+percFitTraces: 70.0
+averageFitness: 0.9223294723294723
+percentage_of_fitting_traces: 70.0
+average_trace_fitness: 0.9223294723294723
+log_fitness: 0.9025254467049698
+precison: 0.39911634756995584
+generalization: 0.7025022959951189
+simplicity: 0.7948717948717947

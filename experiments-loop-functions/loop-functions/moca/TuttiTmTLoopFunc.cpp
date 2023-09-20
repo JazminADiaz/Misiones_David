@@ -384,14 +384,16 @@ Real TuttiTmTLoopFunction::con(std::vector <Real> const &a){
         }
     }
 
+
+    //Check if all the tams involved are occupied
+    if (flag_b!=a.size()){
     flag_b=0;
 
     rob_send.clear();
-    //Check if all the tams involved are occupied
     for(int i=0; i <a.size(); i++){
         sum=robots_con(a.at(i));
         flag_b+=sum;
-    }
+    }}
     //Once all are occupied change the color to busy
     if (flag_b==a.size()){
         cont+=1;
