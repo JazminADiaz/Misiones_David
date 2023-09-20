@@ -1,0 +1,11 @@
+mision, action, DateTime, org:resource, randomSeed 
+mision 0,T_49_Busy,2023-09-20 15:47:16,21,1
+mision 0,T_49_Done,2023-09-20 15:47:20,21,1
+mision 0,T_1_Busy,2023-09-20 15:47:48,10,1
+mision 0,T_1_Done,2023-09-20 15:47:52,10,1
+mision 0,simulation_successful,2023-09-20 15:47:52,user,1
+mision 1,T_49_Busy,2023-09-20 15:46:48,0,2
+mision 1,T_49_Done,2023-09-20 15:46:52,0,2
+mision 1,T_1_Busy,2023-09-20 15:47:14,15,2
+mision 1,T_1_Done,2023-09-20 15:47:18,15,2
+mision 1,simulation_successful,2023-09-20 15:47:18,user,2
