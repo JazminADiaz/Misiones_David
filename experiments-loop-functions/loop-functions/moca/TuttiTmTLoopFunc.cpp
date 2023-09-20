@@ -533,6 +533,7 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
 
 
             if (enter==Tm){
+                cont+=1;
 
                 if( Tam_color.at(Tm)==1){
 
@@ -547,7 +548,6 @@ Real TuttiTmTLoopFunction::robots_sec(Real Tm){
 
 
                 }
-                cont+=1;
                 //if robot has been in the tam for 5 secs call the success function to check 
                 //wether it was sucessfull or not
                 if (cont==50 and Tam_color.at(Tm)==2){
