@@ -1,0 +1,4 @@
+probability=0.8;
+activities["0_con"] = {48, 25};
+activities["1_sec"] = {54, 36, 52, 25, 30, 51, 20, 15, 31, 54, 9};
+activities["2_con"] = {16, 8, 51, 51};

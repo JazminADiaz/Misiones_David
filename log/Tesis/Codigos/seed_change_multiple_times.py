@@ -6,14 +6,14 @@ import argparse
 def simulacion(directorio, repetition, time):
     #print("Simulación aqui.")
 
-    mision = "tuttiTamT"
+
 
     filelist = glob.glob(os.path.join(directorio, "*"))
     for f in filelist:
         os.remove(f)
 
     for b in range(1, repetition + 1):
-        with open(f"/home/jazmin/tuttifrutti/experiments-loop-functions/scenarios/tuttifrutti/{mision}.argos") as fp:
+        with open(f"/home/jazmin/tuttifrutti/experiments-loop-functions/scenarios/tuttifrutti/tuttiTamT.argos") as fp:
             soup = bs(fp, 'html.parser')
         
         tag = soup.experiment
@@ -28,14 +28,14 @@ def simulacion(directorio, repetition, time):
             f.write(f"events_folder= \"{directorio}\";\n")
             f.write(f"timer_simulation= {time};\n")
         
-        with open(f"/home/jazmin/tuttifrutti/experiments-loop-functions/scenarios/tuttifrutti/{mision}.argos", "w") as outf:
+        with open(f"/home/jazmin/tuttifrutti/experiments-loop-functions/scenarios/tuttifrutti/tuttiTamT.argos", "w") as outf:
             outf.write(str(soup))
         
         os.chdir('/home/jazmin/tuttifrutti/experiments-loop-functions/build')
         os.system('make')
         os.chdir('/home/jazmin/tuttifrutti/experiments-loop-functions/scenarios/tuttifrutti/')
         #os.system("cd ~/tuttifrutti/experiments-loop-functions/build")
-        os.system(f"argos3 -c {mision}.argos")
+        os.system("argos3 -c tuttiTamT.argos")
 
 def main():
     parser = argparse.ArgumentParser(description="Descripción de tu script.")
