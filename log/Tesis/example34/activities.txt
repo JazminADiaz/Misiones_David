@@ -1,0 +1,3 @@
+probability=1;
+
+activities["0_sec"] = {49, 1};
