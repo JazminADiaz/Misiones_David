@@ -1,5 +1,0 @@
-Trace Number,Trace Is Fit,Trace Fitness,Missing Tokens,Consumed Tokens,Remaining Tokens,Produced Tokens
-1,True,1.0,0,150,0,150
-----------,----------,----------,----------,----------,----------,----------
-2,False,0.974025974025974,4,154,4,154
-----------,----------,----------,----------,----------,----------,----------

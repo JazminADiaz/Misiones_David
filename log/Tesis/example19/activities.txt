@@ -1,7 +1,0 @@
-probability=0.8;
-activities["0_con"] = {16, 8, 3};
-activities["1_sec"] = {14, 58, 16, 52, 27};
-activities["2_con"] = {37, 9, 51, 54, 59, 48, 37};
-activities["3_sec"] = {44, 43, 29, 37, 24};
-activities["4_con"] = {52, 40, 57};
-activities["5_sec"] = {49, 6, 31};

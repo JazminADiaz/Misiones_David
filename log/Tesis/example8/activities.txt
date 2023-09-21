@@ -1,5 +1,0 @@
-probability=0.3;
-activities[0_sec] = {35, 17};
-activities[1_con] = {24, 38, 34, 49, 29, 46, 50, 20, 24, 17, 3, 58, 1};
-activities[2_con] = {59, 10};
-activities[3_con] = {29, 7, 29};

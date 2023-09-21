@@ -1,3 +1,0 @@
-probability=0.3;
-activities["0_sec"] = {21,22,23};
-activities["1_con"] = {31,25,26};
